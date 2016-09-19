@@ -1,0 +1,238 @@
+/*
+* =================================================================================
+* This file is part of: ENTICE Image Portal (Graphical User Interface)
+* Release version: 0.2
+* =================================================================================
+* Developer: Polona Štefanič, University of Ljubljana, Slovenia
+*
+* The project leading to this application has received funding
+* from the European Union's Horizon 2020 research and innovation
+* programme under grant agreement No 644179.
+*
+* Copyright 2016
+* Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
+           Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
+* =================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you must not use this file except in compliance with the License.
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*
+* For details see the terms of the License (see attached file: README).
+* The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
+* ================================================================================
+*/
+
+
+/*************************
+*  EXPLORE-IMAGES.CSS    *
+**************************/
+
+#search-div {
+    margin-left:-15px;
+    margin-right: -15px;
+}
+
+#search-bar h3 {
+    text-transform: uppercase;
+    color: #00b3ee;
+}
+
+#image-hits {
+    margin-top: 20px;
+    margin-left: -13px;
+    font-size: 1.1em;
+}
+
+#advanced-search {
+    padding-top: 10px;
+}
+
+#advanced-settings {
+    margin-left: -13px;
+}
+
+#advanced-settings span {
+    margin-top: 8px;
+    margin-left: -10px;
+}
+
+#advanced-settings input {
+    margin-left: -30px;
+}
+
+/* Izpis za eno sliko */
+.image-data-list {
+    /*background-color: #efefff;*/
+    border: 1px solid #C0C0C0;
+    margin-top: 20px;
+    margin-left: 0px;
+    cursor: pointer;
+    min-height: 155px;
+}
+
+.image-data-list:hover {
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Name of the image */
+.img-avatar p {
+    font-size: 1.3em;
+    margin-top: 10px;
+    color: #0d8aee;
+}
+
+/* Image avatar */
+.img-avatar img {
+    width:80px;
+    height:60px;
+}
+
+/* Div s podatki o virtualni sliki */
+.virtual-disk-info div:first-child {
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+/* Publisher, Size, Pulls, Likes, ... */
+.virtual-disk-info strong {
+    font-size: 1.1em;
+}
+
+/* Tagi pri posamezni sliki */
+/*.tags p {
+    border: 1px solid #5BC0DE;
+    border-radius: 5px;
+    color: #6e6e6e;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 5px;
+}*/
+@media screen and (min-width: 992px) {
+    .tags p {
+        /*background-color: #5BC0DE;*/
+        border: 1px solid #5BC0DE;
+        border-radius: 5px;
+        color: #6e6e6e;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        border-radius: 5px;
+        min-height: 30px;
+        min-width:145px;
+    }
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .tags p {
+        /*background-color: #5BC0DE;*/
+        border: 1px solid #5BC0DE;
+        border-radius: 5px;
+        color: #6e6e6e;
+        margin-left: 50px;
+        margin-right: 10px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        border-radius: 5px;
+        min-height: 30px;
+        min-width:145px;
+    }
+}
+
+
+@media screen and (max-width: 767px)  {
+    .tags p {
+        /*background-color: #5BC0DE;*/
+        border: 1px solid #5BC0DE;
+        border-radius: 5px;
+        color: #6e6e6e;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        border-radius: 5px;
+        min-height: 30px;
+        min-width:145px;
+    }
+}
+
+
+@media screen and (max-width: 767px)  {
+    .tags p {
+        border: 1px solid #5BC0DE;
+        border-radius: 5px;
+        color: #6e6e6e;
+        margin-left: 110px;
+        margin-right: 110px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        border-radius: 5px;
+        min-height: 30px;
+        min-width:145px;
+
+    }
+}
+
+@media screen and (max-width: 720px)  {
+    .tags p {
+        border: 1px solid #5BC0DE;
+        border-radius: 5px;
+        color: #6e6e6e;
+        margin-left: 70px;
+        margin-right: 70px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        border-radius: 5px;
+        min-height: 30px;
+        min-width:145px;
+
+    }
+}
+
+@media screen and (max-width: 500px)  {
+    .tags p {
+        border: 1px solid #5BC0DE;
+        border-radius: 5px;
+        color: #6e6e6e;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        border-radius: 5px;
+        min-height: 30px;
+        min-width:145px;
+
+    }
+}
+
+
+
+
+.read-more {
+    margin-top: 80px;
+    font-size: 1.1em;
+}
+
+.fa-question-circle:hover {
+    cursor: pointer;
+}
+
+.storage-price {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: #0d8aee;
+}
+
+#display-results .container {
+    margin-bottom: 30px;
+}

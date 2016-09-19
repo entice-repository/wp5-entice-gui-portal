@@ -1,0 +1,180 @@
+<!--
+/*
+* =================================================================================
+* This file is part of: ENTICE Image Portal (Graphical User Interface)
+* Release version: 0.2
+* =================================================================================
+* Developer: Polona Štefanič, University of Ljubljana, Slovenia
+*
+* The project leading to this application has received funding
+* from the European Union's Horizon 2020 research and innovation
+* programme under grant agreement No 644179.
+*
+* Copyright 2016
+* Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
+           Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
+* =================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you must not use this file except in compliance with the License.
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*
+* For details see the terms of the License (see attached file: README).
+* The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
+* ================================================================================
+*/
+-->
+
+<form name="uploadForm" ng-model="uploadForm" class="form-horizontal" role="form">
+    <!-- Image upload-->
+    <div class="container">
+        <section id="image-upload">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Upload new VM Image</h3>
+                    <div growl></div>
+
+                    <!-- IMAGE NAME -->
+                    <div class="form-group" ng-class="{ 'has-error' : uploadForm.image_name.$invalid && uploadForm.image_name.$dirty, 'has-success' : uploadForm.image_name.$valid && uploadForm.image_name.$dirty}">
+                        <span class="control-label col-sm-3">Image name <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsUploadImage.imageName }}">?</a></span>
+                        <div class="col-sm-6">
+                            <input name="image_name"
+                                   ng-model="formData.image_name"
+                                   ng-required="true"
+                                   ng-minlength="4"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Image name">
+
+                            <span class="red-message" ng-if="uploadForm.image_name.$error.minlength">A minimum of 3 characters.</span>
+                            <span class="red-message" ng-if="uploadForm.image_name.$error.required && uploadForm.image_name.$dirty">Enter data.</span>
+                        </div>
+                        <!--<span class="green-message" ng-if="uploadForm.image_name.$valid"><i class="fa fa-check"></i></span>-->
+                    </div>
+
+                    <!-- UPLOAD IMAGE -->
+                   <div class="form-group">
+                        <span class="control-label col-sm-3 color-me">Image upload <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsUploadImage.imageUpload }}">?</a></span>
+                        <div class="col-sm-6">
+                            <label class="radio-inline"> <input ng-click="tab = 1" name="radio-button" type="radio"> Local </label>
+                            <label class="radio-inline"> <input ng-click="tab = 2" name="radio-button" type="radio"> URL </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : uploadForm.image_url.$invalid && uploadForm.image_url.$dirty, 'has-success' : uploadForm.image_url.$valid && uploadForm.image_url.$dirty}">
+                        <!-- 1. Upload - local storage -->
+                        <div ng-show="tab === 1" class="col-sm-6 col-md-offset-3">
+                            <input  id="f_upload"
+                                    name="f_upload"
+                                    type="file"
+                                    class="form-control"
+                                    placeholder="Upload Disk Image"
+                                    ng-model="f_upload">
+
+                            <span class="red-message" ng-if="uploadForm.f_upload.$error.required && uploadForm.f_upload.$dirty">Upload Image.</span>
+                        </div>
+                        <!--<span class="green-message" ng-if="uploadForm.file_upload.$valid"><i class="fa fa-check"></i></span>-->
+
+                        <!-- 2. Upload - URL -->
+                        <div ng-show="tab === 2" class="col-sm-6 col-md-offset-3">
+                            <input name="image_url"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Upload Disk Image"
+                                   ng-model="formData.image_url">
+                         </div>
+                    </div>
+
+                    <!-- IMAGE CATEGORY / TAGS -->
+                    <div class="form-group" ng-class="{ 'has-error' : uploadForm.image_tags.$invalid && uploadForm.image_tags.$dirty, 'has-success' : uploadForm.image_tags.$valid && uploadForm.image_tags.$dirty}">
+                        <span class="control-label col-sm-3">Tag your software <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsUploadImage.tagSoftware }}">?</a></span>
+                        <div class="col-sm-6">
+                            <ol class="nya-bs-select form-control" multiple name="image_tags" ng-model="formData.category" ng-required="true">
+                                <li nya-bs-option="item in tags">
+                                    <a> {{item.tag}}
+                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                    </a>
+                                </li>
+                            </ol>
+                            <span class="red-message" ng-if="uploadForm.image_tags.$error.required && uploadForm.image_tags.$dirty">Select at least one tag.</span>
+                        </div>
+                        <!--<span class="green-message" ng-if="uploadForm.image_tags.$valid"><i class="fa fa-check"></i></span>-->
+                    </div>
+
+
+                    <!-- IMAGE DESCRIPTION -->
+                    <div class="form-group" ng-class="{ 'has-error' : uploadForm.image_description.$invalid && uploadForm.image_description.$dirty, 'has-success' : uploadForm.image_description.$valid && uploadForm.image_name.$dirty}">
+                        <span class="control-label col-sm-3">Image description <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsUploadImage.imageDescription }}">?</a></span>
+                        <div class="col-sm-6">
+                            <textarea
+                                    name="image_description"
+                                    ng-model="formData.image_description"
+                                    class="form-control vresize"
+                                    rows="5"
+                                    ng-required="true">
+
+                            </textarea>
+                            <span class="red-message" ng-if="uploadForm.image_description.$error.minlength">A minimum of 20 characters.</span>
+                            <span class="red-message" ng-if="uploadForm.image_description.$error.required && uploadForm.image_description.$dirty">Enter data.</span>
+                        </div>
+                        <!--<span class="green-message" ng-if="uploadForm.image_description.$valid"><i class="fa fa-check"></i></span>-->
+                    </div>
+
+
+                    <!-- FUNCTIONAL TESTS-->
+                    <div class="form-group" ng-class="{ 'has-error' : uploadForm.functional_tests_upload.$invalid && uploadForm.functional_tests_upload.$dirty, 'has-success' : uploadForm.functional_tests_upload.$valid && uploadForm.functional_tests_upload.$dirty}">
+                        <span class="control-label col-sm-3">Functional tests <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsUploadImage.functionalTests }}">?</a></span>
+                        <div class="col-sm-6">
+                            <input id="functional_tests_upload"
+                                   name="functional_tests_upload"
+                                   type="file"
+                                   class="form-control"
+                                   placeholder="Upload functional tests"
+                                   valid-file ng-model="test1">
+                            <span class="red-message" ng-if="uploadForm.functional_tests_upload.$error.required && uploadForm.functional_tests_upload.$dirty">Upload File.</span>
+                        </div>
+                        <!--<span class="green-message" ng-if="uploadForm.functional_tests_upload.$valid"><i class="fa fa-check"></i></span>-->
+                    </div>
+
+
+                    <!-- AVATAR -->
+                    <div class="form-group" ng-class="{ 'has-error' : uploadForm.image_avatar.$invalid && uploadForm.image_avatar.$dirty, 'has-success' : uploadForm.image_avatar.$valid && uploadForm.image_avatar.$dirty}">
+                        <span class="control-label col-sm-3">Avatar for your image <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsUploadImage.avatar }}">?</a></span>
+                        <div class="col-sm-6">
+                            <ol class="nya-bs-select form-control"
+                                ng-model="formData.avatar"
+                                ng-required="true"
+                                name="image_avatar">
+                                <li nya-bs-option="item in avatar">
+                                    <a>
+                                        <span>
+                                            <img height="18" width="20" ng-src="{{item.img}}" /> {{item.name}}
+                                        </span>
+                                        <!--<span class="glyphicon glyphicon-ok check-mark"></span>-->
+                                    </a>
+                                </li>
+                            </ol>
+                            <span class="red-message" ng-if="uploadForm.image_avatar.$error.required && uploadForm.image_avatar.$dirty">Choose data.</span>
+                        </div>
+                        <!--<span class="green-message" ng-if="uploadForm.image_avatar.$valid"><i class="fa fa-check"></i></span>-->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pareto front -->
+        <section id="pareto-choice" ng-if="loaded">
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="font-size: 1.2em; margin-top: 30px;">With a help of multi-objective optimization choose the storage for your image <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsUploadImage.paretoPoint }}">?</a></div>
+                    <div style="height: 600px" google-chart chart="paretoChart" agc-on-select="paretoChartSelect(selectedItem);" ></div>
+                    <div class="form-group col-md-12">
+                        <button ng-disabled="myForm.$invalid" id="upload" class="btn btn-info" ng-click="submitForm();">Upload disk image</button>
+                    </div>
+                 </div>
+            </div>
+        </section>
+    </div>
+</form>

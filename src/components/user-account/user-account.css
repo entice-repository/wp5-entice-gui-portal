@@ -1,0 +1,241 @@
+/*
+* =================================================================================
+* This file is part of: ENTICE Image Portal (Graphical User Interface)
+* Release version: 0.2
+* =================================================================================
+* Developer: Polona Štefanič, University of Ljubljana, Slovenia
+*
+* The project leading to this application has received funding
+* from the European Union's Horizon 2020 research and innovation
+* programme under grant agreement No 644179.
+*
+* Copyright 2016
+* Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
+           Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
+* =================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you must not use this file except in compliance with the License.
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*
+* For details see the terms of the License (see attached file: README).
+* The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
+* ================================================================================
+*/
+
+/*************************
+*   USER-ACCOUNT.CSS     *
+**************************/
+
+/* SIGN-UP */
+#sign-up {
+    width: 450px;
+    padding: 3% 0;
+    margin: auto;
+}
+
+#sign-up .container {
+    background: white;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    /*box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+    color: grey;
+}
+
+.form input {
+    width: 100%;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    margin: 5px 0 10px;
+    padding: 7px;
+    box-sizing: border-box;
+    font-size: 1.0em;
+}
+
+#email-input, #password-input, #username-input {
+    margin: 10px 0;
+}
+
+hr.style-six {
+    padding: 0;
+    border: none;
+    border-top: 1px solid gainsboro;
+    color: gray;
+    text-align: center;
+}
+
+hr.style-six:after {
+    content: "OR";
+    display: inline-block;
+    position: relative;
+    top: -0.9em;
+    font-size: 0.9em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+#google button:first-child {
+    background-color: #DC4E41;
+    color: white;
+    border-right: double #d43f3a;
+}
+
+#google div:first-child i {
+    width:16px;
+    height:18px;
+    margin-left: -2px;
+}
+
+#google button:last-child {
+    background-color: #DC4E41;
+    color: white;
+}
+
+#google button:last-child span {
+    background-color: #DC4E41;
+    width:100%;
+    height:18px;
+}
+
+#facebook button:first-child {
+    background-color: #43609C;
+    color: white;
+    border-right: double #286090;
+}
+
+#facebook div:first-child i {
+    width:14px;
+    height:18px;
+    margin-left: -3px;
+}
+
+#facebook button:last-child {
+    background-color: #43609C;
+    color: white;
+}
+
+#facebook button:last-child span {
+    background-color: #43609C;
+    width:100%;
+    height:18px;
+}
+
+#google  {
+    background-color: #DC4E41;
+    color: white;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+#facebook {
+    background-color: #43609C;
+    color: white;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+#fb-div:hover, #g-div:hover,
+#fb-div:focus, #g-div:focus,
+#fb-div:active, #g-div:active {
+    opacity: 0.8;
+}
+
+
+#signup-btn {
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    height: 40px;
+    width: 100%;
+}
+
+@media screen and (min-width: 1000px) {
+    #fb-div {
+        float: right;
+    }
+}
+
+/* SIGN-IN */
+#sign-in {
+    width: 440px;
+    padding: 3% 0;
+    margin: auto;
+}
+
+#sign-in .container {
+    background: white;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    /*box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+    color: grey;
+}
+
+#signin-btn {
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    height: 40px;
+    width: 100%;
+}
+
+/* RESET PASSWORD */
+#reset-passwd {
+    width: 440px;
+    padding: 3% 0;
+    margin: auto;
+}
+
+#reset-passwd .container {
+    background: white;
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    /*box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+    color: grey;
+}
+
+#reset-passwd-btn {
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    height: 40px;
+    width: 100%;
+}
+
+
+.red-message {
+    color: red;
+    font-size: 0.9em;
+}
+
+.green-message {
+    color: limegreen;
+}
+
+.ng-valid.ng-dirty {
+    border-color: #00EA89;
+}
+
+.ng-invalid.ng-dirty {
+    border-color: #FA787E;
+}
+
+#sign-in p:first-child {
+    color: #C70039;
+    padding: 5px;
+    font-size: 1.2em;
+    text-align: center;
+}

@@ -1,0 +1,101 @@
+<!--
+/*
+* =================================================================================
+* This file is part of: ENTICE Image Portal (Graphical User Interface)
+* Release version: 0.2
+* =================================================================================
+* Developer: Polona Štefanič, University of Ljubljana, Slovenia
+*
+* The project leading to this application has received funding
+* from the European Union's Horizon 2020 research and innovation
+* programme under grant agreement No 644179.
+*
+* Copyright 2016
+* Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
+Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
+* =================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you must not use this file except in compliance with the License.
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*
+* For details see the terms of the License (see attached file: README).
+* The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
+* ================================================================================
+*/
+-->
+
+<!-- Search bar -->
+<form ng-submit="search()">
+    <section id="search-bar">
+        <div class="row">
+            <div class="container">
+                <!-- Search field -->
+                <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px">
+                   <h3 style="margin-bottom: 30px" >Explore public images in ENTICE's repositories</h3>
+                    <div class="col-md-12 well">
+                        <div id="search-div" class="input-icon col-md-10">
+                            <input type="text" ng-model="data.searchText" placeholder="Search..." class="form-control" ng-keyup="search()"/>
+                        </div>
+                        <div class="col-md-2">
+                            <p id="advanced-search"><a ng-click="toggle()" href="">Advanced search</a></p>
+                        </div>
+                        <div ng-show="show" id="advanced-settings" class="row">
+                            <div class="form-group col-md-7">
+                                <span class="control-label col-sm-2">Sort by</span>
+                                <div class="col-sm-6">
+                                    <select class="form-control"
+                                            ng-options="item.name for item in sorting_options"
+                                            ng-model="data.dropdownSorting"
+                                            ng-change="search()">
+                                        <option value="">-- Select Sorting --</option>
+                                    </select>
+                                </div>
+                                <!--<a href ng-click="search()" >Show unfiltered</a>-->
+                            </div>
+                            <!--<div class="col-md-12">
+                                <span ng-repeat="t in getCountedTags()" class="col-md-2"><a href ng-click="search(t.tag)">{{ t.tag }} ({{ t.image_number}})</a></span>
+                            </div>-->
+                        </div>
+                    </div>
+                </div> <!--/.col-md-12-->
+            </div> <!--/.container-->
+        </div> <!--/.row-->
+    </section>
+</form>
+
+<section id="display-results">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <div id="image-hits" class="col-md-12">
+                    <p>Hits ({{ virtual_images.length }})</p>
+                </div>
+                <div class="col-md-12 image-data-list" ng-repeat="v in virtual_images" ng-click="goToInformation(v)">
+                    <div class="col-md-2 img-avatar">
+                        <div class="row">
+                            <p>{{ v.imageName }}</p>
+                        </div>
+                        <div class="row">
+                            <img ng-src="{{ getImagePath(v.avatarId) }}" class="img-rounded" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-10 virtual-disk-info">
+                        <div class="row">
+                            <p class="col-sm-4"><strong><i class="fa fa-user"></i>&nbspOwner:</strong> {{ v.ownerFullName }}</p>
+                            <p class="col-sm-4"><strong><i class="fa fa-arrows-alt"></i>&nbspSize:</strong> {{ formatSizeUnits(v.imageSize) }} </p>
+                            <p class="col-sm-4"><strong><i class="fa fa-cloud-download"></i>&nbspPulls:</strong> {{ v.pulls }}</p>
+                        </div>
+
+                        <div class="col-md-12 row tags">
+                            <p class="col-sm-2" ng-repeat="t in v.categories track by $index"><i style="color: #5BC0DE" class="fa fa-tag"></i>&nbsp {{ t }}</p>
+                        </div>
+                    </div>
+                </div> <!--/.col-md-12-->
+            </div>
+        </div>  <!--/.container-->
+    </div> <!--/.row-->
+</section>

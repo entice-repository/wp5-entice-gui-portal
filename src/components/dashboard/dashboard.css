@@ -1,0 +1,162 @@
+/*
+* =================================================================================
+* This file is part of: ENTICE Image Portal (Graphical User Interface)
+* Release version: 0.2
+* =================================================================================
+* Developer: Polona Štefanič, University of Ljubljana, Slovenia
+*
+* The project leading to this application has received funding
+* from the European Union's Horizon 2020 research and innovation
+* programme under grant agreement No 644179.
+*
+* Copyright 2016
+* Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
+           Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
+* =================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you must not use this file except in compliance with the License.
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*
+* For details see the terms of the License (see attached file: README).
+* The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
+* ================================================================================
+*/
+
+
+/*************************
+*    DASHBOARD.CSS       *
+**************************/
+
+#dashboard-user, #dashboard-admin {
+    font-family: 'Helvetica Neue', 'Quicksand', 'Open Sans', 'monospace', sans-serif;
+    margin-top: 40px;
+    font-weight: 100;
+}
+
+.dashboard-monitoring {
+    color: #00b3ee;
+    font-size: 1.4em;
+    text-align: center;
+    font-weight:100;
+}
+
+.dashboard-data {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#pareto {
+    margin-top: 30px;
+    font-size: 1.4em;
+}
+
+#redistribution {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }
+
+
+
+
+
+/*
+h1 {
+    font-size: 32px;
+    font-weight: 100;
+    margin-bottom: 0px;
+}
+
+h5 {
+    color: #00BFFF;
+    font-weight: 300;
+}
+
+.line-chart {
+    height: 225px;
+}
+
+.line-chart-toolbar {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    font-weight: 100;
+}
+
+.line-chart-toolbar div {
+    border: 1px white solid;
+    display: inline;
+    padding: 2px 7px 2px 7px;
+    margin-left: -2px !important;
+    margin-right: -2px !important;
+}
+
+.line-chart-toolbar div:first-child {
+    border-radius: 5px 0px 0px 5px;
+}
+
+.line-chart-toolbar div:last-child {
+    border-radius: 0px 5px 5px 0px;
+}
+
+.line-chart-toolbar div a {
+    color: white !important;
+}
+
+.line-chart-toolbar div a:hover {
+    color: #FBD700 !important;
+}
+
+.color-white {
+    color:white;
+}
+
+.color-black {
+    color: #393939;
+}
+
+.green-background {
+    background-color: #00BFFF;
+}
+*/

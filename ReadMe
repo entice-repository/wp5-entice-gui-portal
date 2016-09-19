@@ -1,0 +1,15 @@
+
+Step 1: Open Console
+
+Step 2: Go to folder wp5-entice-gui-portal
+
+Step 3: Install neccessary libraries and dependencies using bower and npm packet managers using commands: bower install && npm install
+The developing environment is ready.
+
+Step 4: Run command: gulp watch to create dist folder with all necessary files
+
+Step 5: dist folder contains the whole client-side web application and is ready to put in on the server
+
+Step 6: Configure Apache Server
+
+Step 7: Go to URL and start using a web application

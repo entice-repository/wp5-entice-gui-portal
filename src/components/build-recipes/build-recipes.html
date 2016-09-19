@@ -1,0 +1,245 @@
+<!--
+/*
+* =================================================================================
+* This file is part of: ENTICE Image Portal (Graphical User Interface)
+* Release version: 0.2
+* =================================================================================
+* Developer: Polona Štefanič, University of Ljubljana, Slovenia
+*
+* The project leading to this application has received funding
+* from the European Union's Horizon 2020 research and innovation
+* programme under grant agreement No 644179.
+*
+* Copyright 2016
+* Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
+Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
+* =================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you must not use this file except in compliance with the License.
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+*
+* For details see the terms of the License (see attached file: README).
+* The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
+* ================================================================================
+*/
+
+-->
+
+<!-- BUILD RECIPES -->
+<section id="recipes">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <h3>Create VMIs with recipes</h3>
+                <uib-tabset active="active">
+                    <uib-tab index="0">
+                        <uib-tab-heading>Recipe-based VMI Creation</uib-tab-heading>
+                        <form  class="form-horizontal" role="form" ng-submit="submitForm()">
+                            <section id="recipes-build">
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-md-12">
+                                            <h4>Build me</h4>
+                                            <!-- CHOOSE MODULE -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Module</span>
+                                                <div class="col-sm-5">
+                                                    <input ng-required="true" name="choose_model" class="form-control" ng-model="data.build.module" />
+                                                </div>
+                                            </div>
+
+                                            <!-- CHOOSE VERSION -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Version</span>
+                                                <div class="col-sm-5">
+                                                    <input ng-required="true" name="choose_version" class="form-control" ng-model="data.build.version" />
+                                                </div>
+                                            </div>
+
+                                            <!-- UPLOAD INPUT DATA (FUNCTIONAL TESTS) -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Input data</span>
+                                                <div class="col-sm-5">
+                                                    <input ng-required="true" name="choose_version" class="form-control" ng-model="data.build.input.zipurl" />
+                                                </div>
+                                            </div>
+
+                                            <!--
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Input data</span>
+                                                <div class="col-sm-6">
+                                                    <label class="radio-inline"> <input ng-click="tab = 1" name="radio-button" type="radio"> Upload </label>
+                                                    <label class="radio-inline"> <input ng-click="tab = 2" name="radio-button" type="radio"> Provide a path </label>
+                                                </div>
+                                            </div>
+                                            -->
+
+                                            <!--
+                                            <div class="form-group">
+
+                                                <div ng-show="tab === 1" class="col-sm-6 col-md-offset-3">
+                                                    <input name="input_file1"
+                                                           ng-model="input_file1"
+                                                           ng-required="true"
+                                                           type="file"
+                                                           class="form-control"
+                                                           placeholder="Upload">
+                                                </div>
+
+
+                                                <div ng-show="tab === 2" class="col-sm-6 col-md-offset-3">
+                                                    <input name="input_file2"
+                                                           ng-model="input_file2"
+                                                           ng-required="true"
+                                                           type="url"
+                                                           class="form-control"
+                                                           placeholder="URL">
+                                                </div>
+                                            </div>
+                                            -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-md-12">
+                                            <h4>Test</h4>
+                                            <!-- TEST: MODULE -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Module</span>
+                                                <div class="col-sm-5">
+                                                    <input name="test_module"
+                                                           ng-model="data.test.module"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Module">
+                                                </div>
+                                            </div>
+
+                                            <!-- TEST: VERSION -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Version</span>
+                                                <div class="col-sm-5">
+                                                    <input ng-required="true" name="test_version" class="form-control" ng-model="data.test.version" />
+                                                </div>
+                                            </div>
+
+
+                                            <!-- TEST: COMMAND -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Test command</span>
+                                                <div class="col-sm-5">
+                                                    <input name="test_command"
+                                                           ng-model="data.test.input.command"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Test command">
+                                                </div>
+                                            </div>
+
+                                            <!-- TEST: INPUT DATA -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Input data</span>
+                                                <div class="col-sm-5">
+                                                    <input ng-required="true" name="choose_version" class="form-control" ng-model="data.test.input.zipurl" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="col-md-12">
+
+                                            <!-- NOTIFICATION -->
+                                            <!--<div class="form-group">
+                                                    <span class="control-label col-sm-3"><strong>Notify me when done optimizing</strong></span>
+                                                    <div class="col-sm-5">
+                                                        <input type="email"
+                                                               class="form-control"
+                                                               placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                -->
+
+                                            <!-- START BUILDING RECIPES -->
+                                            <div class="form-group">
+                                                <button id="optimize-now" class="btn btn-info">Start building</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </form>
+                    </uib-tab>
+
+                    <uib-tab index="1">
+                        <uib-tab-heading>List of created VMIs</uib-tab-heading>
+                        <!-- RECIPES IN PROGRESS  -->
+                        <section id="recipes-progress">
+                            <div class="row">
+                                <div class="container">
+                                    <div class="col-md-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>JobId</th>
+                                                    <th>Status</th>
+                                                    <th>Size</th>
+                                                    <th>Action</th>
+                                                    <th>Outcome</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="recipe in recipes">
+                                                    <td>{{ recipe.jobId }}</td>
+                                                    <td ng-class="{ 'status-init' : recipe.request_status == 'init', 'status-finished' : recipe.request_status == 'finished', 'status-running' : recipe.request_status == 'running', 'status-error' : recipe.request_status == 'error' }">{{ recipe.request_status }}</td>
+                                                    <td>{{ formatSizeUnits(recipe.size) }}</td>
+
+                                                    <td ng-if="recipe.request_status == 'finished' || recipe.request_status == 'cancelled'
+                                                            || recipe.request_status == '' || recipe.request_status == null">
+                                                        <button class="btn btn-default" ng-click="deleteRecipe(recipe.id)">Delete</button>
+                                                    </td>
+                                                    <td ng-if="recipe.request_status != 'finished' && recipe.request_status != 'cancelled'
+                                                            && recipe.request_status != '' && recipe.request_status != null">
+                                                        <button class="btn btn-default" ng-click="cancelRecipe(recipe.id)">Cancel</button>
+
+                                                    <td ng-if="recipe.request_status =='finished' && recipe.outcome == 'success'"><a target="_blank" href="{{ recipe.url }}">VMI_URL</a></td>
+                                                    <td ng-if="recipe.outcome != 'success'">{{ recipe.outcome }}</td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <!--
+                                    <div class="col-md-12">
+                                        <table class="table table-hover">
+                                            <thead></thead>
+                                            <tbody>
+                                            <tr ng-repeat="(key, value) in result">
+                                                <td>{{key}}</td>
+                                                <td>{{value}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+                        </section>
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</section>
