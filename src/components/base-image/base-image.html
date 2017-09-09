@@ -1,0 +1,88 @@
+<!-- CREATE BASE IMAGE -->
+<section id="base-image">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <form  class="form-horizontal" role="form">
+                    <p>Create base image</p>
+
+                    <p>Base image can be registered with the following fields</p>
+
+                    <!-- NAME -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Name <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imageName }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_name" ng-model="formData.image_name" class="form-control" placeholder="Name" />
+                        </div>
+                    </div>
+
+                    <!-- TAGS -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Tags <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imageTags }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_tags" ng-model="formData.tags" class="form-control" placeholder="Tag" />
+                        </div>
+                    </div>
+
+                    <!-- DESCRIPTION-->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Description <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imageDescription }}">?</a></span>
+                        <div class="col-sm-5">
+                              <textarea
+                                      ng-model="formData.description"
+                                      name="image_description"
+                                      class="form-control vresize"
+                                      rows="5"
+                                      ng-required="true"
+                                      placeholder="...">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <!-- URL -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">URL <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imageURL }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_url" ng-model="formData.image_url" class="form-control" placeholder="URL" />
+                        </div>
+                    </div>
+
+                    <!-- PARTITION -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Partition <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imagePartition }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_partition" ng-model="formData.partition" class="form-control" placeholder="Partition"/>
+                        </div>
+                    </div>
+
+                      <!-- CLOUD IMAGE IDs -->
+                    <div class="form-group" >
+                        <span class="control-label col-sm-3">Cloud image Id (key and value)  <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imageCloudId }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_id" ng-model="formData.image_id_key" class="form-control" placeholder="sztaki" value="sztaki"/>
+                            <input name="image_id" ng-model="formData.image_id_value" class="form-control" placeholder="ami-000001654" value="ami-000001654"/>
+                        </div>
+                    </div>
+
+                    <!-- CLOUD  -->
+                    <!--<div class="form-group" >-->
+                        <!--<span class="control-label col-sm-3">Cloud <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.Cloud }}">?</a></span>-->
+                        <!--<div class="col-sm-5">-->
+                            <!--<ol class="nya-bs-select form-control" name="cloud" ng-required="true" ng-model="dynModel">-->
+                                <!--<li nya-bs-option="img in images">-->
+                                    <!--<a>{{img.cloud_name}}-->
+                                        <!--<span class="glyphicon glyphicon-ok check-mark"></span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                            <!--</ol>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <div class="form-group">
+                        <button ng-click="registerBaseImageSubmit()" class="btn btn-info">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

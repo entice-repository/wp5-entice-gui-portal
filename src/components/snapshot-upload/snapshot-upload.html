@@ -1,0 +1,70 @@
+<!-- SNAPSHOT UPLOAD -->
+<section id="snapshot-upload">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <form  class="form-horizontal" role="form">
+                    <p>Snapshot image upload</p>
+                    <p>Snapshot image can be registered with the following fields</p>
+
+                    <!-- NAME -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Name <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab3.imageName }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_name" class="form-control" placeholder="Name" />
+                        </div>
+                    </div>
+
+                    <!-- TAGS -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Tags <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab3.imageTags }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_tags" class="form-control" placeholder="Tag" />
+                        </div>
+                    </div>
+
+                    <!-- DESCRIPTION-->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Description <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab3.imageDescription }}">?</a></span>
+                        <div class="col-sm-5">
+                             <textarea
+                                     name="image_description"
+                                     class="form-control vresize"
+                                     rows="5"
+                                     placeholder="...">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <!-- URL -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">URL <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab3.imageURL }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_url" class="form-control" placeholder="URL" />
+                        </div>
+                    </div>
+
+                    <!-- PARENT -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Parent <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab3.imageParent }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_parent" class="form-control" placeholder="Parent"/>
+                        </div>
+                    </div>
+
+                    <!-- PARTITION -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Partition <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab3.partition }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_parent" class="form-control" placeholder="Partition"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button ng-click="createSnapshotImage()" class="btn btn-info">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

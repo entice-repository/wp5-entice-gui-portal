@@ -1,0 +1,54 @@
+<form name="uploadForm" ng-model="uploadForm" class="form-horizontal" role="form">
+    <!-- Image upload-->
+    <div class="container">
+        <section id="image-upload">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Upload optimized VMI</h3>
+                    <div growl></div>
+
+                    <!-- VMI FILE-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : uploadForm.vmi_file.$invalid && uploadForm.vmi_file.$dirty, 'has-success' : uploadForm.vmi_file.$valid && uploadForm.vmi_file.$dirty}">
+                        <span class="control-label col-sm-3">Select VMI file<a class="tooltip-pointer" tooltips
+                                                                               tooltip-template="{{ tooltipsOptimizedUploadImage.vmiFile }}">?</a></span>
+                        <div class="col-sm-6">
+                            <input id="vmi_file"
+                                   name="vmi_file"
+                                   type="file"
+                                   class="form-control"
+                                   placeholder="Upload optimized VMI"
+                                   valid-file ng-model="test1">
+                            <span class="red-message"
+                                  ng-if="uploadForm.vmi_file.$error.required && uploadForm.vmi_file.$dirty">Upload File.</span>
+                        </div>
+                    </div>
+
+                    <!-- JSON REDISTRIBUTION FILE -->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : uploadForm.json_redistribution_file.$invalid && uploadForm.json_redistribution_file.$dirty, 'has-success' : uploadForm.json_redistribution_file.$valid && uploadForm.json_redistribution_file.$dirty}">
+                        <span class="control-label col-sm-3">Select JSON redistribution file <a class="tooltip-pointer"
+                                                                                                tooltips
+                                                                                                tooltip-template="{{ tooltipsOptimizedUploadImage.jsonFile }}">?</a></span>
+                        <div class="col-sm-6">
+                            <input id="json_redistribution_file"
+                                   name="json_redistribution_file"
+                                   type="file"
+                                   class="form-control"
+                                   placeholder="Upload redistribution JSON file"
+                                   valid-file ng-model="test1">
+                            <span class="red-message"
+                                  ng-if="uploadForm.json_redistribution_file.$error.required && uploadForm.json_redistribution_file.$dirty">Upload File.</span>
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <button ng-disabled="myForm.$invalid" id="upload" class="btn btn-info"
+                                    ng-click="submitOptimizedImageUpload();">Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</form>

@@ -1,30 +1,3 @@
-/*
- * =================================================================================
- * This file is part of: ENTICE Image Portal (Graphical User Interface)
- * Release version: 0.2
- * =================================================================================
- * Developer: Polona Štefanič, University of Ljubljana, Slovenia
- *
- * The project leading to this application has received funding
- * from the European Union's Horizon 2020 research and innovation
- * programme under grant agreement No 644179.
- *
- * Copyright 2016
- * Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
- Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
- * =================================================================================
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you must not use this file except in compliance with the License.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *
- * For details see the terms of the License (see attached file: README).
- * The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
- * ================================================================================
- */
-
 
 app.controller('exploreImageController', function($scope, $http, $state) {
 
@@ -93,16 +66,22 @@ app.controller('exploreImageController', function($scope, $http, $state) {
                 $scope.virtual_images = data[0];
 
                 for(var c=0; c<$scope.virtual_images.length; c++){
+                    if($scope.virtual_images[c].ownerFullName == "dummy full name") {
+                        $scope.virtual_images[c].ownerFullName = "Dragi";
+                    }
+                }
+
+                for(var c=0; c<$scope.virtual_images.length; c++){
                     var vi = $scope.virtual_images[c];
-                   // console.log(vi);
+                    // console.log(vi);
                     if(vi.categories != null){
                         for(var b=0; b < vi.categories.length; b++){
                             var cat = vi.categories[b];
-                           // console.log(cat);
+                            // console.log(cat);
                             for(var d=0; d<$scope.countedTags.length; d++){
-                               // console.log($scope.countedTags[d]);
+                                // console.log($scope.countedTags[d]);
                                 if($scope.countedTags[d].tag == cat){
-                                    $scope.countedTags[d].image_number++;
+                                    $scope.countedTags[d].Y7HNU8Jimage_number++;
                                     break;
                                 }
                             }
@@ -153,66 +132,66 @@ app.controller('exploreImageController', function($scope, $http, $state) {
         {id: 3, name: "Disk Image size desc"}
 
         /*
-        {id: 4, name: "Number of downloads asc"},
-        {id: 5, name: "Number of downloads desc"},
-        {id: 6, name: "Number of optimisations asc"},
-        {id: 7, name: "Number of optimisations desc"},
-        {id: 8, name: "Newest (image) first"},
-        {id: 9, name: "Oldest (image) first"}
-        */
+         {id: 4, name: "Number of downloads asc"},
+         {id: 5, name: "Number of downloads desc"},
+         {id: 6, name: "Number of optimisations asc"},
+         {id: 7, name: "Number of optimisations desc"},
+         {id: 8, name: "Newest (image) first"},
+         {id: 9, name: "Oldest (image) first"}
+         */
     ];
 });
 
 /*
-     $scope.vmis =
-     {
-     "virtual_images" : [
-     {
-     "id" : "01",
-     "avatar" : "images/apache_logo.png",
-     "name" : "Apache Server 2.0",
-     "image" : "public",
-     "author" : "User_10",
-     "size" : "240MB",
-     "downloads" : "325",
-     "childs" : "3",
-     "tags" : ["HTTP Server", "Apache 2.0", "RESTful", "Web Server", "Server"]
-     },
-     {
-     "id" : "02",
-     "avatar" : "images/creative_cloud_logo.png",
-     "name" : "Adobe Creative Cloud",
-     "image" : "private",
-     "author" : "User_13",
-     "size" : "6,7GB",
-     "downloads" : "765",
-     "childs" : "0",
-     "tags" : ["Photoshop", "Illustrator", "InDesign", "Bridge", "UX Design"]
-     },
-     {
-     "id" : "03",
-     "avatar" : "images/centos_logo.png",
-     "name" : "Cent OS",
-     "image" : "public",
-     "author" : "User_20",
-     "size" : "3,4GB",
-     "downloads" : "265",
-     "childs" : "5",
-     "tags" : ["Linux", "Gnome", "Version 3.4", "KDE", "Unix"]
-     },
+ $scope.vmis =
+ {
+ "virtual_images" : [
+ {
+ "id" : "01",
+ "avatar" : "images/apache_logo.png",
+ "name" : "Apache Server 2.0",
+ "image" : "public",
+ "author" : "User_10",
+ "size" : "240MB",
+ "downloads" : "325",
+ "childs" : "3",
+ "tags" : ["HTTP Server", "Apache 2.0", "RESTful", "Web Server", "Server"]
+ },
+ {
+ "id" : "02",
+ "avatar" : "images/creative_cloud_logo.png",
+ "name" : "Adobe Creative Cloud",
+ "image" : "private",
+ "author" : "User_13",
+ "size" : "6,7GB",
+ "downloads" : "765",
+ "childs" : "0",
+ "tags" : ["Photoshop", "Illustrator", "InDesign", "Bridge", "UX Design"]
+ },
+ {
+ "id" : "03",
+ "avatar" : "images/centos_logo.png",
+ "name" : "Cent OS",
+ "image" : "public",
+ "author" : "User_20",
+ "size" : "3,4GB",
+ "downloads" : "265",
+ "childs" : "5",
+ "tags" : ["Linux", "Gnome", "Version 3.4", "KDE", "Unix"]
+ },
 
-     {
-     "id" : "05",
-     "avatar" : "images/nodejs_logo.png",
-     "name" : "NodeJS",
-     "image" : "public",
-     "author" : "User_28",
-     "size" : "230MB",
-     "downloads" : "135",
-     "childs" : "1",
-     "tags" : ["JavaScript", "Open Source", "Framework", "Web", "Library"]
-     },
-     ]
-     };
+ {
+ "id" : "05",
+ "avatar" : "images/nodejs_logo.png",
+ "name" : "NodeJS",
+ "image" : "public",
+ "author" : "User_28",
+ "size" : "230MB",
+ "downloads" : "135",
+ "childs" : "1",
+ "tags" : ["JavaScript", "Open Source", "Framework", "Web", "Library"]
+ },
+ ]
+ };
  */
 //console.log($scope._vmis);

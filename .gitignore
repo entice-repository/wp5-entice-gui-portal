@@ -1,0 +1,6 @@
+.idea
+dist/*
+*.iml
+bower_components/*
+node_modules/*
+dist/*

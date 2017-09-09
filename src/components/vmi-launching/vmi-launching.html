@@ -1,0 +1,90 @@
+<!-- VMI Launching -->
+<section id="vmi-launching">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <form class="form-horizontal" role="form">
+                    <p>VMI Launching</p>
+                    <p>An image can be launched with the following fields</p>
+
+                    <!-- CLOUD -->
+                    <div class="form-group" >
+                        <span class="control-label col-sm-3">Cloud <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudName }}">?</a></span>
+                        <div class="col-sm-5">
+                            <ol class="nya-bs-select form-control"  name="cloud_name" ng-required="true" ng-model="dynModel">
+                                <li nya-bs-option="cloud in clouds">
+                                    <a>{{cloud.name}}
+                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- ENDPOINT-->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Endpoint <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudEndpoint }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="cloud_endpoint" class="form-control" placeholder="Endpoint" />
+                        </div>
+                    </div>
+
+                    <!-- ACCESS KEY -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Access Key <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudAccessKey }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="cloud_access_key" class="form-control" placeholder="Cloud Access Key"/>
+                        </div>
+                    </div>
+
+                    <!-- SECRET KEY -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Secret Key <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudSecretKey }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="cloud_secret_key" class="form-control" placeholder="Cloud Secret Key"/>
+
+                        </div>
+                    </div>
+
+                    <!-- INSTANCE TYPE -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Instance type <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudInstanceType }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="cloud_instance_type" class="form-control" placeholder="Instance type"/>
+                        </div>
+                    </div>
+
+
+                    <!-- KEY PAIR NAME -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Key Pair Name <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudKeyPairName }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="cloud_keypair_name" class="form-control" placeholder="Key Pair Name"/>
+                        </div>
+                    </div>
+
+
+                    <p><a ng-click="toggleInstallers()" href="" style="color: #00b3ee;" >Add Contextualization</a></p>
+
+
+                    <!-- CONTEXTUALIZATION -->
+                    <div ng-show="show" class="form-group">
+                        <span style="color: #00b3ee;" class="control-label col-sm-3">Contextualization <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudContextualization }}">?</a></span>
+                        <div  class="col-sm-5">
+                             <textarea
+                                     name="cloud_contextualization"
+                                     class="form-control vresize"
+                                     rows="5"
+                                     placeholder="...">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button ng-click="submit()" class="btn btn-info">Launch</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

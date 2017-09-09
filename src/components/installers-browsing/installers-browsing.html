@@ -1,0 +1,47 @@
+<section id="fragmentation">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <form class="form-horizontal" ng-submit="browseBaseImages()">
+                    <p>List of installers</p>
+
+                    <!-- SEARCH -->
+                    <!--<div class="form-group first-field">-->
+                    <!--<div class="col-sm-12">-->
+                    <!--<input st-search="" type="text" class="form-control" placeholder="Search VM Images"/>-->
+                    <!--&lt;!&ndash;ng-keyup="browseBaseImages()"/>&ndash;&gt;-->
+
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <div class="col-sm-12">
+                        <table st-table="rowCollection" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>VERSION</th>
+                                <th>TAGS</th>
+                                <th>DESCRIPTION</th>
+                                <th>AUTHOR</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in rowCollection">
+                                <td>{{row.id}}</td>
+                                <td>{{row.name}}</td>
+                                <td>{{row.version}}</td>
+                                <td>
+                                    <li ng-repeat="item in row.tags">{{ item }}</li>
+                                </td>
+                                <td>{{row.description}}</td>
+                                <td>{{row.author}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

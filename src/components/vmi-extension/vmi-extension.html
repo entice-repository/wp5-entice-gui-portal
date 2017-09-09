@@ -1,0 +1,82 @@
+<!-- VMI Extension -->
+<section id="vmi-extension">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <form  class="form-horizontal" role="form">
+                    <p>VMI Extension</p>
+                    <p>An Image can be extended with the following fields</p>
+
+                    <!-- NAME -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Name <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageName }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_name" class="form-control" placeholder="Name" />
+                        </div>
+                    </div>
+
+                    <!-- TAGS -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Tags <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageTags }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="image_tags" class="form-control" placeholder="Tag" />
+                        </div>
+                    </div>
+
+                    <!-- DESCRIPTION-->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Description <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageDescription }}">?</a></span>
+                        <div class="col-sm-5">
+                              <textarea
+                                      name="image_description"
+                                      class="form-control vresize"
+                                      rows="5"
+                                      placeholder="...">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <!-- INSTALLERS -->
+                    <div class="form-group" >
+                        <span class="control-label col-sm-3">Installers  <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudName }}">?</a></span>
+                        <div class="col-sm-5">
+                            <ol class="nya-bs-select form-control"  name="cloud_name" ng-model="dynModel">
+                                <li nya-bs-option="installer in installers">
+                                    <a>{{installer.installer_name}}
+                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <p><a ng-click="toggleInstallers()" href="" style="color: #00b3ee;" >Add Installer</a></p>
+
+                    <!-- INSTALLER -->
+                    <div ng-show="show" class="form-group">
+                        <span style="color: #00b3ee;" class="control-label col-sm-3">Installer <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageInstaller }}">?</a></span>
+                        <div class="col-sm-5">
+                             <textarea
+                                     name="image_installer"
+                                     class="form-control vresize"
+                                     rows="5"
+                                     placeholder="...">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button ng-click="submit()" class="btn btn-info">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+

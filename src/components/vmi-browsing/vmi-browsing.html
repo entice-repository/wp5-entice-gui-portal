@@ -1,0 +1,56 @@
+<!-- BROWSE BASE IMAGES -->
+
+<section id="fragmentation">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <form class="form-horizontal" ng-submit="browseBaseImages()">
+                    <p>List of base images</p>
+
+                    <!-- SEARCH -->
+                    <!--<div class="form-group first-field">-->
+                        <!--<div class="col-sm-12">-->
+                            <!--<input st-search="" type="text" class="form-control" placeholder="Search VM Images"/>-->
+                                   <!--&lt;!&ndash;ng-keyup="browseBaseImages()"/>&ndash;&gt;-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <div class="col-sm-12">
+                        <table st-table="rowCollection" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>IMAGE NAME</th>
+                                <th>TAGS</th>
+                                <th>DESCRIPTION</th>
+                                <th>TYPE</th>
+                                <th>STATUS</th>
+                                <th>OWNER</th>
+                                <th>CREATION TIME</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in rowCollection">
+                                <td>{{row.name}}</td>
+                                <td>{{row.tags}}</td>
+                                <td>{{row.description}}</td>
+                                <td>{{row.type}}</td>
+                                <td>{{row.status}}</td>
+                                <td>{{row.owner}}</td>
+                                <td>{{row.created}}</td>
+                                <td>
+                                    <span ng-repeat="a in row.action">
+                                        <button class="{{getBackgroundColor(a)}}"  ng-click="executeBaseImageAction(row.id,a)">{{a}}</button>
+                                        <!--<a href="" ng-click="alert('{{row.id}}')">{{a}}</a>-->
+                                        <br/></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,30 +1,3 @@
-/*
- * =================================================================================
- * This file is part of: ENTICE Image Portal (Graphical User Interface)
- * Release version: 0.2
- * =================================================================================
- * Developer: Polona Štefanič, University of Ljubljana, Slovenia
- *
- * The project leading to this application has received funding
- * from the European Union's Horizon 2020 research and innovation
- * programme under grant agreement No 644179.
- *
- * Copyright 2016
- * Contact: Vlado Stankovski (vlado.stankovski@fgg.uni-lj.si),
- Polona Štefanič (polona.stefanic@fgg.uni-lj.si)
- * =================================================================================
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you must not use this file except in compliance with the License.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *
- * For details see the terms of the License (see attached file: README).
- * The License is also available at http://www.apache.org/licenses/LICENSE-2.0.txt.
- * ================================================================================
- */
-
 /* ANGULAR MODULES - Dependency Injection
 * Calling order:
 * 1. app.config()
@@ -32,6 +5,15 @@
 * 3. app.controller()
 * 4. directives
 * */
+
+function oops() {
+    swal({
+        title: "Oops...",
+        html: "API is not defined!<br />Please contact ENTICE WP6 integrators!",
+        type: 'error'
+    });
+}
+
 var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'googlechart', '720kb.tooltips',
                                  'lr.upload', 'nya.bootstrap.select', 'angular-growl']);
 
@@ -52,6 +34,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         authenticate: true
     });
 
+    $stateProvider.state('upload-optimized-image', {
+        url: '/upload-optimized-image',
+        templateUrl: './templates/upload-optimized-image.html',
+        controller: 'uploadOptimizedImageController',
+        authenticate: true
+    });
+
     $stateProvider.state('explore-images', {
         url: '/explore-images',
         templateUrl: './templates/explore-images.html',
@@ -63,6 +52,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/image-information/{imageId}',
         templateUrl: './templates/image-information.html',
         controller: 'imageInformationController',
+        authenticate: false
+    });
+
+    $stateProvider.state('detailed-vmi-browsing', {
+        url: '/detailed-vmi-browsing/{imageId}',
+        templateUrl: './templates/detailed-vmi-browsing.html',
+        controller: 'detailedVMIBrowsingController',
         authenticate: false
     });
 
@@ -84,6 +80,49 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/build-recipes',
         templateUrl: './templates/build-recipes.html',
         controller: "buildRecipesController",
+        authenticate: true
+    });
+
+    $stateProvider.state('vmi-browsing', {
+        url: '/vmi-browsing',
+        templateUrl: './templates/vmi-browsing.html',
+        controller: "vmiBrowsingController",
+        authenticate: false
+    });
+
+    $stateProvider.state('snapshot-upload', {
+        url: '/snapshot-upload',
+        templateUrl: './templates/snapshot-upload.html',
+        controller: "snapshotUploadController",
+        authenticate: true
+    });
+
+    $stateProvider.state('base-image', {
+        url: '/base-image',
+        templateUrl: './templates/base-image.html',
+        controller: "baseImageController",
+        authenticate: true
+    });
+
+
+    $stateProvider.state('installers-browsing', {
+        url: '/installers-browsing',
+        templateUrl: './templates/installers-browsing.html',
+        controller: "installersBrowsingController",
+        authenticate: true
+    });
+
+    $stateProvider.state('vmi-extension', {
+        url: '/vmi-extension',
+        templateUrl: './templates/vmi-extension.html',
+        controller: "vmiExtensionController",
+        authenticate: true
+    });
+
+    $stateProvider.state('vmi-launching', {
+        url: '/vmi-launching',
+        templateUrl: './templates/vmi-launching.html',
+        controller: "vmiLaunchingController",
         authenticate: true
     });
 

@@ -1,0 +1,184 @@
+<div id="detailed-info" class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div style="display: inline-block; margin-top: 30px;" class="col-md-9">
+                <h2>&nbsp&nbsp {{ image.imageName }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-6">
+            <div class="col-md-12 box">
+                <p><span><i class="fa fa-user"></i>&nbsp&nbspOwner</span></p>
+                <p> {{ image.ownerFullName }} </p>
+            </div>
+            <div class="col-md-12 box">
+                <p><span><i class="fa fa-user"></i>&nbsp&nbspCreation date</span></p>
+                <p> {{ image.created }} </p>
+            </div>
+            <div class="col-md-12 box">
+                <p><span><i class="fa fa-user"></i>&nbsp&nbspStatus</span></p>
+                <p> {{ image.status }} </p>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12 box" style="float: right; height:353px;">
+                <p><span><i class="fa fa-tag"></i>&nbsp&nbspTags</span></p>
+                <ul>
+                    <li ng-repeat="item in image.tags">{{ item }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-md-12 box">
+            <p><span><i class="fa fa-cloud-download"></i>&nbsp&nbspVMI URL</span></p>
+            <p><a style="font-size: 0.9em" href="{{ image.vmiURL }}" target="_blank">{{ image.vmiURL }}</a></p>
+        </div>
+    </div>
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-md-12 box">
+            <p><span><i class="fa fa-cloud-download"></i>&nbsp&nbspCloud image IDs</span></p>
+            <li ng-repeat="item in image.cloudImageIds">{{ item }}</li>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-md-12 box">
+            <p><span><i class="fa fa-pencil"></i>&nbsp&nbspDescription</span></p>
+            <p> {{ image.description }} </p>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-md-12" style="margin-bottom: 70px;">
+            <p><span><i class="fa fa-database"></i>&nbsp&nbspRepository</span> This image is stored in the following
+                repository</p>
+            <p> {{ image.partition }} </p>
+            <div class="col-md-10">
+                <div id="network-geo-map"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--<div class="col-md-3">
+    <a style="float: right; margin-bottom: 20px;"><i class="fa fa-cloud-upload"></i>&nbspDeploy on Cloud</a>
+</div>
+<form name="deployForm" ng-model="deployForm" class="form-horizontal" role="form">
+    <!-- IMAGE ID -->
+<!--<div class="col-md-3">
+    <div class="form-group" ng-class="{ 'has-error' : deployForm.image_id.$invalid && deployForm.image_id.$dirty, 'has-success' : deployForm.image_id.$valid && deployForm.image_id.$dirty}">
+        <span class="control-label">Image Id <a class="tooltip-pointer"></a></span>
+        <input name="image_id"
+               type="text"
+               class="form-control"
+               placeholder="Image Id"
+               ng-model="data.image_id">
+        <span class="red-message" ng-if="deployForm.image_id.$error.required && deployForm.image_id.$dirty">Upload File.</span>
+        <!--<span class="green-message" ng-if="uploadForm.functional_tests_upload.$valid"><i class="fa fa-check"></i></span>-->
+<!--   </div>
+</div>
+
+<!-- CLOUD ACCESS KEY -->
+<!--  <div class="col-md-3">
+      <div class="form-group" ng-class="{ 'has-error' : deployForm.deploy_access_key.$invalid && deployForm.deploy_access_key.$dirty, 'has-success' : deployForm.deploy_access_key.$valid && deployForm.deploy_access_key.$dirty}">
+          <span class="control-label">Cloud Access Key <a class="tooltip-pointer"></a></span>
+          <input name="deploy_access_key"
+                 type="text"
+                 class="form-control"
+                 placeholder="Cloud Access Key"
+                 ng-model="data.cloud_access_key">
+          <span class="red-message" ng-if="uploadForm.functional_tests_upload.$error.required && uploadForm.functional_tests_upload.$dirty">Upload File.</span>
+          <!--<span class="green-message" ng-if="uploadForm.functional_tests_upload.$valid"><i class="fa fa-check"></i></span>-->
+<!--     </div>
+ </div>
+
+ <!-- CLOUD SECRET KEY -->
+<!--   <div class="col-md-3">
+       <div class="form-group" ng-class="{ 'has-error' : deployForm.deploy_secret_key.$invalid && deployForm.deploy_secret_key.$dirty, 'has-success' : deployForm.deploy_secret_key.$valid && deployForm.deploy_secret_key.$dirty}">
+           <span class="control-label">Cloud Secret Key <a class="tooltip-pointer"></a></span>
+           <input name="deploy_secret_key"
+                  type="text"
+                  class="form-control"
+                  placeholder="Cloud Secret Key"
+                  ng-model="data.cloud_secret_key">
+           <span class="red-message" ng-if="deploy_secret_key.$error.required && deploy_secret_key.$dirty">Upload File.</span>
+           <!--<span class="green-message" ng-if="uploadForm.functional_tests_upload.$valid"><i class="fa fa-check"></i></span>-->
+<!--     </div>
+ </div>
+
+ <!-- CLOUD LOCATION-->
+<!--<div class="col-md-3">
+    <div class="form-group" ng-class="{ 'has-error' : deployForm.cloud_location.$invalid && deployForm.cloud_location.$dirty, 'has-success' : deployForm.cloud_location.$valid && deployForm.cloud_location.$dirty}">
+        <span class="control-label">Cloud Name <a class="tooltip-pointer"></a></span>
+        <input name="cloud_location"
+               type="text"
+               class="form-control"
+               placeholder="Cloud Location"
+               ng-model="data.cloud_id">
+        <span class="red-message" ng-if="cloud_location.$error.required && cloud_location.$dirty">Upload File.</span>
+        <!--<span class="green-message" ng-if="uploadForm.functional_tests_upload.$valid"><i class="fa fa-check"></i></span>-->
+<!--   </div>
+</div>
+
+<div class="col-md-3" style="padding: 0">
+   <button style="width: 100%;" id="deploy" class="btn btn-info" ng-click="deployOnCloud();">Deploy</button>
+</div>
+</form>-->
+
+<!--
+        </div>
+    </div>
+</section>
+-->
+
+<!--<section id="progress" ng-show="showProgress">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <h4 style="margin-left: 55px; margin-top: 50px; margin-bottom: -30px">Optimizing image...</h4>
+
+            </div>
+            <div class="col-md-12">
+                <div class="radial-progress" data-progress="0">
+                    <div class="circle">
+                        <div class="mask full">
+                            <div class="fill"></div>
+                        </div>
+                        <div class="mask half">
+                            <div class="fill"></div>
+                            <div class="fill fix"></div>
+                        </div>
+                        <div class="shadow"></div>
+                    </div>
+                    <div class="inset">
+                        <div class="percentage">
+                            <div class="numbers"><span>-</span><span>0%</span><span>1%</span><span>2%</span><span>3%</span><span>4%</span><span>5%</span><span>6%</span><span>7%</span><span>8%</span><span>9%</span><span>10%</span><span>11%</span><span>12%</span><span>13%</span><span>14%</span><span>15%</span><span>16%</span><span>17%</span><span>18%</span><span>19%</span><span>20%</span><span>21%</span><span>22%</span><span>23%</span><span>24%</span><span>25%</span><span>26%</span><span>27%</span><span>28%</span><span>29%</span><span>30%</span><span>31%</span><span>32%</span><span>33%</span><span>34%</span><span>35%</span><span>36%</span><span>37%</span><span>38%</span><span>39%</span><span>40%</span><span>41%</span><span>42%</span><span>43%</span><span>44%</span><span>45%</span><span>46%</span><span>47%</span><span>48%</span><span>49%</span><span>50%</span><span>51%</span><span>52%</span><span>53%</span><span>54%</span><span>55%</span><span>56%</span><span>57%</span><span>58%</span><span>59%</span><span>60%</span><span>61%</span><span>62%</span><span>63%</span><span>64%</span><span>65%</span><span>66%</span><span>67%</span><span>68%</span><span>69%</span><span>70%</span><span>71%</span><span>72%</span><span>73%</span><span>74%</span><span>75%</span><span>76%</span><span>77%</span><span>78%</span><span>79%</span><span>80%</span><span>81%</span><span>82%</span><span>83%</span><span>84%</span><span>85%</span><span>86%</span><span>87%</span><span>88%</span><span>89%</span><span>90%</span><span>91%</span><span>92%</span><span>93%</span><span>94%</span><span>95%</span><span>96%</span><span>97%</span><span>98%</span><span>99%</span><span>100%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+<!--
+<section id="buttons">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-2">
+                <button id="optimize" class="btn btn-info" ng-click="goToOptimization();">Optimize</button>
+            </div>
+            <!--<div class="col-md-2">
+                <button id="deploy" class="btn btn-info">&nbsp Deploy on Cloud</button>
+            </div>-->
+<!-- </div>
+</div>
+</section>
