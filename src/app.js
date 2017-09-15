@@ -63,9 +63,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state('optimization', {
-        url: '/optimization/:imageId',
+        url: '/optimization/:imageId&imageURL={imageURL}&functionalTests={functionalTests}',
         templateUrl: './templates/optimization.html',
         controller: 'optimizationController',
+        authenticate: true
+    });
+
+    $stateProvider.state('storeFragmentat', {
+        url: '/fragment/:imageId',
+        templateUrl: './templates/fragment.html',
+        controller: 'fragmentController',
         authenticate: true
     });
 

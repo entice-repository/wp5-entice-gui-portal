@@ -1,46 +1,32 @@
-app.controller('baseImageController', function ($scope, $http, upload, authService, growl, $state, $timeout) {
+app.controller('fragmentController', function ($scope, $http, upload, authService, growl, $state, $stateParams, $timeout) {
 
 
     /* Create base image */
-    $scope.tooltipsTab2 = {
-        "imageName": "Name of the image",
-        "imageTags": "Tags of the image separated with comma delimiter",
-        "imageDescription": "Description of the image",
-        "imageURL": "The URL from where the image file can be downloaded.",
-        "imagePartition": "Physical partition number of LVM (group and volume).",
-        "imageCloudId": "Map of cloud names and cloud image Ids.",
-        "imageOwner": "Creator of the image"
+    $scope.tooltipsAttachFragment = {
+        "file": "Fragment file to be attached to the VMI"
     };
 
 
-    var register_base_image = SERVICES_URL + "sztaki/register_base_image";
+    var store_fragment_url = SERVICES_URL + "sztaki/store_fragment";
 
-    $scope.registerBaseImageSubmit = function () {
-
-        var cloudImageDict = {};
-        cloudImageDict[$scope.formData.image_id_key] = $scope.formData.image_id_value;
-
+    $scope.fragmentAttachSubmit = function () {
         var data = {
-            owner: $scope.getUserId(),
-            url: $scope.formData.image_url,
-            name: $scope.formData.image_name,
-            description: $scope.formData.description,
-            partition: parseInt($scope.formData.partition),
-            tags: $scope.formData.tags.split(","),
-            cloudImageIds: cloudImageDict
+            file_upload: $("#vmi_file"),
+            disk_image_id: $stateParams.imageId
         };
 
-        // alert(JSON.stringify(data));
-        // todo: add validation if needed
+         alert($stateParams.imageId);
 
         waitingDialog.show();
-
         $http.post({
-            url: register_base_image,
+            url: store_fragment_url,
             data: data
         }).then(
             function (response) {
                 waitingDialog.hide();
+
+                // console.log(response);
+                // console.log("** Code: " + $scope.responseCode + " \n** RepositoryID: " + $scope.responseMessage);
 
                 if (response.data.code == 200) {
                     $scope.popUpToastr("success", "Image with ID " + response.data.message + " was successfully registered.");

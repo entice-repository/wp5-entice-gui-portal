@@ -1,0 +1,35 @@
+<!-- ATTACH FRAGMENT -->
+<section id="base-image">
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12">
+                <form  class="form-horizontal" role="form">
+                    <p>Attach fragment to the VMI</p>
+
+                    <p>Select a fragment to attach it to the selected VMI</p>
+
+                    <!-- VMI FILE-->
+                    <div class="form-group"
+                         ng-class="{ 'has-error' : uploadForm.vmi_file.$invalid && uploadForm.vmi_file.$dirty, 'has-success' : uploadForm.vmi_file.$valid && uploadForm.vmi_file.$dirty}">
+                        <span class="control-label col-sm-3">Select fragment file<a class="tooltip-pointer" tooltips
+                                                                               tooltip-template="{{ tooltipsAttachFragment.file }}">?</a></span>
+                        <div class="col-sm-6">
+                            <input id="vmi_file"
+                                   name="vmi_file"
+                                   type="file"
+                                   class="form-control"
+                                   placeholder="Upload optimized VMI"
+                                   valid-file ng-model="test1">
+                            <span class="red-message"
+                                  ng-if="uploadForm.vmi_file.$error.required && uploadForm.vmi_file.$dirty">Upload File.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button ng-click="fragmentAttachSubmit();" class="btn btn-info">Attach Fragment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
