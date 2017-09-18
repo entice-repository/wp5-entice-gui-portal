@@ -73,8 +73,9 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
     $scope.optimizeSubmit = function () {
 
         var data = {
-            imageId: new Date().getUTCMilliseconds(),
+            imageId: $scope.data.imageId,
             imageURL: $scope.data.imageURL,
+            imageFormat: $scope.data.ImageFormat,
             alternativeImageURL: $scope.data.alternativeImageURL,
             validatorScriptURL: $scope.data.validatorScriptURL,
             alternativeValidatorScriptURL: $scope.data.alternativeValidatorScriptURL,
@@ -84,7 +85,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
             s3AccessKey: $scope.data.s3AccessKey,
             s3SecretKey: $scope.data.s3SecretKey,
             Xs3Path: $scope.data.Xs3Path,
-            cloudInterface: $scope.data.cloudInterface,
+            cloudInterface: $scope.data.CloudInterface,
             imageUserName: $scope.data.imageUserName,
             fsPartition: $scope.data.fsPartition,
             imageKeyPair: $scope.data.imageKeyPair,
@@ -94,6 +95,8 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
             cloudWorkerVMInstanceType: $scope.data.WorkerVMInstanceType,
             freeDiskSpace: $scope.data.freeDiskSpace,
             numberOfParallelWorkerVMs: $scope.data.numberOfParallelWorkerVMs,
+            aimedSize: $scope.data.aimedSize,
+            aimedReductionRatio: $scope.data.aimedReductionRatio,
             maxIterationsNum: $scope.data.maxIterationsNum
         }
 
@@ -341,8 +344,8 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
         "numberOfParallelWorkerVMs": "The maximum number of VMs used simultaneously during optimization.",
         "maxIterationsNum": "The number of optimization iterations. The more iterations result in the less optimized image.",
         "freeDiskSpace": "The size of demanded free disk space in the optimized image. The default value 0 preserves original free disk space.",
-        "XaimedReductionRatio": "Stop optimization when the ratio of the original and the optimized image size reaches this value.",
-        "XaimedSize": "Stop optimization when the size of the optimized image size reaches this value. ",
+        "aimedReductionRatio": "Stop optimization when the ratio of the original and the optimized image size reaches this value.",
+        "aimedSize": "Stop optimization when the size of the optimized image size reaches this value. ",
         "XmaxRunningTime": "The maximum duration of optimization in seconds. Note that actual execution time may slightly exceed this limit, as it is check after each iteration.",
         "XmaxNumberOfVMs": "The maximum number of VMs used during the optimization (default: empty unlimited)."
     };

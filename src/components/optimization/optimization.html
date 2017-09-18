@@ -28,19 +28,34 @@
                                             </div>
                                             -->
 
-                                            <!-- IMAGE ID -->
-                                            <!-- <div class="form-group">
+                                             <!--IMAGE ID-->
+                                            <!--REQUIRED THIS OR IMAGE URL-->
+                                            <div class="form-group">
                                                  <span class="control-label col-sm-3">Image ID <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.imageId }}">?</a></span>
                                                  <div class="col-sm-5">
                                                      <input name="imageId"
                                                             ng-model="data.imageId"
-                                                            ng-required="true"
+                                                            ng-required="false"
                                                             type="text"
                                                             class="form-control"
                                                             placeholder="Image ID [f037a515-dd50-412e-9624-17512399e270]">
                                                  </div>
                                              </div>
- -->
+
+                                            <!--IMAGE URL -->
+                                            <!--REQUIRED THIS OR IMAGE ID-->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image URL <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.imageURL }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="imageURL"
+                                                           ng-model="data.imageURL"
+                                                           ng-required="false"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Image URL">
+                                                </div>
+                                            </div>
+
 
                                             <!-- IMAGE URL -->
                                             <div class="form-group">
@@ -56,6 +71,22 @@
                                                            placeholder="Image URL">
                                                 </div>
                                             </div>
+
+                                            <!-- IMAGE ID -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image URL <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imageURL }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="imageURL"
+                                                           ng-model="data.imageURL"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Image URL">
+                                                </div>
+                                            </div>
+
 
                                             <!-- ALTERNATIVE IMAGE URL -->
                                             <div class="form-group">
@@ -112,7 +143,7 @@
                                                 <div class="col-sm-5">
                                                     <input name="cloudOptimizerVMInstanceType"
                                                            ng-model="data.cloudOptimizerVMInstanceType"
-                                                           ng-required="true"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="Cloud Optimizer VM Instance Type">
@@ -187,12 +218,13 @@
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.cloudInterface }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="cloudInterface"
-                                                           ng-model="data.cloudInterface"
-                                                           ng-required="true"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Cloud Interface">
+                                                    <select ng-required="true" name="cloudInterface"
+                                                            class="form-control"
+                                                            ng-model="data.CloudInterface">
+                                                        <option value="ec2">ec2</option>
+                                                        <option value="fco">fco</option>
+                                                        <option value="wt">wt</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -238,7 +270,7 @@
                                                 <div class="col-sm-5">
                                                     <textarea name="imagePrivateKey"
                                                               ng-model="data.imagePrivateKey"
-                                                              ng-required="false"
+                                                              ng-required="true"
                                                               rows="9"
                                                               class="form-control"
                                                               placeholder="Image Private Key"></textarea>
@@ -269,6 +301,7 @@
                                                 <div class="col-sm-5">
                                                     <input name="fsPartition"
                                                            ng-model="data.fsPartition"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="FS Partition">
@@ -298,13 +331,18 @@
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.imageFormat }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="imageFormat"
-                                                           ng-model="data.imageFormat"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image format">
+                                                    <select ng-required="false" name="imageFormat"
+                                                            class="form-control"
+                                                            ng-model="data.ImageFormat">
+                                                        <option value="qcow2">qcow2</option>
+                                                        <option value="vmdk">vmdk</option>
+                                                        <option value="raw">raw</option>
+                                                    </select>
                                                 </div>
                                             </div>
+
+
+                                            <!--OVF template URL (vmdk only) - ovfURL, optional (required if vmdk), textfield automatically filled URL to where the ovf file had been uploaded at VMI upload-->
 
 
                                             <h4>Functional test</h4>
@@ -321,7 +359,7 @@
                                                 <div class="col-sm-5">
                                                     <input name="validatorScriptURL"
                                                            ng-model="data.validatorScriptURL"
-                                                           ng-required="true"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="Validator Script">
@@ -336,7 +374,7 @@
                                                 <div class="col-sm-5">
                                                     <input name="alternativeValidatorScriptURL"
                                                            ng-model="data.alternativeValidatorScriptURL"
-                                                           ng-required="true"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="AlternativeValidator Script">
@@ -410,7 +448,7 @@
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.workerVMInstanceType }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <select ng-required="true" name="cloudWorkerVMInstanceType"
+                                                    <select ng-required="false" name="cloudWorkerVMInstanceType"
                                                             class="form-control"
                                                             ng-model="data.WorkerVMInstanceType">
 
@@ -464,7 +502,7 @@
                                                 <div class="col-sm-5">
                                                     <input name="maxIterationsNum"
                                                            ng-model="data.maxIterationsNum"
-                                                           ng-required="true"
+                                                           ng-required="false"
                                                            type="number"
                                                            class="form-control"
                                                            placeholder="Max number of iterations">
@@ -479,7 +517,7 @@
                                                 <div class="col-sm-5">
                                                     <input name="numberOfParallelWorkerVMs"
                                                            ng-model="data.numberOfParallelWorkerVMs"
-                                                           ng-required="true"
+                                                           ng-required="false"
                                                            type="number"
                                                            class="form-control"
                                                            placeholder="Max number of VMs [optional]">
@@ -507,14 +545,14 @@
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Aimed reduction Ratio <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.XaimedReductionRatio }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.aimedReductionRatio }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="XaimedReductionRatio"
-                                                           ng-model="data.XaimedReductionRatio"
+                                                    <input name="aimedReductionRatio"
+                                                           ng-model="data.aimedReductionRatio"
                                                            ng-required="false"
                                                            type="number"
                                                            class="form-control"
-                                                           placeholder="Aimed Reduction Ratio [optional]">
+                                                           placeholder="Aimed Reduction Ratio">
                                                 </div>
                                             </div>
 
@@ -522,10 +560,10 @@
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Aimed reduction Size <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.XaimedSize }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.aimedSize }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="XaimedSize"
-                                                           ng-model="data.XaimedSize"
+                                                    <input name="aimedSize"
+                                                           ng-model="data.aimedSize"
                                                            ng-required="false"
                                                            type="number"
                                                            class="form-control"
@@ -535,17 +573,17 @@
 
 
                                             <!-- Max number of VMs OPTIONAL -->
-                                            <!--<div class="form-group">
+                                            <div class="form-group">
                                                 <span class="control-label col-sm-3">Max number of VMs <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.XmaxNumberOfVMs }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="XmaxNumberOfVMs"
-                                                           ng-model="data.XmaxNumberOfVMs"
-                                                           ng-required="true"
+                                                    <input name="maxNumberOfVMs"
+                                                           ng-model="data.maxNumberOfVMs"
+                                                           ng-required="false"
                                                            type="number"
                                                            class="form-control"
                                                            placeholder="Max number of VMs [optional]">
                                                 </div>
-                                            </div>-->
+                                            </div>
 
                                             <div class="form-group">
                                                 <button id="optimize-now" class="btn btn-info" type="submit">Optimize
