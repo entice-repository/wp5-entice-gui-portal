@@ -18,45 +18,6 @@
 
                                             <h4>Source Image Selection</h4>
 
-                                            <!-- IMAGE Name - should be a select among already uploaded images -->
-                                            <!--  <div class="form-group">
-                                                <span class="control-label col-sm-3 tipper right">Image Name <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.imageName }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <select ng-if="imageId == ''" ng-required="true" ng-model="data.imageName" name="imageName" class="form-control"></select>
-                                                    <input ng-if="imageId != ''" ng-model="data.imageName" name="imageName" class="form-control" disabled />
-                                                </div>
-                                            </div>
-                                            -->
-
-                                             <!--IMAGE ID-->
-                                            <!--REQUIRED THIS OR IMAGE URL-->
-                                            <div class="form-group">
-                                                 <span class="control-label col-sm-3">Image ID <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.imageId }}">?</a></span>
-                                                 <div class="col-sm-5">
-                                                     <input name="imageId"
-                                                            ng-model="data.imageId"
-                                                            ng-required="false"
-                                                            type="text"
-                                                            class="form-control"
-                                                            placeholder="Image ID [f037a515-dd50-412e-9624-17512399e270]">
-                                                 </div>
-                                             </div>
-
-                                            <!--IMAGE URL -->
-                                            <!--REQUIRED THIS OR IMAGE ID-->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image URL <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.imageURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="imageURL"
-                                                           ng-model="data.imageURL"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image URL">
-                                                </div>
-                                            </div>
-
-
                                             <!-- IMAGE URL -->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Image URL <a
@@ -72,145 +33,119 @@
                                                 </div>
                                             </div>
 
-                                            <!-- IMAGE ID -->
+                                            <!-- IMAGE FORMAT-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Image URL <a
+                                                <span class="control-label col-sm-3">Image format <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageURL }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.imageFormat }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="imageURL"
-                                                           ng-model="data.imageURL"
-                                                           ng-required="true"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image URL">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- ALTERNATIVE IMAGE URL -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Alternative Image URL <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.alternativeImageURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="alternativeImageURL"
-                                                           ng-model="data.alternativeImageURL"
-                                                           ng-required="true"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Alternative Image URL">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- TEMPLATE URL -  -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Template URL <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.templateURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="templateURL"
-                                                           ng-model="data.templateURL"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Template URL">
-                                                </div>
-                                            </div>
-
-                                            <!-- CLOUD ENDPOINT URL -  -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Cloud Endpoint URL <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.cloudEndpointURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <select ng-required="true" name="cloudEndpointURL"
+                                                    <select ng-required="false" name="imageFormat"
                                                             class="form-control"
-                                                            ng-model="data.CloudEndpointURL">
-                                                        <option value="http://cfe2.lpds.sztaki.hu:4567">SZTAKI</option>
-                                                        <option value="https://cp.sd1.flexiant.net/soap/user/current/?wsdl">FlexiOps</option>
-                                                        <option value="http://entice-api.wtelecom.es">WT</option>
+                                                            ng-model="data.ImageFormat">
+                                                        <option ng-option value="qcow2">qcow2</option>
+                                                        <option value="vmdk">vmdk</option>
+                                                        <option value="raw">raw</option>
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <!-- TEMPLATE URL -  -->
+
+                                            <!--OVF template URL (vmdk only) - ovfURL, optional (required if vmdk),
+                                            textfield automatically filled URL to where the ovf file had been uploaded at VMI upload-->
+                                            <!-- OVF template URL (vmdk only) -->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Cloud Optimizer VM Instance Type <a
+                                                <span class="control-label col-sm-3">OVF template URL (vmdk only)<a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.cloudOptimizerVMInstanceType }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.ovfURL }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="cloudOptimizerVMInstanceType"
-                                                           ng-model="data.cloudOptimizerVMInstanceType"
+                                                    <input name="ovfURL"
+                                                           ng-model="data.ovfURL"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="OVF template URL">
+                                                </div>
+                                            </div>
+
+                                            <!-- VALIDATOR SCRIPT-->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Validator Script <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.validatorScriptURL }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="validatorScriptURL"
+                                                           ng-model="data.validatorScriptURL"
                                                            ng-required="false"
                                                            type="text"
                                                            class="form-control"
-                                                           placeholder="Cloud Optimizer VM Instance Type">
+                                                           placeholder="Validator Script">
                                                 </div>
                                             </div>
 
-                                            <h4>S3 parameters</h4>
-
-                                            <!-- S3 Endpoint URL  -->
+                                            <!-- VALIDATORS SERVER URL-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">S3 Endpoint URL<a
+                                                <span class="control-label col-sm-3">Validators server URL <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.s3EndpointURL }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.validatorServerURL }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="s3EndpointURL"
-                                                           ng-model="data.s3EndpointURL"
-                                                           ng-required="true"
+                                                    <input name="validatorServerURL"
+                                                           ng-model="data.validatorServerURL"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
-                                                           placeholder="S3 Endpoint URL">
+                                                           placeholder="Validator server URL">
                                                 </div>
                                             </div>
 
-                                            <!-- S3 Access Key -->
+                                            <!-- VALIDATOR SCRIPT-->
+                                            <!--it will override the script uploaded at VMI upload-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">S3 Access Key<a
+                                                <span class="control-label col-sm-3">Validator Script<a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.s3AccessKey }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.validatorScript }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="s3AccessKey"
-                                                           ng-model="data.s3AccessKey"
-                                                           ng-required="true"
+                                                    <input name="validatorScript"
+                                                           ng-model="data.validatorScript"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
-                                                           placeholder="S3 Access Key">
+                                                           placeholder="Validator Script">
                                                 </div>
                                             </div>
 
-                                            <!-- S3 Access Key -->
+                                            <!-- FS PARTITION-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">S3 Secret Key<a
+                                                <span class="control-label col-sm-3">FS Partition <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.s3SecretKey }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.fsPartition }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="s3SecretKey"
-                                                           ng-model="data.s3SecretKey"
-                                                           ng-required="true"
-                                                           type="text"
+                                                    <input name="fsPartition"
+                                                           ng-model="data.fsPartition"
+                                                           ng-required="false"
+                                                           type="number"
                                                            class="form-control"
-                                                           placeholder="S3 Secret Key">
+                                                           placeholder="FS Partition" value="1">
                                                 </div>
                                             </div>
 
-                                            <!-- S3 Path-->
+                                            <!-- FS TYPE-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">S3 Path<a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.Xs3Path }}">?</a></span>
+                                                <span class="control-label col-sm-3">FS Type <a class="tooltip-pointer"
+                                                                                                tooltips
+                                                                                                tooltip-template="{{ tooltipsOptimisation.fsType }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="Xs3Path"
-                                                           ng-model="data.Xs3Path"
-                                                           ng-required="true"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="S3 Path">
+                                                    <select ng-required="false" name="fsType"
+                                                            class="form-control"
+                                                            ng-model="data.FsType">
+                                                        <option ng-option value="ext4">ext4</option>
+                                                        <option value="ext3">ext3</option>
+                                                        <option value="ext2">ext2</option>
+                                                        <option value="xfs">xfs</option>
+                                                    </select>
                                                 </div>
                                             </div>
+
+                                            <h4>Optimisation resource</h4>
 
                                             <!-- Cloud Interface-->
                                             <div class="form-group">
@@ -228,178 +163,25 @@
                                                 </div>
                                             </div>
 
-                                            <h4>Source image access and contextualization parameters</h4>
-
-                                            <!-- IMAGE USERNAME (optional) -->
+                                            <!-- CLOUD ENDPOINT URL -  -->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Image Username <a
+                                                <span class="control-label col-sm-3">Cloud Endpoint URL <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageUserName }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.cloudEndpointURL }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="imageUserName"
-                                                           ng-model="data.imageUserName"
-                                                           ng-required="true"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image Username">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- IMAGE KEY PAIR (optional) -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image Key Pair <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageKeyPair }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="imageKeyPair"
-                                                           ng-model="data.imageKeyPair"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image Key Pair">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- IMAGE PRIVATE KEY (required) must be base64 encoded before sending to the service  -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image Private Key <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imagePrivateKey }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <textarea name="imagePrivateKey"
-                                                              ng-model="data.imagePrivateKey"
-                                                              ng-required="true"
-                                                              rows="9"
-                                                              class="form-control"
-                                                              placeholder="Image Private Key"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <!-- IMAGE CONTEXTUALIZATION  -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image contextualization <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageContextualization }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="imageContextualization"
-                                                           ng-model="data.imageContextualization"
-                                                           ng-required="true"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image contextualization">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- FS PARTITION-->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">FS Partition <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.fsPartition }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="fsPartition"
-                                                           ng-model="data.fsPartition"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="FS Partition">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- FS TYPE-->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">FS Type <a class="tooltip-pointer"
-                                                                                                tooltips
-                                                                                                tooltip-template="{{ tooltipsOptimisation.fsType }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="fsType"
-                                                           ng-model="data.fsType"
-                                                           type="text"
-                                                           ng-required="false"
-                                                           class="form-control"
-                                                           placeholder="FS Type">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- IMAGE FORMAT-->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image format <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageFormat }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <select ng-required="false" name="imageFormat"
+                                                    <select ng-required="true" name="cloudEndpointURL"
                                                             class="form-control"
-                                                            ng-model="data.ImageFormat">
-                                                        <option value="qcow2">qcow2</option>
-                                                        <option value="vmdk">vmdk</option>
-                                                        <option value="raw">raw</option>
+                                                            ng-model="data.CloudEndpointURL">
+                                                        <option value="http://cfe2.lpds.sztaki.hu:4567">sztaki</option>
+                                                        <option value="https://cp.sd1.flexiant.net/soap/user/current/?wsdl">
+                                                            fco
+                                                        </option>
+                                                        <option value="http://entice-api.wtelecom.es">wt</option>
+                                                        <option value="https://opennebula.lpds.sztaki.hu:4567">deimos
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
-
-
-                                            <!--OVF template URL (vmdk only) - ovfURL, optional (required if vmdk), textfield automatically filled URL to where the ovf file had been uploaded at VMI upload-->
-
-
-                                            <h4>Functional test</h4>
-                                            <!--
-                                            Provide validator script - required here the user either gives a URL or can copy paste here the text of the script (base64 on sending)
-                                            And also for free disk space there should be a comment that: "0 means keep original free disk space"
-                                            -->
-
-                                            <!-- VALIDATOR SCRIPT-->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Validator Script <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.validatorScriptURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="validatorScriptURL"
-                                                           ng-model="data.validatorScriptURL"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Validator Script">
-                                                </div>
-                                            </div>
-
-                                            <!-- ALTERNATIVE VALIDATOR SCRIPT-->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Alternative Validator Script <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.alternativeValidatorScriptURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="alternativeValidatorScriptURL"
-                                                           ng-model="data.alternativeValidatorScriptURL"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="AlternativeValidator Script">
-                                                </div>
-                                            </div>
-
-
-                                            <!-- VALIDATORS SERVER URL-->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Validators server URL <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.validatorServerURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="validatorServerURL"
-                                                           ng-model="data.validatorServerURL"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Validator server URL">
-                                                </div>
-                                            </div>
-
-
-                                            <h4>Optimisation resource and credentials</h4>
-
 
                                             <!-- CLOUD ACCESS KEY -->
                                             <div class="form-group">
@@ -419,7 +201,6 @@
                                                 </div>
                                             </div>
 
-
                                             <!-- CLOUD SECRET KEY -->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Cloud Secret Key <a
@@ -438,61 +219,115 @@
                                                 </div>
                                             </div>
 
+                                            <!--IMAGE ID-->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image ID <a class="tooltip-pointer"
+                                                                                                 tooltips
+                                                                                                 tooltip-template="{{ tooltipsOptimisation.imageId }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="imageId"
+                                                           ng-model="data.imageId"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Image ID">
+                                                </div>
+                                            </div>
 
-                                            <h4>Optimisation parameters</h4>
+                                            <!-- IMAGE KEY PAIR (optional) -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image Key Pair <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imageKeyPair }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="imageKeyPair"
+                                                           ng-model="data.imageKeyPair"
+                                                           ng-required="false"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Image Key Pair">
+                                                </div>
+                                            </div>
 
+                                            <!-- IMAGE USERNAME (optional) -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image Username <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imageUserName }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="imageUserName"
+                                                           ng-model="data.imageUserName"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Image Username">
+                                                </div>
+                                            </div>
+
+                                            <!-- IMAGE PRIVATE KEY (required) must be base64 encoded before sending to the service  -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image Private Key <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imagePrivateKey }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <textarea name="imagePrivateKey"
+                                                              ng-model="data.imagePrivateKey"
+                                                              ng-required="true"
+                                                              rows="9"
+                                                              class="form-control"
+                                                              placeholder="Image Private Key"></textarea>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Image Contextualization URL (required) must be base64 encoded before sending to the service  -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image Contextualization URL<a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imageContextualizationURL }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="imageContextualizationURL"
+                                                           ng-model="data.imageContextualizationURL"
+                                                           ng-required="false"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Image Contextualization URL"></input>
+                                                </div>
+                                            </div>
+
+                                            <!-- TEMPLATE URL -  -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Cloud Optimizer VM Instance Type <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.cloudOptimizerVMInstanceType }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <select ng-required="false" name="cloudOptimizerVMInstanceType"
+                                                            class="form-control"
+                                                            ng-model="data.CloudOptimizerVMInstanceType">
+                                                        <option value="m1.small">m1.small</option>
+                                                        <option value="m1.medium">m1.medium</option>
+                                                        <option value="m1.large">m1.large</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
                                             <!-- CLOUD WORKER VMI INSTANCE -->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Worker VM instance type <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.workerVMInstanceType }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.cloudWorkerVMInstanceType }}">?</a></span>
                                                 <div class="col-sm-5">
                                                     <select ng-required="false" name="cloudWorkerVMInstanceType"
                                                             class="form-control"
-                                                            ng-model="data.WorkerVMInstanceType">
-
-                                                        <option ng-if="imageId == ''" value="m1.small"
-                                                                ng-selected="true">m1.small
-                                                        </option>
-                                                        <option ng-if="imageId != ''" value="m1.small">m1.small</option>
+                                                            ng-model="data.CloudWorkerVMInstanceType">
+                                                        <option value="m1.small">m1.small</option>
                                                         <option value="m1.medium">m1.medium</option>
+                                                        <option value="m1.large">m1.large</option>
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <!-- Number of Parallel Worker VMIs -->
-                                            <!--
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Number of VMIs <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.numberOfVMs }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="numberOfParallelWorkerVMs"
-                                                           ng-model="data.numberOfParallelWorkerVMs"
-                                                           ng-required="true"
-                                                           type="number"
-                                                           class="form-control"
-                                                           placeholder="Number of VMIs">
-                                                </div>
-                                            </div>
-                                            -->
-
-                                            <!-- FREE DISKSPACE -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Free Disk Space <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.freeDiskSpace }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="freeDiskSpace"
-                                                           ng-model="data.freeDiskSpace"
-                                                           type="number"
-                                                           ng-required="false"
-                                                           class="form-control"
-                                                           placeholder="Free Disk Space">
-                                                </div>
-                                            </div>
-
-
-                                            <h4>Optimisation Limits</h4>
+                                            <h4>Optimisation goals and limits</h4>
 
                                             <!-- Max number of iterations -->
                                             <div class="form-group">
@@ -524,15 +359,14 @@
                                                 </div>
                                             </div>
 
-
                                             <!-- Maximum running time (in seconds)-->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Max running time (in sec) <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.XmaxRunningTime }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.maxRunningTime }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="XmaxRunningTime"
-                                                           ng-model="data.XmaxRunningTime"
+                                                    <input name="maxRunningTime"
+                                                           ng-model="data.maxRunningTime"
                                                            ng-required="false"
                                                            type="number"
                                                            class="form-control"
@@ -540,19 +374,18 @@
                                                 </div>
                                             </div>
 
-
-                                            <!-- Aimed Reduction Ratio OPTIONAL -->
+                                            <!-- Max number of VMs OPTIONAL -->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Aimed reduction Ratio <a
+                                                <span class="control-label col-sm-3">Max number of VMs <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.aimedReductionRatio }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.XmaxNumberOfVMs }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="aimedReductionRatio"
-                                                           ng-model="data.aimedReductionRatio"
+                                                    <input name="maxNumberOfVMs"
+                                                           ng-model="data.maxNumberOfVMs"
                                                            ng-required="false"
                                                            type="number"
                                                            class="form-control"
-                                                           placeholder="Aimed Reduction Ratio">
+                                                           placeholder="Max number of VMs [optional]">
                                                 </div>
                                             </div>
 
@@ -571,17 +404,33 @@
                                                 </div>
                                             </div>
 
-
-                                            <!-- Max number of VMs OPTIONAL -->
+                                            <!-- Aimed Reduction Ratio OPTIONAL -->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Max number of VMs <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsOptimisation.XmaxNumberOfVMs }}">?</a></span>
+                                                <span class="control-label col-sm-3">Aimed reduction Ratio <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.aimedReductionRatio }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="maxNumberOfVMs"
-                                                           ng-model="data.maxNumberOfVMs"
+                                                    <input name="aimedReductionRatio"
+                                                           ng-model="data.aimedReductionRatio"
                                                            ng-required="false"
                                                            type="number"
                                                            class="form-control"
-                                                           placeholder="Max number of VMs [optional]">
+                                                           placeholder="Aimed Reduction Ratio">
+                                                </div>
+                                            </div>
+
+                                            <!-- FREE DISKSPACE -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Free Disk Space <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.freeDiskSpace }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="freeDiskSpace"
+                                                           ng-model="data.freeDiskSpace"
+                                                           type="number"
+                                                           ng-required="false"
+                                                           class="form-control"
+                                                           placeholder="Free Disk Space">
                                                 </div>
                                             </div>
 

@@ -10,43 +10,25 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
     $scope.imageId = imageId;
     $scope.imageData = {};
 
+    // Default values
     $scope.data = {
-        imageId: $stateParams.imageId,
-        imageURL: $stateParams.imageURL,
-        templateURL: $stateParams.functionalTests,
-        validatorScriptURL: "https://s3.lpds.sztaki.hu/atisu/entice/wp3/optimize/wordpress-centos7.0-20160627b.sh",
+        ImageFormat: "qcow2",
+        FsType: "ext4",
+        CloudInterface: "ec2",
+        CloudEndpointURL: "http://cfe2.lpds.sztaki.hu:4567",
+        cloudAccessKey: "Entice-admin",
         imageUserName: "root",
-        fsPartition: "vg0 root",
-        imageKeyPair: "ahajnal_keypair",
-        imagePrivateKey: "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQ0KTUlJRXBBSUJBQUtDQVFFQXpzY0xpcmpGNUlibEgwNWljUVFZa2VWRzdCeWFWcVhuVXZQSDcwOHV2OHV0Rk1nOA0KcTNmZ09xa2YvUkgvMUIwSHZjZkdEa2x6NkhRVksrWGgwN1J1Ykh6M0x2by9SMm5MVmI3YlJnY3oxYjEwR1I3Nw0KdWJGTEZ6Y3hsUFpKR3Z4OUxsYVd5UTUwL2VlU3R5VHQ3bGV3UWJacWtRZ0R4b2pYMm1iS3VrOGRscXRYeDZhZw0KU01hK2pUOGtXZWp4dnlGNDJqWVRNSk9DZ0FjYWxrdnpqYnNpRUxrWE5Xb0pvd3JQM1V3YUR1OHRFaW91UTY0dw0Kc2pJQnBSNmp5eHlqZW9uRVJGeU9mL2M3WkMvaW9nOU50cWRmcUo4YXVKLzRMYm8xYUpiemw1dkJCeTBnZ3BzVA0KejM3eGQzTWp5UEtNZm1SQXEvOEQ1TkJ4SUtodGZYU0FMZEIrTFFJREFRQUJBb0lCQUdEcWdDbGowelQ2V05law0KaUpWS0F5NFdsWGhESzcrakFOb3JjckZpbnBtOG9BSVduQUVPTGFXdzhWSlBKbVpIdVFJbGFWbjI2WUd4THQ4bA0KWHdRNEZHMTY0T3crMUh2blJTdUtTZ0gzakQ4SkRpcGNFRVlIcUJkWWdqKzhjNlZYWkdEY3FzM1BuZHdIdHdkcQ0KSXE3TW9Nc2I4YlRLV2VLcTd1anB0dWs5L2JOSkFYTThhN3ptaFNPMWNRTkZFeWxqRStLWjFyNTRkS0lVcUlLZg0KOTh2cFFvbmhDMHA4OExOVFBNMkthdk5uK1Y3Y3ArcnlNNHVRUnhkUjc5YVFaaGFuWXQxWllTQWYrRjN2bHppTg0KVUI2OXpSNGhhbzZEUUtWeE1yVWZxU1N5cHRPcW8vN1hXTlVYM1F5R3VsZ24wTHhORjdv dnI3aEtZQlpuZ0pQdg0KeERIWEt5MENnWUVBK2NhaG83MHErYlJBTzl3RHZPeHFuSHlFV2ZGQ2ZITk5lcmJaQ3MveVRHNmFNZGo5dVd0SA0KNnNmR2ltMGcwUWtoT1M1V0ZOV1ZYWVBkeDVaMk4yMTlhQ3hLdUlUd1pvdWx6WlREZW1hdkIzUXU5OE9aZi9TTA0KRU9HMS81d2xlY0JHK2dBRnVvMGNZRVlrZWFvby9EZXU2ejFuYmRXWHMzNGhjU21Kb1JQdlBtTUNnWUVBMCs0ZQ0KWTZMVlpqUUNFOVR0bUdFRWt3Ky9UQXorUmVTa3pRWmZxWDZZTTNVOGg5OVp3bzFBNWRQaFVPQ2M0ODdwbE1UYQ0KRys0dWhtRmVJd0FFbWRBMm9FK3NUaW5CWlVMQUJ5SDZJd2xRV0pKMW5WeUE3aVZSSElYK0F4S0tmaUV4QXJQYw0KUC82dVVzaUQvTXZGQTVoR3JEUnUyWUlHRXdkRCtyRE9sN2JNN2k4Q2dZRUF0bTJHL1VwYXF3b2xxQktuZ0VMRQ0KRXdzMnQySm9odkRIOUFxOE54TnVDcmoxVWRjRWFYcWJpalRqSTVOVTFwZnVkZzhMdkNmSzhnUXY1V2hWYTJKQw0KcCtWQnBjY2l0aUxrdEdRazZhODV3eDN1ZC9PYWwwUUtsZ2ZrbjQ1eUtKeHd1b050cTdVSXRxQkVYOEFTTXpTUQ0KUXl3VDhMcUNGQXpaYkFkRWlDdEJIN1VDZ1lFQXdYcDNaZkVIcjRtMWg5TnhvaGFZYllZSDErOVl5QWhJYUNEMA0KZnJIalU3OHBKc1pDbFBvT0VJUVNCSnM2d0VOclBmVkZSaEI1aXhjak1RTFlNSEJGSHEvK0YxSEpqSitXM2l3bg0KeDRxK1BrNWZiKzAraTZ1bjFFbURyOXhpY1dudDY1QzJkL29UdmVIdmxYK1dlb1N2cUpFcHpnc0ZicVBJYlBxeg0KY1JCaklPTU NnWUJBTnZoQWppb25Ya0l1NjYzUFZsekFKQ0REcTZ1empDKzlSTkpFdEhxbkZYd1B6RHRXV3NZSQ0KeDVNSW9hWjZOZ1dSSVZJek9mc3UzMU9QdVdqZ2lHTFJQY3ZBNi80UjJmWm5sc0tvbitHRXFmajlTQ0tLOUJGZg0KYVEra0xoOHVpbUVtYlBkcVFtVWtjYkl6QmdjMnVlY1pjNWlyVGJuS1RVVjdWTkhqQzViaEhRPT0NCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t",
-        cloudAccessKey: "ahajnal@sztaki.hu",
-        cloudSecretKey: "I should not be commited ever!!",
-        cloudWorkerVMInstanceType: "m1.small",
-        freeDiskSpace: 100,
-        numberOfParallelWorkerVMs: 8,
-        maxIterationsNum: 5
+        CloudOptimizerVMInstanceType: "m1.medium",
+        CloudWorkerVMInstanceType: "m1.small",
+        maxIterationsNum: 5,
+        numberOfParallelWorkerVMs: 4,
+        fsPartition: 1,
+        imageId: $stateParams.imageId,
+        imageURL: $stateParams.imageURL
     };
 
-    /* TODO: TO BE UPDATED
-     - ImageId (Int) REQ
-     - ImageLoginName (String) REQ
-     - ImageKeyPair (String) REQ
-     - ImagePrivateKey (String) REQ
-     - ValidatorScript (String) REQ
-     - CloudLocation (Sting) REQ
-     - CloudAccessKey (String) REQ
-     - CloudSecretKey (String) REQ
-     - FSPartition (String) OPT
-     - WorkerVMInstanceType (String) REQ
-     - MaxNumberOfIteration (String) REQ
-     - FreeDiskSpace (Int) OPT.
-     - Aimed Reduction Ratio (Float) OPT.
-     - Aimed Size (UInt) OPT.
-     - MaxRunningTime (Float) OPT.
-     - MaxNumberOfVMIs (UInt) OPT.
-
-     * */
-    // };
+    // LATEST DOCUMENTATION:
+    // https://docs.google.com/document/d/1cw2hx_QgwkxAg9J8vfDUPSrUwIwpjsQDod4NzPbrINM/edit
 
     $scope.optimization = [];
     $scope.active = 0;
@@ -71,33 +53,38 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
     }, 20000));
 
     $scope.optimizeSubmit = function () {
-
         var data = {
-            imageId: $scope.data.imageId,
+            // Source image
             imageURL: $scope.data.imageURL,
             imageFormat: $scope.data.ImageFormat,
-            alternativeImageURL: $scope.data.alternativeImageURL,
+            ovfURL: $scope.data.ovfURL,
             validatorScriptURL: $scope.data.validatorScriptURL,
-            alternativeValidatorScriptURL: $scope.data.alternativeValidatorScriptURL,
-            cloudEndpointURL: $scope.data.CloudEndpointURL,
-            cloudOptimizerVMInstanceType: $scope.data.cloudOptimizerVMInstanceType,
-            s3EndpointURL: $scope.data.s3EndpointURL,
-            s3AccessKey: $scope.data.s3AccessKey,
-            s3SecretKey: $scope.data.s3SecretKey,
-            Xs3Path: $scope.data.Xs3Path,
-            cloudInterface: $scope.data.CloudInterface,
-            imageUserName: $scope.data.imageUserName,
+            validatorServerURL: $scope.data.validatorServerURL,
+            validatorScript: $scope.data.validatorScript,
             fsPartition: $scope.data.fsPartition,
-            imageKeyPair: $scope.data.imageKeyPair,
-            imagePrivateKey: $scope.data.imagePrivateKey,
+            fsType: $scope.data.FsType,
+
+            // Optimisation resource
+            cloudInterface: $scope.data.CloudInterface,
+            cloudEndpointURL: $scope.data.CloudEndpointURL,
             cloudAccessKey: $scope.data.cloudAccessKey,
             cloudSecretKey: $scope.data.cloudSecretKey,
-            cloudWorkerVMInstanceType: $scope.data.WorkerVMInstanceType,
-            freeDiskSpace: $scope.data.freeDiskSpace,
+            imageId: $scope.data.imageId,
+            imageKeyPair: $scope.data.imageKeyPair,
+            imageUserName: $scope.data.imageUserName,
+            imagePrivateKey: $scope.data.imagePrivateKey,
+            imageContextualizationURL: $scope.data.imageContextualizationURL,
+            cloudOptimizerVMInstanceType: $scope.data.cloudOptimizerVMInstanceType,
+            cloudWorkerVMInstanceType: $scope.data.CloudWorkerVMInstanceType,
+
+            // Optimisation goals and limits
+            maxIterationsNum: $scope.data.maxIterationsNum,
             numberOfParallelWorkerVMs: $scope.data.numberOfParallelWorkerVMs,
+            maxRunningTime: $scope.data.maxRunningTime,
+            maxNumberOfVMs: $scope.data.maxNumberOfVMs,
             aimedSize: $scope.data.aimedSize,
             aimedReductionRatio: $scope.data.aimedReductionRatio,
-            maxIterationsNum: $scope.data.maxIterationsNum
+            freeDiskSpace: $scope.data.freeDiskSpace
         }
 
         waitingDialog.show();
