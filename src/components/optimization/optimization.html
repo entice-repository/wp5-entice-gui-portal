@@ -60,7 +60,7 @@
                                                 <div class="col-sm-5">
                                                     <input name="ovfURL"
                                                            ng-model="data.ovfURL"
-                                                           ng-required="true"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="OVF template URL">
@@ -69,7 +69,7 @@
 
                                             <!-- VALIDATOR SCRIPT-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Validator Script <a
+                                                <span class="control-label col-sm-3">Validator Script URL<a
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.validatorScriptURL }}">?</a></span>
                                                 <div class="col-sm-5">
@@ -78,7 +78,7 @@
                                                            ng-required="false"
                                                            type="text"
                                                            class="form-control"
-                                                           placeholder="Validator Script">
+                                                           placeholder="Validator Script URL">
                                                 </div>
                                             </div>
 
@@ -100,16 +100,16 @@
                                             <!-- VALIDATOR SCRIPT-->
                                             <!--it will override the script uploaded at VMI upload-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Validator Script<a
+                                                <span class="control-label col-sm-3">Validator Script (base64)<a
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.validatorScript }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="validatorScript"
-                                                           ng-model="data.validatorScript"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Validator Script">
+                                                    <textarea name="validatorScript"
+                                                              ng-model="data.validatorScript"
+                                                              ng-required="false"
+                                                              rows="9"
+                                                              class="form-control"
+                                                              placeholder="Validator Script (base64)"></textarea>
                                                 </div>
                                             </div>
 
@@ -221,16 +221,17 @@
 
                                             <!--IMAGE ID-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Image ID <a class="tooltip-pointer"
-                                                                                                 tooltips
-                                                                                                 tooltip-template="{{ tooltipsOptimisation.imageId }}">?</a></span>
+                                                <span class="control-label col-sm-3">Source image cloud repository ID<a
+                                                        class="tooltip-pointer"
+                                                        tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imageId }}">?</a></span>
                                                 <div class="col-sm-5">
                                                     <input name="imageId"
                                                            ng-model="data.imageId"
                                                            ng-required="true"
                                                            type="text"
                                                            class="form-control"
-                                                           placeholder="Image ID">
+                                                           placeholder="Source image cloud repository ID">
                                                 </div>
                                             </div>
 
@@ -292,6 +293,21 @@
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="Image Contextualization URL"></input>
+                                                </div>
+                                            </div>
+
+                                            <!-- Image Contextualization base64 -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image Contextualization (base64)<a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imageContextualization }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="imageContextualization"
+                                                           ng-model="data.imageContextualization"
+                                                           ng-required="false"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Image Contextualization (base64)"></input>
                                                 </div>
                                             </div>
 
@@ -406,7 +422,7 @@
 
                                             <!-- Aimed Reduction Ratio OPTIONAL -->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Aimed reduction Ratio <a
+                                                <span class="control-label col-sm-3">Aimed reduction Ratio<a
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.aimedReductionRatio }}">?</a></span>
                                                 <div class="col-sm-5">
@@ -415,9 +431,11 @@
                                                            ng-required="false"
                                                            type="number"
                                                            class="form-control"
-                                                           placeholder="Aimed Reduction Ratio">
+                                                           placeholder="Aimed Reduction Ratio"
+                                                           ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
                                                 </div>
                                             </div>
+
 
                                             <!-- FREE DISKSPACE -->
                                             <div class="form-group">

@@ -23,7 +23,6 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
         maxIterationsNum: 5,
         numberOfParallelWorkerVMs: 4,
         fsPartition: 1,
-        imageId: $stateParams.imageId,
         imageURL: $stateParams.imageURL
     };
 
@@ -74,6 +73,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
             imageUserName: $scope.data.imageUserName,
             imagePrivateKey: $scope.data.imagePrivateKey,
             imageContextualizationURL: $scope.data.imageContextualizationURL,
+            imageContextualization: $scope.data.imageContextualization,
             cloudOptimizerVMInstanceType: $scope.data.cloudOptimizerVMInstanceType,
             cloudWorkerVMInstanceType: $scope.data.CloudWorkerVMInstanceType,
 
@@ -89,19 +89,25 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
 
         waitingDialog.show();
 
-
-        $http.post(optimize_url, data).then(
-            function (success) {
-                console.log(success);
-                $scope.active = 1;
-                waitingDialog.hide();
-            },
-            function (error) {
-                alert("Optimisation error: " + JSON.stringify(error));
-                console.log("Optimisation error");
-                waitingDialog.hide();
-            }
-        );
+        try {
+            $http.post(optimize_url, data).then(
+                function (success) {
+                    console.log(success);
+                    $scope.active = 1;
+                    waitingDialog.hide();
+                    alert("Success: " + JSON.stringify(success));
+                },
+                function (error) {
+                    alert("Optimisation error: " + JSON.stringify(error));
+                    console.log("Optimisation error");
+                    waitingDialog.hide();
+                }
+            );
+        }
+        catch (err) {
+            waitingDialog.hide();
+            alert(err);
+        }
     };
 
     $scope.chart2 = {
@@ -308,7 +314,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
 
     /* TEXT FOR TOOLTIPS */
     $scope.tooltipsOptimisation = {
-        "imageId": "The UUID of the image in the KB",
+        "imageId": "Image ID is the ID within the cloud repository.",
         "imageURL": "HTTP URL from where the source image file can be downloaded by the optimizer.",
         "alternativeImageURL": "Alternative HTTP URL from where the source image file can be downloaded by the optimizer.",
         "templateURL": "The template of the VMI in OVF (Open Virtual machine format.)",
@@ -326,7 +332,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
         "cloudLocation": "Select the cloud where to perform optimization.",
         "cloudAccessKey": "Cloud credentials",
         "cloudSecretKey": "Cloud credentials",
-        "fsPartition": "The partition of the image containing the root file system. Either provide a number (“0”, “1”, …) indicating a physical partition or give two strings “volume-group-name volume-name” in the case of LVM. Defaults to partition 0 (no LVM).",
+        "fsPartition": "The partition of the image containing the root file system. Either provide a number (“0”, “1”, …) indicating a physical partition or give two strings “volume-group-name volume-name” in the case of LVM.",
         "workerVMInstanceType": "Instance type of the VMs started from the source image.",
         "numberOfParallelWorkerVMs": "The maximum number of VMs used simultaneously during optimization.",
         "maxIterationsNum": "The number of optimization iterations. The more iterations result in the less optimized image.",
@@ -334,6 +340,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
         "aimedReductionRatio": "Stop optimization when the ratio of the original and the optimized image size reaches this value.",
         "aimedSize": "Stop optimization when the size of the optimized image size reaches this value. ",
         "XmaxRunningTime": "The maximum duration of optimization in seconds. Note that actual execution time may slightly exceed this limit, as it is check after each iteration.",
-        "XmaxNumberOfVMs": "The maximum number of VMs used during the optimization (default: empty unlimited)."
+        "XmaxNumberOfVMs": "The maximum number of VMs used during the optimization (default: empty unlimited).",
+        "cloudWorkerVMInstanceType": "Worker VM instance type. It can be m1.small, m1.medium or m1.large."
     };
 });
