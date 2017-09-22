@@ -121,11 +121,11 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
         var image_url_value = null;
         if($scope.tab == 1) {
             file_upload_value = $("#image_upload");
-            image_url_value = null;
+            image_url_value = "";
         }
         if($scope.tab == 2) {
             file_upload_value = null;
-            image_url_value = $scope.formData.image_url ? $scope.formData.image_url : null;
+            image_url_value = $scope.formData.image_url ? $scope.formData.image_url : "";
         }
 
         var data = {
@@ -153,7 +153,7 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
 
         waitingDialog.show();
 
-        upload({
+        iiupload({
             url: post_upload_image,
             method: 'POST',
             data: data
@@ -162,7 +162,7 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
 
                 console.log(response);
                 //$scope.responseCode = response.data.code;
-                $scope.responseMessage = response.data.repositoryID;
+                $scope.responseMessage = response.data.message;
 
                 console.log("** Code: " + $scope.responseCode + " \n** RepositoryID: " + $scope.responseMessage);
 
@@ -175,7 +175,7 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
                     }, 3000);
 
                 } else {
-                    $scope.popUpToastr("error", "Upload failed");
+                    $scope.popUpToastr("error", "Upload failed: " + response.data.message);
                 }
             },
             function (response) {
@@ -183,7 +183,7 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
                 error_response = response.data;
 
                 waitingDialog.hide();
-                $scope.popUpToastr("error", "Upload failed");
+                $scope.popUpToastr("error", "Upload failed" + JSON.stringify(error_response));
             }
         );
     };

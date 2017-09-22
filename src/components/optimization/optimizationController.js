@@ -22,8 +22,9 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
         CloudWorkerVMInstanceType: "m1.small",
         maxIterationsNum: 5,
         numberOfParallelWorkerVMs: 4,
-        fsPartition: 1,
-        imageURL: $stateParams.imageURL
+        fsPartition: "1",
+        imageURL: $stateParams.imageURL,
+        validatorScriptURL: $stateParams.functionalTests
     };
 
     // LATEST DOCUMENTATION:
@@ -33,15 +34,18 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
     $scope.active = 0;
 
     var interval_function = function () {
-        $http.get(get_optimization_list).then(
-            function (success) {
-                $scope.optimization = success.data;
-            },
-            function (failure) {
-                //alert("Get Pareto request error");
-                console.log("Get Pareto request error");
-            }
-        );
+        // refresh only if tab index 1 is active:
+        if ($scope.active == 1) {
+            $http.get(get_optimization_list).then(
+                function (success) {
+                    $scope.optimization = success.data;
+                },
+                function (failure) {
+                    //alert("Get Pareto request error");
+                    console.log("Get Pareto request error");
+                }
+            );
+        }
     };
 
     interval_function();
@@ -87,6 +91,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
             freeDiskSpace: $scope.data.freeDiskSpace
         }
 
+        console.log(data);
         waitingDialog.show();
 
         try {
@@ -199,7 +204,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
     $scope.convertMillisecondsToDigitalClock = function (timestamp) {
         var time = timestamp + 3600000 * 2;
         var date = new Date(time).toUTCString();
-        console.log(date);
+        // console.log(date);
         return date
     };
 
