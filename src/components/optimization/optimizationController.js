@@ -33,18 +33,31 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
     $scope.optimization = [];
     $scope.active = 0;
 
+    var refreshOptimizationData = function () {
+        $http.get(get_optimization_list).then(
+            function (success) {
+                $scope.optimization = success.data;
+            },
+            function (failure) {
+                //alert("Get Pareto request error");
+                console.log("Get Pareto request error");
+            }
+        );
+    };
+
+
+    $scope.tabSelected = function (selectedIndex) {
+        $scope.active = selectedIndex;
+
+        console.log("selected tab " + $scope.active);
+        if ($scope.active == 1)
+            refreshOptimizationData();
+    };
+
     var interval_function = function () {
         // refresh only if tab index 1 is active:
         if ($scope.active == 1) {
-            $http.get(get_optimization_list).then(
-                function (success) {
-                    $scope.optimization = success.data;
-                },
-                function (failure) {
-                    //alert("Get Pareto request error");
-                    console.log("Get Pareto request error");
-                }
-            );
+            refreshOptimizationData();
         }
     };
 
@@ -99,6 +112,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
                 function (success) {
                     console.log(success);
                     $scope.active = 1;
+                    refreshOptimizationData();
                     waitingDialog.hide();
                     alert("Success: " + JSON.stringify(success));
                 },
