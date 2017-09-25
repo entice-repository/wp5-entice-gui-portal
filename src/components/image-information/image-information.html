@@ -60,6 +60,16 @@
         </div>
     </div>
 
+    <div class="row" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-md-12 box">
+            <p><span><i class="fa fa-cloud-download"></i>&nbsp&nbspOVF URL</span><br />
+                <p ng-if="image.functionalTests == null || image.functionalTests.length == 0">No OVF URL attached</p>
+                <p ng-if="image.functionalTests != null && image.functionalTests.length > 0">Attached OVF URL:</p>
+            <p><a style="font-size: 0.9em" href="{{ image.ovfURL }}" target="_blank">{{ image.ovfURL }}</a></p>
+            </p>
+        </div>
+    </div>
+
 
 
 

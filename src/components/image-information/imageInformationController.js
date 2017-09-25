@@ -67,7 +67,7 @@ app.controller('imageInformationController', function ($scope, $http, $statePara
             functionalTests = $scope.image.functionalTests[0].inputDescription;
 
         // delegate data to optimization form - image ID, image URL, functional tests URL
-        $state.go("optimization", {imageId: imageId, imageURL: $scope.image.vmiURL, functionalTests: functionalTests});
+        $state.go("optimization", {imageId: imageId, imageURL: $scope.image.vmiURL, functionalTests: functionalTests, ovfurl : $scope.image.ovfURL });
     };
 
     $scope.goToStoreFragmentat = function () {

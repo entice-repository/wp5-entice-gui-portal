@@ -63,7 +63,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state('optimization', {
-        url: '/optimization/:imageId&imageURL={imageURL}&functionalTests={functionalTests}',
+        url: '/optimization/:imageId&imageURL={imageURL}&functionalTests={functionalTests}&ovfurl={ovfurl}',
         templateUrl: './templates/optimization.html',
         controller: 'optimizationController',
         authenticate: true

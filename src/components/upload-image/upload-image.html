@@ -37,8 +37,8 @@
                     <div class="form-group" ng-class="{ 'has-error' : uploadForm.image_url.$invalid && uploadForm.image_url.$dirty, 'has-success' : uploadForm.image_url.$valid && uploadForm.image_url.$dirty}">
                         <!-- 1. Upload - local storage -->
                         <div ng-show="tab === 1" class="col-sm-6 col-md-offset-3">
-                            <input  id="f_upload"
-                                    name="f_upload"
+                            <input  id="image_upload"
+                                    name="image_upload"
                                     type="file"
                                     class="form-control"
                                     placeholder="Upload Disk Image"
@@ -93,6 +93,19 @@
                         <!--<span class="green-message" ng-if="uploadForm.image_description.$valid"><i class="fa fa-check"></i></span>-->
                     </div>
 
+                    <!-- OVF FILE-->
+                    <div class="form-group" ng-class="{ 'has-error' : uploadForm.ovf_upload.$invalid && uploadForm.ovf_upload.$dirty, 'has-success' : uploadForm.ovf_upload.$valid && uploadForm.ovf_upload.$dirty}">
+                        <span class="control-label col-sm-3">OVF file </span>
+                        <div class="col-sm-6">
+                            <input id="ovf_upload"
+                                   name="ovf_upload"
+                                   type="file"
+                                   class="form-control"
+                                   placeholder="Upload OVF"
+                                   valid-file ng-model="test1">
+                            <span class="red-message" ng-if="uploadForm.ovf_upload.$error.required && uploadForm.ovf_upload.$dirty">Upload File.</span>
+                        </div>
+                    </div>
 
                     <!-- FUNCTIONAL TESTS-->
                     <div class="form-group" ng-class="{ 'has-error' : uploadForm.functional_tests_upload.$invalid && uploadForm.functional_tests_upload.$dirty, 'has-success' : uploadForm.functional_tests_upload.$valid && uploadForm.functional_tests_upload.$dirty}">

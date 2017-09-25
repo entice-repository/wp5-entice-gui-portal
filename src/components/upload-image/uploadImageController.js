@@ -131,6 +131,7 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
         var data = {
             file_upload : file_upload_value,
             image_url:  image_url_value,                                                                                                // "https://entice.lpds.sztaki.hu:5443/api/imagebuilder/build/99b5f56b-75ba-4a02-ad37-52ecfbeb1afa/result/image",
+            ovf_file : $("#ovf_upload"),                                                           // file upload
             functional_tests : $("#functional_tests_upload"),                                                           // file upload
             category_list : category_list,                                                                              // tags
             image_description : $scope.formData ? $scope.formData.image_description : null,                             // image description
@@ -153,7 +154,7 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
 
         waitingDialog.show();
 
-        iiupload({
+        upload({
             url: post_upload_image,
             method: 'POST',
             data: data

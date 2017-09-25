@@ -24,7 +24,8 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
         numberOfParallelWorkerVMs: 4,
         fsPartition: "1",
         imageURL: $stateParams.imageURL,
-        validatorScriptURL: $stateParams.functionalTests
+        validatorScriptURL: $stateParams.functionalTests,
+        ovfURL: $stateParams.ovfurl
     };
 
     // LATEST DOCUMENTATION:
