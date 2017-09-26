@@ -1,5 +1,4 @@
-
-app.controller('exploreImageController', function($scope, $http, $state) {
+app.controller('exploreImageController', function ($scope, $http, $state) {
 
     /* SEARCH AND ENTICE IMAGES */
     var url = SERVICES_URL + "gui/get_entice_images";
@@ -10,101 +9,110 @@ app.controller('exploreImageController', function($scope, $http, $state) {
 
     angular.copy($scope.tags, $scope.countedTags);
 
-    $scope.search = function(category) {
-        $scope.virtual_images = [];
+    var searchIdle = true;
 
-        angular.copy($scope.tags, $scope.countedTags);
+    $scope.search = function (category) {
+        if (searchIdle) {
+            searchIdle = false;
+            $scope.virtual_images = [];
 
-        var searchText = $scope.data.searchText || null;
-        var dropdownSorting = ($scope.data.dropdownSorting ? $scope.data.dropdownSorting.id : null);
+            angular.copy($scope.tags, $scope.countedTags);
 
-        var queryString = null;
-        var queryArray = [];
+            var searchText = $scope.data.searchText || null;
+            var dropdownSorting = ($scope.data.dropdownSorting ? $scope.data.dropdownSorting.id : null);
 
-        if(searchText){
-            queryArray.push("image_title=" + searchText);
-        }
+            var queryString = null;
+            var queryArray = [];
 
-        if(dropdownSorting) {
-            switch(dropdownSorting) {
-                case 1:
-                    queryArray.push("order=name&sort=true");
-                    break;
-                case 2:
-                    queryArray.push("order=name");
-                    break;
-                case 3:
-                    queryArray.push("order=size&sort=true");
-                    break;
-                case 4:
-                    queryArray.push("order=size");
-                    break;
+            if (searchText) {
+                queryArray.push("image_title=" + searchText);
             }
-        }
 
-        if(category != null){
-            queryArray.push("category_id="+category);
-        }
-
-        if(queryArray.length > 0){
-            queryString = queryArray.join("&");
-        }
-
-        var getUrl = url;
-
-        if(queryString){
-            getUrl += "?" + queryString;
-        }
-
-        // console.debug(queryArray);
-        // console.debug(queryString);
-        // waitingDialog.show();
-
-        $http.get(getUrl).then(
-            function(success) {
-                var data = success.data;
-                $scope.virtual_images = data[0];
-
-                for(var c=0; c<$scope.virtual_images.length; c++){
-                    if($scope.virtual_images[c].ownerFullName == "dummy full name") {
-                        $scope.virtual_images[c].ownerFullName = "Dragi";
-                    }
+            if (dropdownSorting) {
+                switch (dropdownSorting) {
+                    case 1:
+                        queryArray.push("order=name&sort=true");
+                        break;
+                    case 2:
+                        queryArray.push("order=name");
+                        break;
+                    case 3:
+                        queryArray.push("order=size&sort=true");
+                        break;
+                    case 4:
+                        queryArray.push("order=size");
+                        break;
                 }
+            }
 
-                for(var c=0; c<$scope.virtual_images.length; c++){
-                    var vi = $scope.virtual_images[c];
-                    // console.log(vi);
-                    if(vi.categories != null){
-                        for(var b=0; b < vi.categories.length; b++){
-                            var cat = vi.categories[b];
-                            // console.log(cat);
-                            for(var d=0; d<$scope.countedTags.length; d++){
-                                // console.log($scope.countedTags[d]);
-                                if($scope.countedTags[d].tag == cat){
-                                    $scope.countedTags[d].Y7HNU8Jimage_number++;
-                                    break;
+            if (category != null) {
+                queryArray.push("category_id=" + category);
+            }
+
+            if (queryArray.length > 0) {
+                queryString = queryArray.join("&");
+            }
+
+            var getUrl = url;
+
+            if (queryString) {
+                getUrl += "?" + queryString;
+            }
+
+            // console.debug(queryArray);
+            // console.debug(queryString);
+            // waitingDialog.show();
+
+            $http.get(getUrl).then(
+                function (success) {
+                    var data = success.data;
+                    $scope.virtual_images = data[0];
+
+                    for (var c = 0; c < $scope.virtual_images.length; c++) {
+                        if ($scope.virtual_images[c].ownerFullName == "dummy full name") {
+                            $scope.virtual_images[c].ownerFullName = "Dragi";
+                        }
+                    }
+
+                    for (var c = 0; c < $scope.virtual_images.length; c++) {
+                        var vi = $scope.virtual_images[c];
+                        // console.log(vi);
+                        if (vi.categories != null) {
+                            for (var b = 0; b < vi.categories.length; b++) {
+                                var cat = vi.categories[b];
+                                // console.log(cat);
+                                for (var d = 0; d < $scope.countedTags.length; d++) {
+                                    // console.log($scope.countedTags[d]);
+                                    if ($scope.countedTags[d].tag == cat) {
+                                        $scope.countedTags[d].Y7HNU8Jimage_number++;
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
+
+                    //console.log($scope.countedTags);
+                    // waitingDialog.hide();
+                    // console.log($scope.virtual_images);
+                    searchIdle = true;
+                },
+                function (failure) {
+                    searchIdle = true;
+                    //alert("An error occured");
+                    console.log("Explore images failure or server timeout...");
+
+                    // waitingDialog.hide();
                 }
+            );
+        }
+        ;
+    }
 
-                //console.log($scope.countedTags);
-                // waitingDialog.hide();
-                // console.log($scope.virtual_images);
-            },
-            function(failure) {
-                //alert("An error occured");
-                console.log("Explore images failure or server timeout...");
-                // waitingDialog.hide();
-            }
-        );
-    };
-
-    $scope.getCountedTags = function(){
+    $scope.getCountedTags = function () {
         var a = [];
-        for(var c=0; c < $scope.countedTags.length; c++){
-            if($scope.countedTags[c].image_number > 0)
+        for (var c = 0; c < $scope.countedTags.length; c++) {
+            if ($scope.countedTags[c].image_number > 0)
                 a.push($scope.countedTags[c])
         }
         console.log(a);
@@ -113,14 +121,14 @@ app.controller('exploreImageController', function($scope, $http, $state) {
 
     $scope.search();
 
-    $scope.goToInformation = function(v) {
+    $scope.goToInformation = function (v) {
         $state.go("image-information", {imageId: v.id});
     };
 
     /* SHOW / HIDE Advanced settings */
     $scope.show = false;
 
-    $scope.toggle = function() {
+    $scope.toggle = function () {
         $scope.show = !$scope.show;
     };
 
