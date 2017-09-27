@@ -181,10 +181,9 @@ app.controller('uploadImageController', function($scope, $http, upload, authServ
             },
             function (response) {
                 console.log(response);
-                error_response = response.data;
 
                 waitingDialog.hide();
-                $scope.popUpToastr("error", "Upload failed" + JSON.stringify(error_response));
+                $scope.popUpToastr("error", "Upload failed: " + JSON.stringify(response));
             }
         );
     };

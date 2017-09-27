@@ -92,7 +92,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
             imagePrivateKey: $scope.data.imagePrivateKey,
             imageContextualizationURL: $scope.data.imageContextualizationURL,
             imageContextualization: $scope.data.imageContextualization,
-            cloudOptimizerVMInstanceType: $scope.data.cloudOptimizerVMInstanceType,
+            cloudOptimizerVMInstanceType: $scope.data.CloudOptimizerVMInstanceType,
             cloudWorkerVMInstanceType: $scope.data.CloudWorkerVMInstanceType,
 
             // Optimisation goals and limits
