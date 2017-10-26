@@ -1,5 +1,6 @@
 <!-- OPTIMIZATION WIZARD -->
 <section id="optimization">
+    <div growl></div>
     <div class="row">
         <div class="container">
             <div class="col-md-12">
@@ -84,7 +85,7 @@
 
                                             <!-- VALIDATORS SERVER URL-->
                                             <div class="form-group">
-                                                <span class="control-label col-sm-3">Validators server URL <a
+                                                <span class="control-label col-sm-3">Validator server URL <a
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.validatorServerURL }}">?</a></span>
                                                 <div class="col-sm-5">
@@ -302,12 +303,12 @@
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.imageContextualization }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="imageContextualization"
-                                                           ng-model="data.imageContextualization"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image Contextualization (base64)"></input>
+                                                    <textarea name="imageContextualization"
+                                                              ng-model="data.imageContextualization"
+                                                              ng-required="false"
+                                                              rows="9"
+                                                              class="form-control"
+                                                              placeholder="Image Contextualization (base64)"></textarea>
                                                 </div>
                                             </div>
 

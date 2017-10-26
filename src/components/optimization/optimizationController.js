@@ -1,9 +1,9 @@
-app.controller('optimizationController', function ($scope, $interval, $stateParams, $http) {
+app.controller('optimizationController', function ($scope, $interval, $stateParams, $http, growl) {
 
     var get_image_url = SERVICES_URL + "gui/get_entice_detailed_images";
     var optimize_url = SERVICES_URL + "sztaki/execute_optimizer";
 
-    var get_optimization_list = SERVICES_URL + "sztaki/get_optimization_refreshed_list";
+    var get_optimization_list = SERVICES_URL + "sztaki/get_optimization_refreshed_list?force_refresh=";
 
     var imageId = $stateParams.imageId;
 
@@ -34,8 +34,8 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
     $scope.optimization = [];
     $scope.active = 0;
 
-    var refreshOptimizationData = function () {
-        $http.get(get_optimization_list).then(
+    var refreshOptimizationData = function (forceRefresh) {
+        $http.get(get_optimization_list + forceRefresh).then(
             function (success) {
                 $scope.optimization = success.data;
             },
@@ -49,16 +49,15 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
 
     $scope.tabSelected = function (selectedIndex) {
         $scope.active = selectedIndex;
-
         console.log("selected tab " + $scope.active);
         if ($scope.active == 1)
-            refreshOptimizationData();
+            refreshOptimizationData(true);
     };
 
     var interval_function = function () {
         // refresh only if tab index 1 is active:
         if ($scope.active == 1) {
-            refreshOptimizationData();
+            refreshOptimizationData(false);
         }
     };
 
@@ -87,6 +86,7 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
             cloudAccessKey: $scope.data.cloudAccessKey,
             cloudSecretKey: $scope.data.cloudSecretKey,
             imageId: $scope.data.imageId,
+            kbImageId : imageId,
             imageKeyPair: $scope.data.imageKeyPair,
             imageUserName: $scope.data.imageUserName,
             imagePrivateKey: $scope.data.imagePrivateKey,
@@ -111,16 +111,22 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
         try {
             $http.post(optimize_url, data).then(
                 function (success) {
-                    console.log(success);
-                    $scope.active = 1;
-                    refreshOptimizationData();
                     waitingDialog.hide();
-                    alert("Success: " + JSON.stringify(success));
+
+                    if (success.data.error)
+                        $scope.popUpToastr("error", "Upload failed: " + success.data.error);
+                    else {
+                        $scope.active = 1;
+                        refreshOptimizationData(true);
+                        $scope.popUpToastr("success", "Optimization successfully started");
+                    }
+
+
                 },
                 function (error) {
-                    alert("Optimisation error: " + JSON.stringify(error));
-                    console.log("Optimisation error");
                     waitingDialog.hide();
+                    $scope.popUpToastr("error", "Upload failed: " + JSON.stringify(error));
+                    console.log("Optimisation error");
                 }
             );
         }
@@ -158,17 +164,42 @@ app.controller('optimizationController', function ($scope, $interval, $statePara
                 baselineColor: '#7A7A7A',
                 textStyle: {color: '#7A7A7A', fontSize: 12}
             },
-            vAxis: {
-                textPosition: 'none',
-                gridlines: {
-                    color: 'transparent'
-                },
-                baselineColor: '#7A7A7A',
-                textStyle: {color: '#7A7A7A', fontSize: 12}
+            vAxis : {
+                minValue : 0
             },
+            // vAxis: {
+            //     textPosition: 'none',
+            //     gridlines: {
+            //         color: 'transparent'
+            //     },
+            //     baselineColor: '#7A7A7A',
+            //     textStyle: {color: '#7A7A7A', fontSize: 12}
+            // },
             backgroundColor: "transparent",
             bar: {groupWidth: "20%"}
             //width: 600
+        }
+    };
+
+    /* NOTIFICATIONS */
+    $scope.popUpToastr = function (type, msg) {
+        console.log("growl invoke");
+        var config = {};
+        switch (type) {
+            case "success":
+                growl.success(msg, config);
+                break;
+            case "error":
+                growl.error(msg, config);
+                break;
+            case "warning":
+                growl.warning(msg, config);
+                break;
+            case "info":
+                growl.info(msg, config);
+                break;
+            default:
+                growl.info(msg, config);
         }
     };
 

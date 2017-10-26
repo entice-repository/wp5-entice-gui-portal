@@ -10,48 +10,89 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
                     <!-- HOME -->
-                    <li><a ui-sref="home" data-id="home" class="main-links" ng-class="{selected: getStateName() == 'home'}"><i class="fa fa-home"></i>&nbspHome</a></li>
+                    <li><a ui-sref="home" data-id="home" class="main-links"
+                           ng-class="{selected: getStateName() == 'home'}"><i class="fa fa-home"></i>&nbspHome</a></li>
 
                     <!-- EXPLORE IMAGE -->
-                    <li><a ui-sref="explore-images" data-id="explore-images" class="main-links" ng-class="{selected: getStateName() == 'explore-images'}"><i class="fa fa-search"></i>&nbspExplore</a></li>
+                    <li><a ui-sref="explore-images" data-id="explore-images" class="main-links"
+                           ng-class="{selected: getStateName() == 'explore-images'}"><i class="fa fa-search"></i>&nbspExplore</a>
+                    </li>
 
                     <!-- IMAGE: UPLOAD IMAGE, RECIPE-BUILD IMAGE, VMI SIZE REDUCTION  -->
                     <li class="dropdown">
-                        <a href class="dropdown-toggle main-links" data-id="images" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                        <a href class="dropdown-toggle main-links" data-id="images" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false"
                            ng-class="{selected: getStateName() == 'upload-image' || getStateName() == 'build-recipes' || getStateName() == 'optimization'}">
                             <i class="fa fa-cloud"></i>&nbspVMI manipulation&nbsp<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a ui-sref="upload-image" class="main-links-sub" ng-class="{selected: getStateName() == 'upload-image'}"><i class="fa fa-cloud-upload" aria-hidden="true"></i>&nbspVMI Upload</a></li>
+                            <li><a ui-sref="upload-image" class="main-links-sub"
+                                   ng-class="{selected: getStateName() == 'upload-image'}"><i class="fa fa-cloud-upload"
+                                                                                              aria-hidden="true"></i>&nbspVMI
+                                Upload</a></li>
                             <li role="separator" class="divider"></li>
                             <!--<li><a ui-sref="upload-optimized-image" class="main-links-sub" ng-class="{selected: getStateName() == 'upload-optimized-image'}"><i class="fa fa-cloud-upload" aria-hidden="true"></i>&nbspOptimized VMI Upload</a></li>-->
                             <!--<li role="separator" class="divider"></li>-->
-                            <li><a ui-sref="build-recipes" class="main-links-sub" ng-class="{selected: getStateName() == 'build-recipes'}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbspVMI Creation</a></li>
+                            <li><a ui-sref="build-recipes" class="main-links-sub"
+                                   ng-class="{selected: getStateName() == 'build-recipes'}"><i
+                                    class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbspVMI Creation</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a ui-sref="optimization" class="main-links-sub" ng-class="{selected: getStateName() == 'optimization'}"><i class="fa fa-line-chart"></i>&nbsp VMI Size Reduction</a></li>
+                            <li><a ui-sref="optimization" class="main-links-sub"
+                                   ng-class="{selected: getStateName() == 'optimization'}"><i
+                                    class="fa fa-line-chart"></i>&nbsp VMI Size Reduction</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a ui-sref="dashboard" class="main-links-sub" data-id="dashboard" ng-class="{selected: getStateName() == 'dashboard'}"><i class="fa fa-dashboard"></i>&nbspOffline VMI Redistribution</a></li>
+                            <li><a ui-sref="dashboard" class="main-links-sub" data-id="dashboard"
+                                   ng-class="{selected: getStateName() == 'dashboard'}"><i class="fa fa-dashboard"></i>&nbspOffline
+                                VMI Redistribution</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a ui-sref="vmi-browsing" class="main-links-sub" data-id="vmi-browsing" ng-class="{selected: getStateName() == 'vmi-browsing'}"><i class="fa fa-search"></i>&nbspBase VMI Browsing</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a ui-sref="installers-browsing" class="main-links-sub" data-id="installers-browsing" ng-class="{selected: getStateName() == 'installers-browsing'}"><i class="fa fa-search"></i>&nbspInstallers Browsing</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a ui-sref="base-image" class="main-links-sub" data-id="base-image" ng-class="{selected: getStateName() == 'base-image'}"><i class="fa fa-pencil-square-o"></i>&nbspCreate Base Image</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a ui-sref="snapshot-upload" class="main-links-sub" data-id="snapshot-upload" ng-class="{selected: getStateName() == 'snapshot-upload'}"><i class="fa fa-cloud-upload"></i>&nbspSnapshot upload</a></li>
-                       </ul>
+                            <li><a ui-sref="snapshot-upload" class="main-links-sub" data-id="snapshot-upload"
+                                   ng-class="{selected: getStateName() == 'snapshot-upload'}"><i
+                                    class="fa fa-cloud-upload"></i>&nbspSnapshot upload</a></li>
+                        </ul>
                     </li>
-                    <li><a ui-sref="vmi-extension" class="main-links-sub" data-id="vmi-extension" ng-class="{selected: getStateName() == 'vmi-extension'}"><i class="fa fa-external-link"></i>&nbspVMI Extension</a></li>
-                    <li><a ui-sref="vmi-launching" class="main-links-sub" data-id="vmi-launching" ng-class="{selected: getStateName() == 'vmi-launching'}"><i class="fa fa-rocket"></i>&nbspVMI Launching</a></li>
-
+                    <li class="dropdown">
+                        <a href class="dropdown-toggle main-links" data-id="images" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false"
+                           ng-class="{selected: getStateName() == 'upload-image' || getStateName() == 'build-recipes' || getStateName() == 'optimization'}">
+                            <i class="fa fa-cloud"></i>&nbspVirtual Image manipulation&nbsp<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="vmi-browsing" class="main-links-sub" data-id="vmi-browsing"
+                                   ng-class="{selected: getStateName() == 'vmi-browsing'}"><i class="fa fa-search"></i>&nbspBase
+                                Image Browsing</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ui-sref="vmi-browsing" class="main-links-sub" data-id="vmi-browsing"
+                                   ng-class="{selected: getStateName() == 'vmi-browsing'}"><i class="fa fa-search"></i>&nbspVirtual
+                                Image Browsing</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ui-sref="installers-browsing" class="main-links-sub" data-id="installers-browsing"
+                                   ng-class="{selected: getStateName() == 'installers-browsing'}"><i
+                                    class="fa fa-search"></i>&nbspInstallers Browsing</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ui-sref="base-image" class="main-links-sub" data-id="base-image"
+                                   ng-class="{selected: getStateName() == 'base-image'}"><i
+                                    class="fa fa-pencil-square-o"></i>&nbspRegister Base Image</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ui-sref="vmi-extension" class="main-links-sub" data-id="vmi-extension"
+                                   ng-class="{selected: getStateName() == 'vmi-extension'}"><i
+                                    class="fa fa-external-link"></i>&nbspCreate Virtual Image</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ui-sref="vmi-launching" class="main-links-sub" data-id="vmi-launching"
+                                   ng-class="{selected: getStateName() == 'vmi-launching'}"><i class="fa fa-rocket"></i>&nbspVirtual
+                                Image Launching</a></li>
+                        </ul>
+                    </li>
                 </ul>
 
 
-               <!--  SIGN IN / SIGN OUT -->
+                <!--  SIGN IN / SIGN OUT -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- if user is not authenticated a Sign in link is shown; if user is authenticated username and loguo links are shown -->
-                    <li ng-if="!isAuthenticated()"><a ui-sref="login" data-id="login" class="main-links" ng-class="{selected: getStateName() == 'login'}"><i class="fa fa-user"></i>&nbspSign in</a></li>
+                    <li ng-if="!isAuthenticated()"><a ui-sref="login" data-id="login" class="main-links"
+                                                      ng-class="{selected: getStateName() == 'login'}"><i
+                            class="fa fa-user"></i>&nbspSign in</a></li>
                     <li class="dropdown">
-                        <a ng-if="isAuthenticated()" class="dropdown-toggle main-links" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a ng-if="isAuthenticated()" class="dropdown-toggle main-links" data-toggle="dropdown"
+                           role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-user"></i>&nbsp {{getUsername()}}&nbsp<span class="caret"></span></a>
 
                         <ul class="dropdown-menu">
