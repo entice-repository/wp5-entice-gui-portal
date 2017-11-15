@@ -44,9 +44,9 @@
                                    ng-class="{selected: getStateName() == 'dashboard'}"><i class="fa fa-dashboard"></i>&nbspOffline
                                 VMI Redistribution</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a ui-sref="snapshot-upload" class="main-links-sub" data-id="snapshot-upload"
-                                   ng-class="{selected: getStateName() == 'snapshot-upload'}"><i
-                                    class="fa fa-cloud-upload"></i>&nbspSnapshot upload</a></li>
+                            <!--<li><a ui-sref="snapshot-upload" class="main-links-sub" data-id="snapshot-upload"-->
+                                   <!--ng-class="{selected: getStateName() == 'snapshot-upload'}"><i-->
+                                    <!--class="fa fa-cloud-upload"></i>&nbspSnapshot upload</a></li>-->
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -56,13 +56,9 @@
                             <i class="fa fa-cloud"></i>&nbspVirtual Image manipulation&nbsp<span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a ui-sref="vmi-browsing" class="main-links-sub" data-id="vmi-browsing"
-                                   ng-class="{selected: getStateName() == 'vmi-browsing'}"><i class="fa fa-search"></i>&nbspBase
-                                Image Browsing</a></li>
+                            <li><a ui-sref="base-image-browsing" class="main-links-sub" data-id="base-image-browsing"><i class="fa fa-search"></i>&nbspBase Image Browsing</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a ui-sref="vmi-browsing" class="main-links-sub" data-id="vmi-browsing"
-                                   ng-class="{selected: getStateName() == 'vmi-browsing'}"><i class="fa fa-search"></i>&nbspVirtual
-                                Image Browsing</a></li>
+                            <li><a ui-sref="vmi-browsing" class="main-links-sub" data-id="vmi-browsing"><i class="fa fa-search"></i>&nbspVirtual Image Browsing</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a ui-sref="installers-browsing" class="main-links-sub" data-id="installers-browsing"
                                    ng-class="{selected: getStateName() == 'installers-browsing'}"><i
@@ -76,9 +72,11 @@
                                    ng-class="{selected: getStateName() == 'vmi-extension'}"><i
                                     class="fa fa-external-link"></i>&nbspCreate Virtual Image</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a ui-sref="vmi-launching" class="main-links-sub" data-id="vmi-launching"
-                                   ng-class="{selected: getStateName() == 'vmi-launching'}"><i class="fa fa-rocket"></i>&nbspVirtual
-                                Image Launching</a></li>
+                            <li><a ui-sref="launch-virtual-img" class="main-links-sub" data-id="launch-virtual-img"
+                                   ng-class="{selected: getStateName() == 'launch-virtual-img'}"><i class="fa fa-rocket"></i>&nbspVirtual Image Launching</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ui-sref="virtual_image_statistics" class="main-links-sub" data-id="virtual_image_statistics"
+                                   ng-class="{selected: getStateName() == 'virtual_image_statistics'}"><i class="fa fa-dashboard"></i>&nbspStatistics</a></li>
                         </ul>
                     </li>
                 </ul>

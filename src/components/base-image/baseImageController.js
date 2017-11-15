@@ -1,5 +1,6 @@
-app.controller('baseImageController', function ($scope, $http, upload, authService, growl, $state, $timeout) {
+app.controller('baseImageController', function ($scope, $http, upload, authService, growl, $stateParams, $state, $timeout) {
 
+    var image_url = SERVICES_URL + "gui/get_entice_detailed_images?id=";
 
     /* Create base image */
     $scope.tooltipsTab2 = {
@@ -12,6 +13,32 @@ app.controller('baseImageController', function ($scope, $http, upload, authServi
         "imageOwner": "Creator of the image"
     };
 
+
+    // delegate data if the base image is registered from an existing one
+    if ($stateParams.imageId) {
+        $http.get(image_url + $stateParams.imageId).then(
+            function (success) {
+                var data = success.data;
+
+                $scope.formData = {
+                    image_name: data.imageName,
+                    description: data.description,
+                    image_url: data.vmiURL,
+                    partition: "1",
+                    tags: data.categories
+                };
+            },
+            function (error) {
+                alert("An error occured!" + error);
+            }
+        );
+    }
+    else {
+        // Default values
+        $scope.formData = {
+            partition: "1"
+        };
+    }
 
     var register_base_image = SERVICES_URL + "sztaki/register_base_image";
 

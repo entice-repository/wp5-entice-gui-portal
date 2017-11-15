@@ -1,0 +1,68 @@
+/*************************
+*    DASHBOARD.CSS       *
+**************************/
+
+#dashboard-user, #dashboard-admin {
+    font-family: 'Helvetica Neue', 'Quicksand', 'Open Sans', 'monospace', sans-serif;
+    margin-top: 40px;
+    font-weight: 100;
+}
+
+.dashboard-monitoring {
+    color: #00b3ee;
+    font-size: 1.4em;
+    text-align: center;
+    font-weight:100;
+}
+
+.dashboard-data {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+#pareto {
+    margin-top: 30px;
+    font-size: 1.4em;
+}
+
+#redistribution {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.close {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }

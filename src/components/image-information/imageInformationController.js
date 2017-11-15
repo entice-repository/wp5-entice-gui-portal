@@ -6,7 +6,7 @@ app.controller('imageInformationController', function ($scope, $http, $statePara
     var image_url = SERVICES_URL + "gui/get_entice_detailed_images?id=";
     var get_repositories = SERVICES_URL + "service/get_all_repositories";
 
-    var deploy_on_cloud = SERVICES_URL + "deploy_vmi_on_cloud?image_id=a8169e97-59a0-4478-a0fc-db41a6d99dd9&cloud_access_key=LJUBLJANA&cloud_secret_key=hyp!w7cUNkd$rd_V&cloud_id=OpenStack";
+    var deploy_on_cloud = SERVICES_URL + "deploy_vmi_on_cloud?image_id=*&cloud_access_key=*&cloud_secret_key=*&cloud_id=*";
     $scope.image = {};
     var all_repositories;
 
@@ -34,10 +34,10 @@ app.controller('imageInformationController', function ($scope, $http, $statePara
     );
 
     $scope.data = {
-        image_id: "a8169e97-59a0-4478-a0fc-db41a6d99dd9",
-        cloud_access_key: "LJUBLJANA",
-        cloud_secret_key: "hyp!w7cUNkd$rd_V",
-        cloud_id: "OpenStack"
+        image_id: "*",
+        cloud_access_key: "*",
+        cloud_secret_key: "*",
+        cloud_id: "*"
     };
 
 
@@ -70,8 +70,8 @@ app.controller('imageInformationController', function ($scope, $http, $statePara
         $state.go("optimization", {imageId: imageId, imageURL: $scope.image.vmiURL, functionalTests: functionalTests, ovfurl : $scope.image.ovfURL });
     };
 
-    $scope.goToStoreFragmentat = function () {
-        $state.go("storeFragmentat", {imageId: imageId});
+    $scope.goToRegisterBaseImage = function () {
+        $state.go("registerBaseImage", {imageId: imageId});
     };
 
     $scope.geoLoad = function (country) {

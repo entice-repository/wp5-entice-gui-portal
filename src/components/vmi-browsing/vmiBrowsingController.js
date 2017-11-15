@@ -1,4 +1,4 @@
-app.controller('vmiBrowsingController', function ($scope, $http, $state, growl) {
+app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $state) {
 
     /* SEARCH AND ENTICE IMAGES */
     var url = SERVICES_URL + "sztaki/get_sztaki_virtual_images";
@@ -8,57 +8,57 @@ app.controller('vmiBrowsingController', function ($scope, $http, $state, growl) 
 
     $scope.browseBaseImages = function (message) {
 
+        // ugly hack to check if show base images or virtual images
+        var showBaseImages = typeof($stateParams.isBase) == "string";
+
+        $scope.typeOfImage = showBaseImages ? "BASE" : "VIRTUAL";
+
         $http.get(url).then(
             function (success) {
 
                 if (success != null) {
                     var data = success.data;
+                    var iter = 0;
                     for (var c = 0; c < data.length; c++) {
 
-                        var action = data[c].type == 'VIRTUAL' ? ['Details'] : ['Delete'];
+                        var action = data[c].type == 'VIRTUAL' ? ['Details', "Launch"] : ['Delete'];
 
-                        $scope.rowCollection[c] =
-                            {
-                                id: data[c].id,
-                                name: data[c].name,
-                                tags: data[c].tags,
-                                description: data[c].description,
-                                type: data[c].type,
-                                status: data[c].status,
-                                owner: data[c].owner,
-                                created: new Date(data[c].created),
-                                action: action
-                                // action: ['Details', 'Extend', 'Delete']
-                            };
+                        if (data[c].type == 'BASE' && showBaseImages) {
+                            console.log("BASE: " + iter);
+                            $scope.rowCollection[iter] =
+                                {
+                                    id: data[c].id,
+                                    name: data[c].name,
+                                    tags: data[c].tags,
+                                    description: data[c].description,
+                                    type: data[c].type,
+                                    status: data[c].status,
+                                    owner: data[c].owner,
+                                    created: new Date(data[c].created),
+                                    action: action
+                                    // action: ['Details', 'Extend', 'Delete']
+                                };
+                            iter++;
+                        }
+                        else if (data[c].type == 'VIRTUAL' && !showBaseImages) {
+                            console.log("VIRTUAL: " + iter);
+
+                            $scope.rowCollection[iter] =
+                                {
+                                    id: data[c].id,
+                                    name: data[c].name,
+                                    tags: data[c].tags,
+                                    description: data[c].description,
+                                    type: data[c].type,
+                                    status: data[c].status,
+                                    owner: data[c].owner,
+                                    created: new Date(data[c].created),
+                                    action: action
+                                };
+                            iter++;
+                        }
                     }
                 }
-                // $scope.tooltipsTab1 = {
-                // "imageName" : "Name of the image",
-                // "imageTags" : "Tags of the image",
-                // "imageDescription" : "Description of the image",
-                // "imageType": "Type of an image (BASE/COMPOSITE)",
-                // "imageStatus": "Status of the image (READY / BUILDING / FAILED)",
-                // "imageCreated" : "Date of creation",
-                // "imageOwner" : "Creator of the image",
-                // "imageDetails": "Link to more details (id, parent, message, partition)",
-                // "imageLaunch" : "Bottom to launch the image",
-                // "imageExtend" : "Bottom to extend the image"
-                // };
-
-
-                // var data = success.data;
-                // $scope.virtual_images = data[0];
-                //
-                // for(var c=0; c<$scope.virtual_images.length; c++){
-                //     if($scope.virtual_images[c].ownerFullName == "dummy full name") {
-                //         $scope.virtual_images[c].ownerFullName = "Dragi";
-                //     }
-                // }
-                //
-
-                //console.log($scope.countedTags);
-                // waitingDialog.hide();
-                // console.log($scope.virtual_images);
             },
             function (failure) {
                 console.log("Explore images failure or server timeout...");
@@ -132,6 +132,8 @@ app.controller('vmiBrowsingController', function ($scope, $http, $state, growl) 
             return 'btn btn-danger';
         if (value == 'Details')
             return 'btn btn-info';
+        if (value == 'Launch')
+            return 'btn btn-success';
         return 'btn-outline'
     }
 });

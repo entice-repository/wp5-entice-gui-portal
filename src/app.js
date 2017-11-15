@@ -69,10 +69,25 @@ app.config(function($stateProvider, $urlRouterProvider) {
         authenticate: true
     });
 
-    $stateProvider.state('storeFragmentat', {
+    $stateProvider.state('launch-virtual-img', {
+        url: '/launch-virtual-img/:imageId&imageURL={imageURL}&functionalTests={functionalTests}&ovfurl={ovfurl}',
+        templateUrl: './templates/launch-virtual-img.html',
+        controller: 'launchController',
+        authenticate: true
+    });
+
+    $stateProvider.state('virtual_image_statistics', {
+        url: '/virtual-image-statistics',
+        templateUrl: './templates/virtual-image-statistics.html',
+        controller: 'virtualImageStatisticsController',
+        authenticate: true
+    });
+
+    //storeFragmentat
+    $stateProvider.state('registerBaseImage', {
         url: '/fragment/:imageId',
-        templateUrl: './templates/fragment.html',
-        controller: 'fragmentController',
+        templateUrl: './templates/base-image.html',
+        controller: 'baseImageController',
         authenticate: true
     });
 
@@ -88,6 +103,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: './templates/build-recipes.html',
         controller: "buildRecipesController",
         authenticate: true
+    });
+
+    $stateProvider.state('base-image-browsing', {
+        url: '/vmi-browsing/{isBase}=true',
+        templateUrl: './templates/vmi-browsing.html',
+        controller: "vmiBrowsingController",
+        authenticate: false
     });
 
     $stateProvider.state('vmi-browsing', {

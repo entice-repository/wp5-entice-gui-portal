@@ -1,0 +1,57 @@
+<section id="dashboard-admin">
+    <div class="row">
+        <div class="container">
+            <p class="dashboard-monitoring">Storage statistics</p>
+
+            <div class="col-md-4">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th></th>
+                        <th>Number</th>
+                        <th>Size</th>
+                    </tr>
+                    <tr>
+                        <td>Base images</td>
+                        <td>1</td>
+                        <td>1.1 GB</td>
+                    </tr>
+                    <tr>
+                        <td>Virtual images</td>
+                        <td>4</td>
+                        <td>6.3 GB</td>
+                    </tr>
+                    <tr>
+                        <td>Fragments</td>
+                        <td>4</td>
+                        <td>319.3 MB</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+            <br>
+
+            Storage space reduction (sizeof(base images + fragments) / sizeof(base images + virtual images)): 1.4 GB /
+            7.4 GB
+            <br>
+            Reduction ratio (1 - virtual size/real size): 81.3%
+
+            <!--<div class="col-md-4">-->
+            <!--<p class="dashboard-monitoring">STATISTICS</p>-->
+            <!--<p class="dashboard-data">{{statistics.number_of_all_users}}</p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4">-->
+            <!--<p class="dashboard-monitoring">Number of User VMIs</p>-->
+            <!--<p class="dashboard-data">{{statistics.number_of_user_images}}</p>-->
+            <!--</div>-->
+
+            <!--<div class="col-md-4">-->
+            <!--<p class="dashboard-monitoring">Number of users in ENTICE</p>-->
+            <!--<p class="dashboard-data">{{statistics.number_of_all_repositories}}</p>-->
+            <!--</div>-->
+        </div>
+    </div>
+</section>

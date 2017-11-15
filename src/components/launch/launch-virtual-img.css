@@ -1,0 +1,35 @@
+
+/*************************
+*   OPTIMISATION.CSS     *
+**************************/
+
+#optimization h3,
+#optimization h4  {
+    color: #00b3ee;
+    text-transform: uppercase;
+    padding-bottom: 30px;
+    padding-top: 20px;
+}
+
+/* Space between choose VMI and resource section */
+#optimization-cloud,
+#optimization-progress {
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+.status-init {
+    color: #FDD017;
+}
+
+.status-running {
+    color: #4CC417;
+}
+
+.status-finished {
+    color: #0d8aee;
+}
+
+.status-error {
+    color: red;
+}
