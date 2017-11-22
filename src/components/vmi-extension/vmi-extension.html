@@ -1,80 +1,130 @@
 <!-- VMI Extension -->
-<section id="vmi-extension">
-    <div class="row">
-        <div class="container">
-            <div class="col-md-12">
-                <form  class="form-horizontal" role="form">
-                    <p>VMI Extension</p>
-                    <p>An Image can be extended with the following fields</p>
+<form name="uploadForm" ng-model="uploadForm" class="form-horizontal" role="form" ng-submit="browseBaseImages()">
+    <div growl></div>
+    <section id="vmi-extension">
+        <div class="row">
+            <div class="container">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form">
+                        <p>Create virtual image</p>
+                        <p>A Base or a Virtual Image can be extended with the following fields</p>
 
-                    <!-- NAME -->
-                    <div class="form-group">
-                        <span class="control-label col-sm-3">Name <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageName }}">?</a></span>
-                        <div class="col-sm-5">
-                            <input name="image_name" class="form-control" placeholder="Name" />
+                        <div class="form-group">
+                        <span class="control-label col-sm-3">Parent Image <a class="tooltip-pointer" tooltips
+                                                                           tooltip-template="{{ tooltipsUploadImage.parent }}">?</a></span>
+                            <div class="col-sm-5">
+                                <ol class="nya-bs-select form-control" name="parent"
+                                    ng-model="formData.Parent" ng-required="true">
+                                    <li nya-bs-option="item in images_list">
+                                        <a> {{item.name}}, {{item.type}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- TAGS -->
-                    <div class="form-group">
-                        <span class="control-label col-sm-3">Tags <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageTags }}">?</a></span>
-                        <div class="col-sm-5">
-                            <input name="image_tags" class="form-control" placeholder="Tag" />
+                        <!-- NAME -->
+                        <div class="form-group">
+                        <span class="control-label col-sm-3">Name <a class="tooltip-pointer" tooltips  tooltip-template="{{ tooltipsTab4.imageName }}">?</a></span>
+                            <div class="col-sm-5">
+                                <input name="image_name"
+                                       ng-model="formData.image_name"
+                                       ng-required="true"
+                                       class="form-control" placeholder="Name"/>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- DESCRIPTION-->
-                    <div class="form-group">
-                        <span class="control-label col-sm-3">Description <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageDescription }}">?</a></span>
-                        <div class="col-sm-5">
+                        <!-- SNAPSHOT URL -->
+                        <div class="form-group">
+                        <span class="control-label col-sm-3">Snapshot URL <a class="tooltip-pointer" tooltips  tooltip-template="{{ tooltipsTab4.snapshotUrl }}">?</a></span>
+                            <div class="col-sm-5">
+                                <input name="snapshotUrl"
+                                       ng-model="formData.snapshotUrl"
+                                       ng-required="false"
+                                       class="form-control" placeholder="Snapshot URL"/>
+                            </div>
+                        </div>
+
+                        <!-- TAGS -->
+                        <div class="form-group">
+                        <span class="control-label col-sm-3">Tags <a class="tooltip-pointer" tooltips
+                                                                     tooltip-template="{{ tooltipsTab4.imageTags }}">?</a></span>
+                            <div class="col-sm-5">
+                                <input name="image_tags" ng-model="formData.image_tags" class="form-control" placeholder="Tag"/>
+                            </div>
+                        </div>
+
+                        <!-- DESCRIPTION-->
+                        <div class="form-group">
+                        <span class="control-label col-sm-3">Description <a class="tooltip-pointer" tooltips
+                                                                            tooltip-template="{{ tooltipsTab4.imageDescription }}">?</a></span>
+                            <div class="col-sm-5">
                               <textarea
                                       name="image_description"
+                                      ng-model="formData.image_description"
                                       class="form-control vresize"
                                       rows="5"
                                       placeholder="...">
                             </textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- INSTALLERS -->
-                    <div class="form-group" >
-                        <span class="control-label col-sm-3">Installers  <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab5.cloudName }}">?</a></span>
-                        <div class="col-sm-5">
-                            <ol class="nya-bs-select form-control"  name="cloud_name" ng-model="dynModel">
-                                <li nya-bs-option="installer in installers">
-                                    <a>{{installer.installer_name}}
-                                        <span class="glyphicon glyphicon-ok check-mark"></span>
-                                    </a>
-                                </li>
-                            </ol>
+                        <!-- EXISTING INSTALLERS -->
+                        <div class="form-group">
+                        <span class="control-label col-sm-3">Installers <a class="tooltip-pointer" tooltips
+                                                                           tooltip-template="{{ tooltipsUploadImage.tagSoftware }}">?</a></span>
+                            <div class="col-sm-5">
+                                <ol class="nya-bs-select form-control" multiple name="image_tags"
+                                    ng-model="formData.installers" ng-required="true">
+                                    <li nya-bs-option="item in installer_list">
+                                        <a> {{item.name}} (v. {{item.version}})
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                            </div>
                         </div>
-                    </div>
 
-                    <p><a ng-click="toggleInstallers()" href="" style="color: #00b3ee;" >Add Installer</a></p>
-
-                    <!-- INSTALLER -->
-                    <div ng-show="show" class="form-group">
-                        <span style="color: #00b3ee;" class="control-label col-sm-3">Installer <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab4.imageInstaller }}">?</a></span>
-                        <div class="col-sm-5">
-                             <textarea
-                                     name="image_installer"
-                                     class="form-control vresize"
-                                     rows="5"
-                                     placeholder="...">
-                            </textarea>
+                        <div class="form-group">
+                                                <span class="control-label col-sm-3">Custom installer (base64)<a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.customInstaller }}">?</a></span>
+                            <div class="col-sm-5">
+                                                    <textarea name="customInstaller"
+                                                              ng-model="data.customInstaller"
+                                                              ng-required="false"
+                                                              rows="9"
+                                                              class="form-control"
+                                                              placeholder="Custom installer (base64)"></textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <button ng-click="submit()" class="btn btn-info">Register</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                                                <span class="control-label col-sm-3">Initialization script (base64)<a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.initScript }}">?</a></span>
+                            <div class="col-sm-5">
+                                                    <textarea name="initScript"
+                                                              ng-model="data.initScript"
+                                                              ng-required="false"
+                                                              rows="9"
+                                                              class="form-control"
+                                                              placeholder="Initialization script (base64)"></textarea>
+                            </div>
+                        </div>
+
+                        <!--<p><a ng-click="toggleInstallers()" href="" style="color: #00b3ee;">Add Installer</a></p>-->
+
+                        <div class="form-group">
+                            <button ng-click="submit()" class="btn btn-info">Register</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
-
+    </section>
+</form>
 
 
 

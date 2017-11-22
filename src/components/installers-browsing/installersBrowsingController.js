@@ -1,6 +1,5 @@
 app.controller('installersBrowsingController', function ($scope, $http, $state, growl) {
 
-    /* SEARCH AND ENTICE IMAGES */
     var url = SERVICES_URL + "sztaki/get_sztaki_installers";
 
     $scope.rowCollection = [];

@@ -8,7 +8,9 @@ app.controller('detailedVMIBrowsingController', function ($scope, $http, $stateP
 
     $http.get(detailed_base_image_details + imageId).then(
         function (success) {
+            console.log("abc00");
             var data = success.data;
+            console.log("abc0");
             // alert(JSON.stringify(success));
             $scope.image.imageName = data.name;
             $scope.image.ownerFullName = data.owner;
@@ -18,7 +20,7 @@ app.controller('detailedVMIBrowsingController', function ($scope, $http, $stateP
             $scope.image.description = data.description;
             $scope.image.cloudImageIds = data.cloudImageIds;
             $scope.image.tags = data.tags;
-
+            console.log("abc1");
             if (data.partition > 0)
                 $http.get(get_repositories).then(
                     function (success) {

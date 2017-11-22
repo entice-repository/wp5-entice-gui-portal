@@ -148,6 +148,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         authenticate: true
     });
 
+    //deprecated
     $stateProvider.state('vmi-launching', {
         url: '/vmi-launching',
         templateUrl: './templates/vmi-launching.html',

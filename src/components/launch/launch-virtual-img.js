@@ -1,44 +1,41 @@
 app.controller('launchController', function ($scope, $interval, $stateParams, $http, growl) {
 
-    var get_image_url = SERVICES_URL + "gui/get_entice_detailed_images";
-    var optimize_url = SERVICES_URL + "sztaki/execute_optimizer";
+    // var get_image_url = SERVICES_URL + "gui/get_entice_detailed_images";
+    var launch_url = SERVICES_URL + "sztaki/launch_virtual_image";
 
-    var get_optimization_list = SERVICES_URL + "sztaki/get_optimization_refreshed_list?force_refresh=";
+    // var get_optimization_list = SERVICES_URL + "sztaki/get_optimization_refreshed_list?force_refresh=";
+     var imageId = $stateParams.imageId;
 
-    var imageId = $stateParams.imageId;
-
-    $scope.imageId = imageId;
+    // $scope.imageId = imageId;
     $scope.imageData = {};
 
     // Default values
     $scope.data = {
-        ImageFormat: "qcow2",
-        FsType: "ext4",
-        CloudInterface: "ec2",
-        CloudEndpointURL: "http://cfe2.lpds.sztaki.hu:4567",
-        cloudAccessKey: "Entice-admin",
-        imageUserName: "root",
-        imageURL: $stateParams.imageURL,
-        validatorScriptURL: $stateParams.functionalTests,
-        ovfURL: $stateParams.ovfurl
-    };
-
-    // LATEST DOCUMENTATION:
-    // https://docs.google.com/document/d/1cw2hx_QgwkxAg9J8vfDUPSrUwIwpjsQDod4NzPbrINM/edit
+        endpoint: "",
+        accessKey: "",
+        secretKey: "",
+        virtualImageId: imageId,
+        instanceType: "",
+        contextualization: "",
+        cloud: "",
+        cloudInterface: "",
+        cloudImageId: ""
+    }
 
     $scope.optimization = [];
     $scope.active = 0;
 
+    //todo:
     var refreshOptimizationData = function (forceRefresh) {
-        $http.get(get_optimization_list + forceRefresh).then(
-            function (success) {
-                $scope.optimization = success.data;
-            },
-            function (failure) {
-                //alert("Get Pareto request error");
-                console.log("Get Pareto request error");
-            }
-        );
+        // $http.get(get_optimization_list + forceRefresh).then(
+        //     function (success) {
+        //         $scope.optimization = success.data;
+        //     },
+        //     function (failure) {
+        //         //alert("Get Pareto request error");
+        //         console.log("Get Pareto request error");
+        //     }
+        // );
     };
 
 
@@ -63,55 +60,40 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
         interval_function();
     }, 20000));
 
-    $scope.optimizeSubmit = function () {
+    $scope.launchVirtualImage = function () {
         var data = {
-            // Source image
-            imageURL: $scope.data.imageURL,
-            imageFormat: $scope.data.ImageFormat,
-            ovfURL: $scope.data.ovfURL,
-            validatorScriptURL: $scope.data.validatorScriptURL,
-            validatorServerURL: $scope.data.validatorServerURL,
-            validatorScript: $scope.data.validatorScript,
-            fsPartition: $scope.data.fsPartition,
-            fsType: $scope.data.FsType,
-
-            // Optimisation resource
+            endpoint: $scope.data.endpoint,
+            accessKey: $scope.data.accessKey,
+            secretKey: $scope.data.secretKey,
+            virtualImageId: $scope.data.virtualImageId,
+            instanceType: $scope.data.instanceType,
+            contextualization: $scope.data.contextualization,
+            cloud: $scope.data.CloudEndpointURL,
             cloudInterface: $scope.data.CloudInterface,
-            cloudEndpointURL: $scope.data.CloudEndpointURL,
-            cloudAccessKey: $scope.data.cloudAccessKey,
-            cloudSecretKey: $scope.data.cloudSecretKey,
-            imageId: $scope.data.imageId,
-            kbImageId : imageId,
-            imageKeyPair: $scope.data.imageKeyPair,
-            imageUserName: $scope.data.imageUserName,
-            imagePrivateKey: $scope.data.imagePrivateKey,
-            imageContextualizationURL: $scope.data.imageContextualizationURL,
-            imageContextualization: $scope.data.imageContextualization,
-
+            cloudImageId: $scope.data.cloudImageId,
+            keypair: $scope.data.keypair
         }
+        console.log(JSON.stringify(data));
+        // console.log(data);
 
-        console.log(data);
         waitingDialog.show();
 
         try {
-            $http.post(optimize_url, data).then(
+            $http.post(launch_url, data).then(
                 function (success) {
                     waitingDialog.hide();
 
                     if (success.data.error)
-                        $scope.popUpToastr("error", "Upload failed: " + success.data.error);
+                        $scope.popUpToastr("error", "Virtual Image launch failed: " + success.data.error);
                     else {
                         $scope.active = 1;
                         refreshOptimizationData(true);
-                        $scope.popUpToastr("success", "Optimization successfully started");
+                        $scope.popUpToastr("success", "Successful Virtual Image launch: " + success.data.message);
                     }
-
-
                 },
                 function (error) {
                     waitingDialog.hide();
-                    $scope.popUpToastr("error", "Upload failed: " + JSON.stringify(error));
-                    console.log("Optimisation error");
+                    $scope.popUpToastr("error", "Virtual Image launch failed: " + JSON.stringify(error));
                 }
             );
         }
@@ -119,51 +101,7 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
             waitingDialog.hide();
             alert(err);
         }
-    };
 
-    $scope.chart2 = {
-        type: "ColumnChart",
-        displayed: true,
-        data: [
-            ["Date", "Linear", {
-                'type': 'string',
-                'role': 'style'
-            }]
-        ],
-        options: {
-            chartArea: {'width': '80%', 'height': '80%'},
-            legend: 'none',
-            pointSize: 3,
-            series: {
-                0: {curveType: 'function', lineWidth: 2, color: "#00b3ee"}
-            },
-            vAxes: {
-                0: {}
-            },
-            hAxis: {
-                ticks: [],
-                gridlines: {
-                    color: '#333333',
-                    count: 1
-                },
-                baselineColor: '#7A7A7A',
-                textStyle: {color: '#7A7A7A', fontSize: 12}
-            },
-            vAxis : {
-                minValue : 0
-            },
-            // vAxis: {
-            //     textPosition: 'none',
-            //     gridlines: {
-            //         color: 'transparent'
-            //     },
-            //     baselineColor: '#7A7A7A',
-            //     textStyle: {color: '#7A7A7A', fontSize: 12}
-            // },
-            backgroundColor: "transparent",
-            bar: {groupWidth: "20%"}
-            //width: 600
-        }
     };
 
     /* NOTIFICATIONS */
@@ -188,167 +126,13 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
         }
     };
 
-    $scope.ifShowChart = false;
-    $scope.showChart = function (op) {
-
-        $scope.chart2.options.hAxis.ticks = [];
-        $scope.chart2.data = [
-            ["Date", "Linear", {
-                'type': 'string',
-                'role': 'style'
-            }]
-        ];
-
-        $scope.chart2.options.hAxis.ticks.push(0);
-        $scope.chart2.options.hAxis.ticks.push(1);
-
-        $scope.chart2.data.push(['Original Image Size', op.originalImageSize, '']);
-        $scope.chart2.data.push(['Optimized Image Size', op.optimizedImageSize, '']);
-
-        $scope.ifShowChart = true;
-    };
-
-
-    $scope.formatSizeUnitsOptimisation = function (bytes) {
-        if (bytes >= 1073741824) {
-            bytes = (bytes / 1073741824).toFixed(2) + ' GB';
-        }
-        else if (bytes >= 1048576) {
-            bytes = (bytes / 1048576).toFixed(2) + ' MB';
-        }
-        else if (bytes >= 1024) {
-            bytes = (bytes / 1024).toFixed(2) + ' KB';
-        }
-        else if (bytes > 1) {
-            bytes = bytes + ' bytes';
-        }
-        else if (bytes == 1) {
-            bytes = bytes + ' byte';
-        }
-        else {
-            bytes = '-';
-        }
-        return bytes;
-    };
-
-
     $scope.convertMillisecondsToDigitalClock = function (timestamp) {
         var time = timestamp + 3600000 * 2;
         var date = new Date(time).toUTCString();
-        // console.log(date);
         return date
     };
 
-
-    /*
-
-
-     if(imageId) {
-     $http.get(get_image_url + "?id=" + imageId).then(
-     function(success) {
-     $scope.imageData = success.data;
-     $scope.data.imageName = $scope.imageData.imageName;
-     $scope.data.imageId = $scope.imageData.id;
-
-     for(var k in $scope.data){
-     if(k != "imageName" && k != "imageId"){
-     $scope.data[k] = "";
-     }
-     }
-     //console.log($scope.imageData);
-     },
-     function(error) {
-     alert("An error occured!");
-     }
-     );
-     }
-
-     $scope.maxInputsChart1 = 22;
-     $scope.maxInputsChart2 = 22;
-
-     $scope.chart1 = {
-     type: "LineChart",
-     displayed: true,
-     data: [
-     ["Date", "Linear", {
-     'type': 'string',
-     'role': 'style'
-     }]
-     ],
-     options: {
-     chartArea: {'width': '95%', 'height': '75%'},
-     legend: 'none',
-     pointSize: 1,
-     series: {
-     0: {curveType: 'function', lineWidth: 2, color: "#20B2AA"}
-     },
-     vAxes: {
-     0: {}
-     },
-     hAxis: {
-     ticks: [],
-     gridlines: {
-     color: '#333333',
-     count: $scope.maxInputsChart1 - 1
-     },
-     baselineColor: '#7A7A7A',
-     textStyle: {color: '#7A7A7A', fontSize:9}
-     },
-     vAxis: {
-     gridlines: {
-     color: 'transparent'
-     },
-     baselineColor: '#7A7A7A',
-     textStyle: {color: '#7A7A7A', fontSize:9}
-     },
-     backgroundColor: "transparent"
-     }
-     };
-
-
-
-     $scope.setChart1 = function() {
-     $scope.chart1.options.hAxis.ticks = [];
-     $scope.chart1.data = [
-     ["Date", "Linear", {
-     'type': 'string',
-     'role': 'style'
-     }]
-     ];
-     for(var c=0; c<$scope.maxInputsChart1; c++){
-     $scope.chart1.options.hAxis.ticks.push(c);
-     var value = parseFloat(Math.floor((Math.random() * 10.9999) + 1.9999));
-     $scope.chart1.data.push([c, value, '']);
-     }
-     };
-
-     $scope.setChart2 = function() {
-     $scope.chart2.options.hAxis.ticks = [];
-     $scope.chart2.data = [
-     ["Date", "Linear", {
-     'type': 'string',
-     'role': 'style'
-     }]
-     ];
-     for(var c=0; c<$scope.maxInputsChart2; c++){
-     $scope.chart2.options.hAxis.ticks.push(c);
-     var value = parseFloat(Math.floor((Math.random() * 10.9999) + 1.9999));
-     $scope.chart2.data.push([c, value, '']);
-     }
-     };
-
-     $scope.setChart1();
-     $scope.setChart2();
-
-     $scope.chartShown = false;
-
-     $scope.showChart = function(){
-     $scope.chartShown = true;
-     };
-     */
-
-
-    /* TEXT FOR TOOLTIPS */
+    /* TEXT FOR TOOLTIPS - TODO: update */
     $scope.tooltipsOptimisation = {
         "imageId": "Image ID is the ID within the cloud repository.",
         "imageURL": "HTTP URL from where the source image file can be downloaded by the optimizer.",

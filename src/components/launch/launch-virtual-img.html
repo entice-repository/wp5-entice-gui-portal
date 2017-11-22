@@ -14,19 +14,19 @@
                                 <div class="container">
                                     <div class="col-md-12">
                                         <form ng-model="optimisationForm" name="optimisationForm"
-                                              class="form-horizontal" role="form" ng-submit="optimizeSubmit()">
-
+                                              class="form-horizontal" role="form" ng-submit="launchVirtualImage()">
 
                                             <h4>Source Image Selection</h4>
-                                            <!--IMAGE ID-->
+
+                                            <!-- VIRTUAL IMAGE ID -->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Virtual Image ID<a
                                                         class="tooltip-pointer"
                                                         tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageId }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.virtualImageId }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <input name="imageId"
-                                                           ng-model="data.imageId"
+                                                    <input name="virtualImageId"
+                                                           ng-model="data.virtualImageId"
                                                            ng-required="true"
                                                            type="text"
                                                            class="form-control"
@@ -36,38 +36,51 @@
 
                                             <h4>Launch resource</h4>
 
+                                            <!-- CLOUD  -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Cloud<a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.cloudEndpointURL }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <select ng-required="false" name="cloudEndpointURL"
+                                                            class="form-control"
+                                                            ng-model="data.CloudEndpointURL">
+                                                        <option value="sztaki">sztaki</option>
+                                                        <option value="fco">fco</option>
+                                                        <option value="wt">wt</option>
+                                                        <option value="deimos">deimos</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- ENDPOINT URL -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Endpoint URL<a
+                                                        class="tooltip-pointer"
+                                                        tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.endpoint }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <input name="endpoint"
+                                                           ng-model="data.endpoint"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Endpoint URL">
+                                                </div>
+                                            </div>
+
                                             <!-- Cloud Interface-->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Cloud Interface<a
                                                         class="tooltip-pointer" tooltips
                                                         tooltip-template="{{ tooltipsOptimisation.cloudInterface }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <select ng-required="true" name="cloudInterface"
+                                                    <select ng-required="false" name="cloudInterface"
                                                             class="form-control"
                                                             ng-model="data.CloudInterface">
                                                         <option value="ec2">ec2</option>
                                                         <option value="fco">fco</option>
                                                         <option value="wt">wt</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- CLOUD ENDPOINT URL -  -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Cloud Endpoint URL <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.cloudEndpointURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <select ng-required="true" name="cloudEndpointURL"
-                                                            class="form-control"
-                                                            ng-model="data.CloudEndpointURL">
-                                                        <option value="http://cfe2.lpds.sztaki.hu:4567">sztaki</option>
-                                                        <option value="https://cp.sd1.flexiant.net/soap/user/current/?wsdl">
-                                                            fco
-                                                        </option>
-                                                        <option value="http://entice-api.wtelecom.es">wt</option>
-                                                        <option value="https://opennebula.lpds.sztaki.hu:4567">deimos
-                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -81,8 +94,8 @@
                                                     <!--
                                                     <select ng-required="true" name="choose_cloud" class="form-control" ng-model="choose_cloud"></select>
                                                     -->
-                                                    <input name="cloudAccessKey"
-                                                           ng-model="data.cloudAccessKey"
+                                                    <input name="accessKey"
+                                                           ng-model="data.accessKey"
                                                            ng-required="true"
                                                            type="text"
                                                            class="form-control"
@@ -99,12 +112,46 @@
                                                     <!--
                                                     <select ng-required="true" name="choose_cloud" class="form-control" ng-model="choose_cloud"></select>
                                                     -->
-                                                    <input name="cloudSecretKey"
-                                                           ng-model="data.cloudSecretKey"
+                                                    <input name="secretKey"
+                                                           ng-model="data.secretKey"
                                                            ng-required="true"
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="Cloud Secret Key">
+                                                </div>
+                                            </div>
+
+                                            <!-- CLOUD SECRET KEY -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Keypair <a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.keypair }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <!--
+                                                    <select ng-required="true" name="choose_cloud" class="form-control" ng-model="choose_cloud"></select>
+                                                    -->
+                                                    <input name="secretKey"
+                                                           ng-model="data.keypair"
+                                                           ng-required="true"
+                                                           type="text"
+                                                           class="form-control"
+                                                           placeholder="Keypair">
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Image Contextualization base64 -->
+                                            <div class="form-group">
+                                                <span class="control-label col-sm-3">Image Contextualization (base64)<a
+                                                        class="tooltip-pointer" tooltips
+                                                        tooltip-template="{{ tooltipsOptimisation.imageContextualization }}">?</a></span>
+                                                <div class="col-sm-5">
+                                                    <textarea name="imageContextualization"
+                                                              ng-model="data.imageContextualization"
+                                                              ng-required="false"
+                                                              rows="9"
+                                                              class="form-control"
+                                                              placeholder="Image Contextualization (base64)"></textarea>
                                                 </div>
                                             </div>
 
@@ -113,11 +160,11 @@
                                                 <span class="control-label col-sm-3">Source image cloud repository ID<a
                                                         class="tooltip-pointer"
                                                         tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageId }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.cloudImageId }}">?</a></span>
                                                 <div class="col-sm-5">
                                                     <input name="imageId"
-                                                           ng-model="data.imageId"
-                                                           ng-required="true"
+                                                           ng-model="data.cloudImageId"
+                                                           ng-required="false"
                                                            type="text"
                                                            class="form-control"
                                                            placeholder="Source image cloud repository ID">
@@ -125,7 +172,7 @@
                                             </div>
 
                                             <!--OVF template URL (vmdk only) - ovfURL, optional (required if vmdk),
-                                           textfield automatically filled URL to where the ovf file had been uploaded at VMI upload-->
+                                     textfield automatically filled URL to where the ovf file had been uploaded at VMI upload-->
                                             <!-- OVF template URL (vmdk only) -->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">OVF template URL (vmdk only)<a
@@ -141,64 +188,18 @@
                                                 </div>
                                             </div>
 
-                                            <!-- CLOUD WORKER VMI INSTANCE -->
+                                            <!-- VMI INSTANCE -->
                                             <div class="form-group">
                                                 <span class="control-label col-sm-3">Instance type <a
                                                         class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.cloudWorkerVMInstanceType }}">?</a></span>
+                                                        tooltip-template="{{ tooltipsOptimisation.instanceType }}">?</a></span>
                                                 <div class="col-sm-5">
-                                                    <select ng-required="false" name="cloudWorkerVMInstanceType"
-                                                            class="form-control"
-                                                            ng-model="data.CloudWorkerVMInstanceType">
-                                                        <option value="m1.small">m1.small</option>
-                                                        <option value="m1.medium">m1.medium</option>
-                                                        <option value="m1.large">m1.large</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- IMAGE KEY PAIR (optional) -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image Key Pair <a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageKeyPair }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="imageKeyPair"
-                                                           ng-model="data.imageKeyPair"
+                                                    <input name="virtualImageId"
+                                                           ng-model="data.instanceType"
                                                            ng-required="false"
                                                            type="text"
                                                            class="form-control"
-                                                           placeholder="Image Key Pair">
-                                                </div>
-                                            </div>
-
-                                            <!-- Image Contextualization URL (required) must be base64 encoded before sending to the service  -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image Contextualization URL<a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageContextualizationURL }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <input name="imageContextualizationURL"
-                                                           ng-model="data.imageContextualizationURL"
-                                                           ng-required="false"
-                                                           type="text"
-                                                           class="form-control"
-                                                           placeholder="Image Contextualization URL"></input>
-                                                </div>
-                                            </div>
-
-                                            <!-- Image Contextualization base64 -->
-                                            <div class="form-group">
-                                                <span class="control-label col-sm-3">Image Contextualization (base64)<a
-                                                        class="tooltip-pointer" tooltips
-                                                        tooltip-template="{{ tooltipsOptimisation.imageContextualization }}">?</a></span>
-                                                <div class="col-sm-5">
-                                                    <textarea name="imageContextualization"
-                                                              ng-model="data.imageContextualization"
-                                                              ng-required="false"
-                                                              rows="9"
-                                                              class="form-control"
-                                                              placeholder="Image Contextualization (base64)"></textarea>
+                                                           placeholder="Instance type (e.g. t2.)">
                                                 </div>
                                             </div>
 
@@ -219,40 +220,40 @@
                         TODO
                         <!-- OPTIMIZATIONS IN PROGRESS  -->
                         <!--<section id="optimization-progress">-->
-                            <!--<div class="row">-->
-                                <!--<div class="container">-->
-                                    <!--<div class="col-md-12">-->
-                                        <!--<table class="table table-hover">-->
-                                            <!--<thead>-->
-                                            <!--<tr>-->
-                                                <!--<th>Id</th>-->
-                                                <!--<th>Starting Time</th>-->
-                                                <!--<th>Optimizer Status</th>-->
-                                                <!--<th>Optimizer Phase</th>-->
-                                                <!--<th>Original Size</th>-->
-                                                <!--<th>Optimized Size</th>-->
-                                                <!--&lt;!&ndash;<th>Optimized Image URL</th>&ndash;&gt;-->
-                                                <!--<th>Failure Message</th>-->
-                                            <!--</tr>-->
-                                            <!--</thead>-->
-                                            <!--<tbody>-->
-                                            <!--<tr ng-repeat="op in optimization" ng-click="showChart(op)">-->
-                                                <!--<td>{{ op.id }}</td>-->
-                                                <!--<td>{{ convertMillisecondsToDigitalClock(op.started) }}</td>-->
-                                                <!--<td ng-class="{ 'status-init' : op.status == 'PENDING', 'status-finished' : op.status == 'DONE' || op.status == 'ABORTED', 'status-running' : op.status == 'RUNNING', 'status-error' : op.status == 'FAILED' }">-->
-                                                    <!--{{ op.status }}-->
-                                                <!--</td>-->
-                                                <!--<td>{{ op.optimizerPhase }}</td>-->
-                                                <!--<td>{{ formatSizeUnitsOptimisation(op.originalImageSize) }}</td>-->
-                                                <!--<td>{{ formatSizeUnitsOptimisation(op.optimizedImageSize) }}</td>-->
-                                                <!--&lt;!&ndash;<td><a target="_blank" href="{{ op.optimizedImageURL }}">VMI_URL</a></td>&ndash;&gt;-->
-                                                <!--<th>{{ op.failure }}</th>-->
-                                            <!--</tr>-->
-                                            <!--</tbody>-->
-                                        <!--</table>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--<div class="row">-->
+                        <!--<div class="container">-->
+                        <!--<div class="col-md-12">-->
+                        <!--<table class="table table-hover">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                        <!--<th>Id</th>-->
+                        <!--<th>Starting Time</th>-->
+                        <!--<th>Optimizer Status</th>-->
+                        <!--<th>Optimizer Phase</th>-->
+                        <!--<th>Original Size</th>-->
+                        <!--<th>Optimized Size</th>-->
+                        <!--&lt;!&ndash;<th>Optimized Image URL</th>&ndash;&gt;-->
+                        <!--<th>Failure Message</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr ng-repeat="op in optimization" ng-click="showChart(op)">-->
+                        <!--<td>{{ op.id }}</td>-->
+                        <!--<td>{{ convertMillisecondsToDigitalClock(op.started) }}</td>-->
+                        <!--<td ng-class="{ 'status-init' : op.status == 'PENDING', 'status-finished' : op.status == 'DONE' || op.status == 'ABORTED', 'status-running' : op.status == 'RUNNING', 'status-error' : op.status == 'FAILED' }">-->
+                        <!--{{ op.status }}-->
+                        <!--</td>-->
+                        <!--<td>{{ op.optimizerPhase }}</td>-->
+                        <!--<td>{{ formatSizeUnitsOptimisation(op.originalImageSize) }}</td>-->
+                        <!--<td>{{ formatSizeUnitsOptimisation(op.optimizedImageSize) }}</td>-->
+                        <!--&lt;!&ndash;<td><a target="_blank" href="{{ op.optimizedImageURL }}">VMI_URL</a></td>&ndash;&gt;-->
+                        <!--<th>{{ op.failure }}</th>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                        <!--</table>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</section>-->
                     </uib-tab>
                 </uib-tabset>

@@ -6,6 +6,22 @@ app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $
 
     $scope.rowCollection = [];
 
+    function createNewRowEntry(iter, data, action) {
+        $scope.rowCollection[iter] =
+            {
+                id: data.id,
+                name: data.name,
+                tags: data.tags,
+                description: data.description,
+                // type: data.type,
+                status: data.status,
+                owner: data.owner,
+                message: data.message,
+                created: new Date(data.created),
+                action: action
+            };
+    }
+
     $scope.browseBaseImages = function (message) {
 
         // ugly hack to check if show base images or virtual images
@@ -21,40 +37,14 @@ app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $
                     var iter = 0;
                     for (var c = 0; c < data.length; c++) {
 
-                        var action = data[c].type == 'VIRTUAL' ? ['Details', "Launch"] : ['Delete'];
+                        var action = data[c].type == 'VIRTUAL' ? ['Launch'] : ['Details', 'Delete'];
 
                         if (data[c].type == 'BASE' && showBaseImages) {
-                            console.log("BASE: " + iter);
-                            $scope.rowCollection[iter] =
-                                {
-                                    id: data[c].id,
-                                    name: data[c].name,
-                                    tags: data[c].tags,
-                                    description: data[c].description,
-                                    type: data[c].type,
-                                    status: data[c].status,
-                                    owner: data[c].owner,
-                                    created: new Date(data[c].created),
-                                    action: action
-                                    // action: ['Details', 'Extend', 'Delete']
-                                };
+                            createNewRowEntry(iter,data[c],action);
                             iter++;
                         }
                         else if (data[c].type == 'VIRTUAL' && !showBaseImages) {
-                            console.log("VIRTUAL: " + iter);
-
-                            $scope.rowCollection[iter] =
-                                {
-                                    id: data[c].id,
-                                    name: data[c].name,
-                                    tags: data[c].tags,
-                                    description: data[c].description,
-                                    type: data[c].type,
-                                    status: data[c].status,
-                                    owner: data[c].owner,
-                                    created: new Date(data[c].created),
-                                    action: action
-                                };
+                            createNewRowEntry(iter,data[c],action);
                             iter++;
                         }
                     }
@@ -99,6 +89,9 @@ app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $
             case "Details":
                 $state.go("detailed-vmi-browsing", {imageId: baseImageId});
                 break;
+            case "Launch":
+                $state.go("launch-virtual-img", {imageId: baseImageId});
+                break;
             default:
                 console.log("Unsupported operation!");
 
@@ -114,7 +107,6 @@ app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $
     //     console.log(a);
     //     return a;
     // };
-
 
     /* SHOW / HIDE Advanced settings */
     $scope.show = false;
