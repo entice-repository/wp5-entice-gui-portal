@@ -54,18 +54,16 @@ app.controller('baseImageController', function ($scope, $http, upload, authServi
             description: $scope.formData.description,
             partition: parseInt($scope.formData.partition),
             tags: $scope.formData.tags.split(","),
-            cloudImageIds: cloudImageDict
+            cloudImageIds: cloudImageDict,
+            imageSize : $scope.formData.imageSize
         };
 
-        // alert(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         // todo: add validation if needed
 
         waitingDialog.show();
 
-        $http.post({
-            url: register_base_image,
-            data: data
-        }).then(
+        $http.post(register_base_image, data).then(
             function (response) {
                 waitingDialog.hide();
 

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="col-md-12">
                 <form  class="form-horizontal" role="form">
-                    <p>Register base image</p>
+                    <p>Register base image </p>
 
                     <p>Base image can be registered with the following fields</p>
 
@@ -44,6 +44,14 @@
                         <span class="control-label col-sm-3">URL <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imageURL }}">?</a></span>
                         <div class="col-sm-5">
                             <input name="image_url" ng-model="formData.image_url" class="form-control" placeholder="URL" />
+                        </div>
+                    </div>
+
+                    <!-- SIZE -->
+                    <div class="form-group">
+                        <span class="control-label col-sm-3">Image Size (Bytes) <a class="tooltip-pointer" tooltips tooltip-template="{{ tooltipsTab2.imageSize }}">?</a></span>
+                        <div class="col-sm-5">
+                            <input name="imageSize" ng-model="formData.imageSize" class="form-control" placeholder="Image Size (Bytes)" />
                         </div>
                     </div>
 

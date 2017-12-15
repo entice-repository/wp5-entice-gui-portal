@@ -15,7 +15,7 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
         accessKey: "",
         secretKey: "",
         virtualImageId: imageId,
-        instanceType: "",
+        instanceType: "m1.medium",
         contextualization: "",
         cloud: "",
         cloudInterface: "",

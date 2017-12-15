@@ -37,14 +37,21 @@ app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $
                     var iter = 0;
                     for (var c = 0; c < data.length; c++) {
 
-                        var action = data[c].type == 'VIRTUAL' ? ['Launch'] : ['Details', 'Delete'];
+                        var action = null;
+
+                        if (data[c].type == 'VIRTUAL') {
+                            action = ['Launch', 'Extend'];
+                        } else if (data[c].type == 'BASE') {
+                            action = data[c].owner == $scope.getUserId() ? ['Details', 'Extend', 'Delete'] : ['Details', 'Extend'];
+                        }
+
 
                         if (data[c].type == 'BASE' && showBaseImages) {
-                            createNewRowEntry(iter,data[c],action);
+                            createNewRowEntry(iter, data[c], action);
                             iter++;
                         }
                         else if (data[c].type == 'VIRTUAL' && !showBaseImages) {
-                            createNewRowEntry(iter,data[c],action);
+                            createNewRowEntry(iter, data[c], action);
                             iter++;
                         }
                     }
@@ -89,6 +96,9 @@ app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $
             case "Details":
                 $state.go("detailed-vmi-browsing", {imageId: baseImageId});
                 break;
+            case "Extend":
+                $state.go("vmi-extension", {imageId: baseImageId});
+                break;
             case "Launch":
                 $state.go("launch-virtual-img", {imageId: baseImageId});
                 break;
@@ -122,7 +132,7 @@ app.controller('vmiBrowsingController', function ($scope, $http, $stateParams, $
     $scope.getBackgroundColor = function (value) {
         if (value == 'Delete')
             return 'btn btn-danger';
-        if (value == 'Details')
+        if (value == 'Details' || value == 'Extend')
             return 'btn btn-info';
         if (value == 'Launch')
             return 'btn btn-success';

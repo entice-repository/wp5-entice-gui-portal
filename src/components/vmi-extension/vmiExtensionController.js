@@ -1,4 +1,4 @@
-app.controller('vmiExtensionController', function ($scope, $http, $state, growl) {
+app.controller('vmiExtensionController', function ($scope, $http, $state, $stateParams, growl) {
 
     var url_get_installers = SERVICES_URL + "sztaki/get_sztaki_installers";
     var get_virtual_images = SERVICES_URL + "sztaki/get_sztaki_virtual_images";
@@ -7,6 +7,8 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, growl)
     $scope.show = false;
 
     $scope.tags = ["foo", "bar"];
+
+    var imageId = $stateParams.imageId;
 
     // deprecated
     $scope.toggleInstallers = function () {
@@ -23,6 +25,7 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, growl)
         function (success) {
             if (success != null) {
                 var data = success.data;
+                var index = -1;
                 for (var c = 0; c < data.length; c++) {
                     $scope.images_list[c] =
                         {
@@ -34,7 +37,16 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, growl)
                             // created: new Date(data[c].created)
                         };
                     console.log("executed iteration");
+                    if(imageId && data[c].id == imageId)
+                        index = c;
                 }
+
+                if (index > -1){
+                    // TODO: solve update of combo box programmatically
+                    // $scope.images_list = $scope.images_list[index];
+                    //  $scope.formData.Parent = $scope.images_list[index];
+                }
+
             }
         },
         function (failure) {
@@ -68,7 +80,6 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, growl)
             }
         )
     };
-
 
     /* VMI Extention */
     $scope.tooltipsTab4 = {
@@ -109,8 +120,8 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, growl)
                 description: $scope.formData.image_description,
                 knowledgeBaseRef: "",
                 installerIds: installers_list, //list
-                installerBase64: $scope.data.customInstaller,
-                initBase64: $scope.data.initScript,
+                installerBase64: $scope.formData.customInstaller,
+                initBase64: $scope.formData.initScript,
                 snapshotUrl: $scope.formData.snapshotUrl,
                 tags: tags_list  //list
             };
@@ -124,16 +135,16 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, growl)
                         waitingDialog.hide();
 
                         if (success.data.error)
-                            $scope.popUpToastr("error", "Virtual Image launch failed: " + success.data.error);
+                            $scope.popUpToastr("error", "Virtual Image extension failed: " + success.data.error);
                         else {
                             $scope.active = 1;
-                            refreshOptimizationData(true);
-                            $scope.popUpToastr("success", "Successful Virtual Image launch: " + success.data.message);
+                            // refreshOptimizationData(true);
+                            $scope.popUpToastr("success", "Successful Virtual Image extension: " + success.data.message);
                         }
                     },
                     function (error) {
                         waitingDialog.hide();
-                        $scope.popUpToastr("error", "Virtual Image launch failed: " + JSON.stringify(error));
+                        $scope.popUpToastr("error", "Virtual Image extension failed: " + JSON.stringify(error));
                     }
                 );
             }
@@ -143,7 +154,7 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, growl)
             }
 
         } catch (err) {
-            $scope.popUpToastr("error", "Parent virtual/base image is not selected");
+            $scope.popUpToastr("error", "Parent virtual/base image is not selected" + err);
         }
     }
 

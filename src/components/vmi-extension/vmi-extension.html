@@ -13,7 +13,7 @@
                         <span class="control-label col-sm-3">Parent Image <a class="tooltip-pointer" tooltips
                                                                            tooltip-template="{{ tooltipsUploadImage.parent }}">?</a></span>
                             <div class="col-sm-5">
-                                <ol class="nya-bs-select form-control" name="parent"
+                                <ol class="nya-bs-select" name="parent"
                                     ng-model="formData.Parent" ng-required="true">
                                     <li nya-bs-option="item in images_list">
                                         <a> {{item.name}}, {{item.type}}
@@ -92,7 +92,7 @@
                                                         tooltip-template="{{ tooltipsOptimisation.customInstaller }}">?</a></span>
                             <div class="col-sm-5">
                                                     <textarea name="customInstaller"
-                                                              ng-model="data.customInstaller"
+                                                              ng-model="formData.customInstaller"
                                                               ng-required="false"
                                                               rows="9"
                                                               class="form-control"
@@ -106,7 +106,7 @@
                                                         tooltip-template="{{ tooltipsOptimisation.initScript }}">?</a></span>
                             <div class="col-sm-5">
                                                     <textarea name="initScript"
-                                                              ng-model="data.initScript"
+                                                              ng-model="formData.initScript"
                                                               ng-required="false"
                                                               rows="9"
                                                               class="form-control"

@@ -142,7 +142,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 
     $stateProvider.state('vmi-extension', {
-        url: '/vmi-extension',
+        url: '/vmi-extension/:imageId',
         templateUrl: './templates/vmi-extension.html',
         controller: "vmiExtensionController",
         authenticate: true
