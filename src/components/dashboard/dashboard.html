@@ -20,6 +20,7 @@
 </section>
 -->
 <section id="dashboard-admin">
+    <div growl></div>
     <div class="row">
         <div class="container">
           <!--  <div class="col-md-3">
@@ -53,31 +54,32 @@
                 <!--<p><a href ng-click="showChart()">Optimize VMI redistribution</a></p>-->
                 <div style="height: 600px" google-chart chart="paretoChart" ></div>
             </div>
+            <div style="height: 600px" google-chart chart="paretoChart" agc-on-select="paretoChartSelect(selectedItem);" ></div>
 
             <div id="redistribution" class="col-md-12">
-                <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Trigger Offline VMI Redistribution</button>
+                <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="executeRedistributionAction()">Trigger Offline VMI Redistribution</button>
             </div>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
+        <!--<div class="modal fade" id="myModal" role="dialog">-->
+            <!--<div class="modal-dialog">-->
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Offline VMI Redistribution</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>The process of Offline VMI Redistribution is scheduled to 23:59.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Ok, I'll wait</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <!--&lt;!&ndash; Modal content&ndash;&gt;-->
+                <!--<div class="modal-content">-->
+                    <!--<div class="modal-header">-->
+                        <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                        <!--<h4 class="modal-title">Offline VMI Redistribution</h4>-->
+                    <!--</div>-->
+                    <!--<div class="modal-body">-->
+                        <!--<p>The process of Offline VMI Redistribution is scheduled to 23:59.</p>-->
+                    <!--</div>-->
+                    <!--<div class="modal-footer">-->
+                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Ok, I'll wait</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </section>
 

@@ -1,62 +1,88 @@
-app.controller('repositoriesController', function($scope, $http, authService) {
+app.controller('repositoriesController', function ($scope, $http, authService, growl) {
     /* GET  / POST REQUESTS */
     var get_pareto = SERVICES_URL + "gui/get_newest_pareto?stage=2";
 
     var get_statistics = SERVICES_URL + "gui/get_statistics_data";
+    var get_offline_redistribution = SERVICES_URL + "gui/trigger_offline_redistribution?selected_point_index=";
 
-    var getUserId = function(){
+    var getUserId = function () {
         var user = authService.get("user");
         return user.id;
     };
 
     $scope.statistics = {};
 
-    $http.get(get_statistics+"?show_admin_data=true&user_id="+getUserId()).then(
-        function(success) {
+    $http.get(get_statistics + "?show_admin_data=true&user_id=" + getUserId()).then(
+        function (success) {
             var data = success.data;
             $scope.statistics = data;
         },
-        function(failure) {
+        function (failure) {
             //alert("Offline VMI Redistribution error");
             console.log("Offline VMI Redistribution error");
         }
     );
 
-    waitingDialog.show();
+    $scope.executeRedistributionAction = function () {
+        // alert("point index: " + $scope.pareto.index);
 
-    //$scope.isChart = false;
-   // $scope.showChart = function () {
-        $http.get(get_pareto).then(
-            function(success) {
-                var data = success.data;
-                $scope.pareto.id = data.id;
-                $scope.objectives = data.objectives;
-                var objectives = $scope.objectives;
+        $http.get(get_offline_redistribution + $scope.pareto.index).then(
+            function (data) {
+                // console.log("result redistribution: " + data);
+                if (data.error) $scope.popUpToastr("warning", data.error);
+                else $scope.popUpToastr("success", data.success);
 
-                waitingDialog.hide();
-
-                $scope.paretoChart.data = [];
-                $scope.paretoChart.data.push(['', 'Cost', 'Transfer Time']);
-                for(var i=0; i<objectives.length; i++){
-                    $scope.paretoChart.data.push(['', objectives[i][0], objectives[i][1]]);
-                }
-
-                $scope.isChart = true;
             },
-            function(failure){
-                //alert("Get Pareto error");
-                console.log("Get pareto error");
-
+            function (failure) {
+                $scope.popUpToastr("error", "Redistribution error");
+                console.log(failure);
                 waitingDialog.hide();
             }
         );
-   // };
+    };
+
+    waitingDialog.show();
+
+    $scope.pareto = {
+        id: null,
+        x: 0,
+        y: 0,
+        index: 0
+    };
+
+    //$scope.isChart = false;
+    // $scope.showChart = function () {
+    $http.get(get_pareto).then(
+        function (success) {
+            var data = success.data;
+            $scope.pareto.id = data.id;
+            $scope.objectives = data.objectives;
+            var objectives = $scope.objectives;
+
+            waitingDialog.hide();
+
+            $scope.paretoChart.data = [];
+            $scope.paretoChart.data.push(['', 'Transfer Time', 'Cost', 'Reliability']);
+            for (var i = 0; i < objectives.length; i++) {
+                $scope.paretoChart.data.push(['', objectives[i][0] * -1 + 1, objectives[i][1], objectives[i][2]]);
+            }
+
+            $scope.isChart = true;
+        },
+        function (failure) {
+            //alert("Get Pareto error");
+            console.log("Get pareto error");
+
+            waitingDialog.hide();
+        }
+    );
+    // };
 
     /* PLOT BUBBLE CHART */
     $scope.paretoChart = {
         type: "BubbleChart",
         data: [],
-        options : {
+        options: {
             title: 'Pareto front for Multi-objective optimization',
             hAxis: {title: 'Cost  (EUR / GB)'},
             vAxis: {title: 'Transfer Time (Sec / GB)'},
@@ -65,21 +91,38 @@ app.controller('repositoriesController', function($scope, $http, authService) {
                     fontSize: 5
                 }
             },
-            sizeAxis: {minValue: 5,  maxSize: 17},
+            sizeAxis: {minValue: 5, maxSize: 17},
             colors: ['purple']
         }
     };
 
-    $scope.pareto = {
-        id : null,
-        x : 0,
-        y : 0
-    };
-
-    $scope.paretoChartSelect = function(selectedItem) {
+    $scope.paretoChartSelect = function (selectedItem) {
         var row = $scope.objectives[selectedItem.row];
         $scope.pareto.x = row[0];
         $scope.pareto.y = row[1];
+        $scope.pareto.index = selectedItem.row;
+        console.log($scope.pareto.index)
+    };
+
+    /* NOTIFICATIONS */
+    $scope.popUpToastr = function (type, msg) {
+        var config = {};
+        switch (type) {
+            case "success":
+                growl.success(msg, config);
+                break;
+            case "error":
+                growl.error(msg, config);
+                break;
+            case "warning":
+                growl.warning(msg, config);
+                break;
+            case "info":
+                growl.info(msg, config);
+                break;
+            default:
+                growl.info(msg, config);
+        }
     };
 });
 
