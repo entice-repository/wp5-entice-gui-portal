@@ -118,7 +118,7 @@ app.controller('vmiExtensionController', function ($scope, $http, $state, $state
                 // following optional attributes:
                 name: $scope.formData.image_name,
                 description: $scope.formData.image_description,
-                knowledgeBaseRef: "",
+                knowledgeBaseRef: $scope.formData.Parent.id,
                 installerIds: installers_list, //list
                 installerBase64: $scope.formData.customInstaller,
                 initBase64: $scope.formData.initScript,

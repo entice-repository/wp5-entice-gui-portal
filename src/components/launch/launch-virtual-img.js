@@ -4,7 +4,7 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
     var launch_url = SERVICES_URL + "sztaki/launch_virtual_image";
 
     // var get_optimization_list = SERVICES_URL + "sztaki/get_optimization_refreshed_list?force_refresh=";
-     var imageId = $stateParams.imageId;
+    var imageId = $stateParams.imageId;
 
     // $scope.imageId = imageId;
     $scope.imageData = {};
@@ -83,13 +83,13 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
                 function (success) {
                     waitingDialog.hide();
 
-                    if (success.data.error)
-                        $scope.popUpToastr("error", "Virtual Image launch failed: " + success.data.error);
-                    else {
-                        $scope.active = 1;
-                        refreshOptimizationData(true);
+                    if (success.data.message) {
+                        // $scope.active = 1;
+                        // refreshOptimizationData(true);
                         $scope.popUpToastr("success", "Successful Virtual Image launch: " + success.data.message);
                     }
+                    else if (success.data.error)
+                        $scope.popUpToastr("error", "Virtual Image launch failed: " + success.data.error);
                 },
                 function (error) {
                     waitingDialog.hide();
