@@ -2,7 +2,7 @@
     <div class="row">
         <div class="container">
             <div class="col-md-4">
-                <p class="dashboard-monitoring">STATISTICS</p>
+                <p class="dashboard-monitoring">Number of all users</p>
                 <p class="dashboard-data">{{statistics.number_of_all_users}}</p>
             </div>
 
@@ -12,7 +12,7 @@
             </div>
 
             <div class="col-md-4">
-                <p class="dashboard-monitoring">Number of users in ENTICE</p>
+                <p class="dashboard-monitoring">Number of all repositories</p>
                 <p class="dashboard-data">{{statistics.number_of_all_repositories}}</p>
             </div>
 
@@ -36,10 +36,10 @@
                         <th>Fragmented Image Storage Space</th>
                         <td> {{ stats.fragmentedImageStorageSpace }} GB</td>
                     </tr>
-                    <tr>
-                        <th>Size Of Composite Images</th>
-                        <td> {{ stats.sizeOfCompositeImages }} GB</td>
-                    </tr>
+                    <!--<tr>-->
+                        <!--<th>Size Of Composite Images</th>-->
+                        <!--<td> {{ stats.sizeOfCompositeImages }} GB</td>-->
+                    <!--</tr>-->
                     <tr>
                         <th>Size Of Base Images</th>
                         <td> {{ stats.sizeOfBaseImages }} GB</td>

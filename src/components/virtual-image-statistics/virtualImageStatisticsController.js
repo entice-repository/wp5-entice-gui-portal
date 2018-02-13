@@ -26,7 +26,7 @@ app.controller('virtualImageStatisticsController', function($scope, $http, authS
                     $scope.stats.numberOfFragments = bytesToSize(data.numberOfFragments);
                     $scope.stats.fragmentedImageStorageSpace = bytesToSize(data.fragmentedImageStorageSpace);
                     $scope.stats.sizeOfBaseImages = bytesToSize(data.sizeOfBaseImages);
-                    $scope.stats.sizeOfCompositeImages = bytesToSize(data.sizeOfCompositeImages);
+                    // $scope.stats.sizeOfCompositeImages = bytesToSize(data.sizeOfCompositeImages);
                     $scope.stats.sizeOfFragments = bytesToSize(data.sizeOfFragments);
                     $scope.stats.compositeImageStorageSpace = bytesToSize(data.compositeImageStorageSpace);
                     $scope.stats.reductionRatioPercentage = Math.round(data.reductionRatioPercentage * 100) / 100;
