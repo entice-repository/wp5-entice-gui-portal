@@ -19,7 +19,12 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
         contextualization: "",
         cloud: "",
         cloudInterface: "",
-        cloudImageId: ""
+        cloudImageId: "",
+        CloudEndpointURL : "sztaki",
+        CloudInterface : "ec2",
+        accessKey : "entice_demo",
+        instanceType : "t2.medium",
+        endpoint : "https://opennebula.lpds.sztaki.hu:4567"
     }
 
     $scope.optimization = [];
