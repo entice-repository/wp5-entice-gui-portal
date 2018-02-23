@@ -23,7 +23,7 @@ app.controller('virtualImageStatisticsController', function($scope, $http, authS
                 function(success) {
                     var data = success.data;
                     $scope.stats = data;
-                    $scope.stats.numberOfFragments = bytesToSize(data.numberOfFragments);
+                    $scope.stats.numberOfFragments = data.numberOfFragments;
                     $scope.stats.fragmentedImageStorageSpace = bytesToSize(data.fragmentedImageStorageSpace);
                     $scope.stats.sizeOfBaseImages = bytesToSize(data.sizeOfBaseImages);
                     // $scope.stats.sizeOfCompositeImages = bytesToSize(data.sizeOfCompositeImages);
@@ -47,9 +47,8 @@ app.controller('virtualImageStatisticsController', function($scope, $http, authS
     function bytesToSize(bytes) {
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if (bytes == 0) return '0 Byte';
-        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-        return Math.round(bytes / Math.pow(1024, i), 2) + ' ';
+        var i = Math.log(bytes) / Math.log(1024);
+        console.log(i + " " + bytes + " | " + bytes / Math.pow(1024, i));
+        return (bytes / 1073741824).toFixed(2);
     };
-
-    // waitingDialog.show();
 });

@@ -30,20 +30,6 @@ app.controller('launchController', function ($scope, $interval, $stateParams, $h
     $scope.optimization = [];
     $scope.active = 0;
 
-    //todo:
-    var refreshOptimizationData = function (forceRefresh) {
-        // $http.get(get_optimization_list + forceRefresh).then(
-        //     function (success) {
-        //         $scope.optimization = success.data;
-        //     },
-        //     function (failure) {
-        //         //alert("Get Pareto request error");
-        //         console.log("Get Pareto request error");
-        //     }
-        // );
-    };
-
-
     $scope.tabSelected = function (selectedIndex) {
         $scope.active = selectedIndex;
         console.log("selected tab " + $scope.active);
