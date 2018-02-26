@@ -62,9 +62,9 @@ app.controller('buildRecipesController', function($http, $scope, $interval) {
     $scope.data = {
         "build":  {
             "module": "packer",
-            "version": "1.0",
+            "version": "1.1",
             "input": {
-                "zipurl": "https://s3.lpds.sztaki.hu/atisu/entice/wp3/recipes/wordpress-build-20160913a.zip"
+                "zipurl": "ubuntu/wordpress"
             }
         },
 
@@ -73,7 +73,7 @@ app.controller('buildRecipesController', function($http, $scope, $interval) {
             "version": "1.0",
             "input": {
                 "command": "run_test.sh",
-                "zipurl": "http://smith.s3.lpds.sztaki.hu/Entice/recipes/packer-test-for-wordpress.zip"
+                "zipurl": "ubuntu/wordpress"
             }
         }
     };

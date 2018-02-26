@@ -170,7 +170,7 @@
                                                             && recipe.request_status != '' && recipe.request_status != null">
                                                         <button class="btn btn-default" ng-click="cancelRecipe(recipe.id)">Cancel</button>
 
-                                                    <td ng-if="recipe.request_status =='finished' && recipe.outcome == 'success'"><a target="_blank" href="{{ recipe.url }}">VMI_URL</a></td>
+                                                    <td ng-if="recipe.request_status =='finished' && recipe.outcome == 'success'"><a target="_blank" href="{{ recipe.url }}">Download VMI</a></td>
                                                     <td ng-if="recipe.outcome != 'success'">{{ recipe.outcome }}</td>
 
                                                 </tr>
